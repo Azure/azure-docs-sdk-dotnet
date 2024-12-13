@@ -1,12 +1,12 @@
 ---
 title: Azure Document Intelligence client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.DocumentIntelligence, documentintelligence
-ms.date: 08/15/2024
+ms.date: 12/13/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: documentintelligence
 ---
-# Azure Document Intelligence client library for .NET - version 1.0.0-beta.3 
+# Azure Document Intelligence client library for .NET - version 1.0.0-alpha.20241212.3 
 
 
 > Note: on July 2023, the Azure Cognitive Services Form Recognizer service was renamed to Azure AI Document Intelligence. Any mentions of Form Recognizer or Document Intelligence in documentation refer to the same Azure service.
@@ -30,10 +30,10 @@ This section should include everything a developer needs to do to install and cr
 Install the Azure Document Intelligence client library for .NET with [NuGet][nuget]:
 
 ```dotnetcli
-dotnet add package Azure.AI.DocumentIntelligence --prerelease
+dotnet add package Azure.AI.DocumentIntelligence
 ```
 
-> Note: This version of the client library defaults to the `2024-07-31-preview` version of the service.
+> Note: This version of the client library defaults to the `2024-11-30` version of the service.
 
 ### Prerequisites
 
@@ -106,7 +106,7 @@ az cognitiveservices account keys list --name "<resource-name>" --resource-group
 
 Once you have the value for the API key, create an `AzureKeyCredential`. With the endpoint and key credential, you can create the [`DocumentIntelligenceClient`][doc_intelligence_client_class]:
 
-```C# Snippet:CreateDocumentIntelligenceClient
+```C# Snippet:CreateDocumentIntelligenceClientApiKey
 string endpoint = "<endpoint>";
 string apiKey = "<apiKey>";
 var client = new DocumentIntelligenceClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
@@ -126,9 +126,10 @@ You will also need to [register a new AAD application][register_aad_app] and [gr
 
 Set the values of the client ID, tenant ID, and client secret of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID, AZURE_CLIENT_SECRET.
 
-```C# Snippet:CreateDocumentIntelligenceClientTokenCredential
+```C# Snippet:CreateDocumentIntelligenceClient
 string endpoint = "<endpoint>";
-var client = new DocumentIntelligenceClient(new Uri(endpoint), new DefaultAzureCredential());
+var credential = new DefaultAzureCredential();
+var client = new DocumentIntelligenceClient(new Uri(endpoint), credential);
 ```
 
 ## Key concepts
@@ -164,12 +165,12 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
@@ -191,12 +192,9 @@ Extract text, selection marks, table structures, styles, and paragraphs, along w
 ```C# Snippet:DocumentIntelligenceExtractLayoutFromUriAsync
 Uri uriSource = new Uri("<uriSource>");
 
-var content = new AnalyzeDocumentContent()
-{
-    UrlSource = uriSource
-};
+var options = new AnalyzeDocumentOptions("prebuilt-layout", uriSource);
 
-Operation<AnalyzeResult> operation = await client.AnalyzeDocumentAsync(WaitUntil.Completed, "prebuilt-layout", content);
+Operation<AnalyzeResult> operation = await client.AnalyzeDocumentAsync(WaitUntil.Completed, options);
 AnalyzeResult result = operation.Value;
 
 foreach (DocumentPage page in result.Pages)
@@ -263,8 +261,8 @@ foreach (DocumentStyle style in result.Styles)
 
         foreach (DocumentSpan span in style.Spans)
         {
-            var handwrittenContent = result.Content.Substring(span.Offset, span.Length);
-            Console.WriteLine($"  {handwrittenContent}");
+            var handwrittenOptions = result.Content.Substring(span.Offset, span.Length);
+            Console.WriteLine($"  {handwrittenOptions}");
         }
     }
 }
@@ -293,12 +291,9 @@ For example, to analyze fields from an invoice, use the prebuilt Invoice model p
 ```C# Snippet:DocumentIntelligenceAnalyzeWithPrebuiltModelFromUriAsync
 Uri uriSource = new Uri("<uriSource>");
 
-var content = new AnalyzeDocumentContent()
-{
-    UrlSource = uriSource
-};
+var options = new AnalyzeDocumentOptions("prebuilt-invoice", uriSource);
 
-Operation<AnalyzeResult> operation = await client.AnalyzeDocumentAsync(WaitUntil.Completed, "prebuilt-invoice", content);
+Operation<AnalyzeResult> operation = await client.AnalyzeDocumentAsync(WaitUntil.Completed, options);
 AnalyzeResult result = operation.Value;
 
 // To see the list of all the supported fields returned by service and its corresponding types for the
@@ -312,39 +307,39 @@ for (int i = 0; i < result.Documents.Count; i++)
     AnalyzedDocument document = result.Documents[i];
 
     if (document.Fields.TryGetValue("VendorName", out DocumentField vendorNameField)
-        && vendorNameField.Type == DocumentFieldType.String)
+        && vendorNameField.FieldType == DocumentFieldType.String)
     {
         string vendorName = vendorNameField.ValueString;
         Console.WriteLine($"Vendor Name: '{vendorName}', with confidence {vendorNameField.Confidence}");
     }
 
     if (document.Fields.TryGetValue("CustomerName", out DocumentField customerNameField)
-        && customerNameField.Type == DocumentFieldType.String)
+        && customerNameField.FieldType == DocumentFieldType.String)
     {
         string customerName = customerNameField.ValueString;
         Console.WriteLine($"Customer Name: '{customerName}', with confidence {customerNameField.Confidence}");
     }
 
     if (document.Fields.TryGetValue("Items", out DocumentField itemsField)
-        && itemsField.Type == DocumentFieldType.List)
+        && itemsField.FieldType == DocumentFieldType.List)
     {
         foreach (DocumentField itemField in itemsField.ValueList)
         {
             Console.WriteLine("Item:");
 
-            if (itemField.Type == DocumentFieldType.Dictionary)
+            if (itemField.FieldType == DocumentFieldType.Dictionary)
             {
                 IReadOnlyDictionary<string, DocumentField> itemFields = itemField.ValueDictionary;
 
                 if (itemFields.TryGetValue("Description", out DocumentField itemDescriptionField)
-                    && itemDescriptionField.Type == DocumentFieldType.String)
+                    && itemDescriptionField.FieldType == DocumentFieldType.String)
                 {
                     string itemDescription = itemDescriptionField.ValueString;
                     Console.WriteLine($"  Description: '{itemDescription}', with confidence {itemDescriptionField.Confidence}");
                 }
 
                 if (itemFields.TryGetValue("Amount", out DocumentField itemAmountField)
-                    && itemAmountField.Type == DocumentFieldType.Currency)
+                    && itemAmountField.FieldType == DocumentFieldType.Currency)
                 {
                     CurrencyValue itemAmount = itemAmountField.ValueCurrency;
                     Console.WriteLine($"  Amount: '{itemAmount.CurrencySymbol}{itemAmount.Amount}', with confidence {itemAmountField.Confidence}");
@@ -354,21 +349,21 @@ for (int i = 0; i < result.Documents.Count; i++)
     }
 
     if (document.Fields.TryGetValue("SubTotal", out DocumentField subTotalField)
-        && subTotalField.Type == DocumentFieldType.Currency)
+        && subTotalField.FieldType == DocumentFieldType.Currency)
     {
         CurrencyValue subTotal = subTotalField.ValueCurrency;
         Console.WriteLine($"Sub Total: '{subTotal.CurrencySymbol}{subTotal.Amount}', with confidence {subTotalField.Confidence}");
     }
 
     if (document.Fields.TryGetValue("TotalTax", out DocumentField totalTaxField)
-        && totalTaxField.Type == DocumentFieldType.Currency)
+        && totalTaxField.FieldType == DocumentFieldType.Currency)
     {
         CurrencyValue totalTax = totalTaxField.ValueCurrency;
         Console.WriteLine($"Total Tax: '{totalTax.CurrencySymbol}{totalTax.Amount}', with confidence {totalTaxField.Confidence}");
     }
 
     if (document.Fields.TryGetValue("InvoiceTotal", out DocumentField invoiceTotalField)
-        && invoiceTotalField.Type == DocumentFieldType.Currency)
+        && invoiceTotalField.FieldType == DocumentFieldType.Currency)
     {
         CurrencyValue invoiceTotal = invoiceTotalField.ValueCurrency;
         Console.WriteLine($"Invoice Total: '{invoiceTotal.CurrencySymbol}{invoiceTotal.Amount}', with confidence {invoiceTotalField.Confidence}");
@@ -400,19 +395,17 @@ Uri blobContainerUri = new Uri("<blobContainerUri>");
 // build modes and their differences, see:
 // https://aka.ms/azsdk/formrecognizer/buildmode
 
-var content = new BuildDocumentModelContent(modelId, DocumentBuildMode.Template)
-{
-    AzureBlobSource = new AzureBlobContentSource(blobContainerUri)
-};
+var blobSource = new BlobContentSource(blobContainerUri);
+var options = new BuildDocumentModelOptions(modelId, DocumentBuildMode.Template, blobSource);
 
-Operation<DocumentModelDetails> operation = await client.BuildDocumentModelAsync(WaitUntil.Completed, content);
+Operation<DocumentModelDetails> operation = await client.BuildDocumentModelAsync(WaitUntil.Completed, options);
 DocumentModelDetails model = operation.Value;
 
 Console.WriteLine($"Model ID: {model.ModelId}");
 Console.WriteLine($"Created on: {model.CreatedOn}");
 
 Console.WriteLine("Document types the model can recognize:");
-foreach (KeyValuePair<string, DocumentTypeDetails> docType in model.DocTypes)
+foreach (KeyValuePair<string, DocumentTypeDetails> docType in model.DocumentTypes)
 {
     Console.WriteLine($"  Document type: '{docType.Key}', which has the following fields:");
     foreach (KeyValuePair<string, DocumentFieldSchema> schema in docType.Value.FieldSchema)
@@ -432,7 +425,7 @@ Manage the models stored in your account.
 // Check number of custom models in the Document Intelligence resource, and the maximum number
 // of custom models that can be stored.
 
-ResourceDetails resourceDetails = await client.GetResourceInfoAsync();
+DocumentIntelligenceResourceDetails resourceDetails = await client.GetResourceDetailsAsync();
 
 Console.WriteLine($"Resource has {resourceDetails.CustomDocumentModels.Count} custom models.");
 Console.WriteLine($"It can have at most {resourceDetails.CustomDocumentModels.Limit} custom models.");
@@ -480,26 +473,26 @@ Build a document classifier by uploading custom training documents.
 
 string classifierId = "<classifierId>";
 Uri blobContainerUri = new Uri("<blobContainerUri>");
-var sourceA = new AzureBlobContentSource(blobContainerUri) { Prefix = "IRS-1040-A/train" };
-var sourceB = new AzureBlobContentSource(blobContainerUri) { Prefix = "IRS-1040-B/train" };
-var docTypeA = new ClassifierDocumentTypeDetails() { AzureBlobSource = sourceA };
-var docTypeB = new ClassifierDocumentTypeDetails() { AzureBlobSource = sourceB };
+var sourceA = new BlobContentSource(blobContainerUri) { Prefix = "IRS-1040-A/train" };
+var sourceB = new BlobContentSource(blobContainerUri) { Prefix = "IRS-1040-B/train" };
+var docTypeA = new ClassifierDocumentTypeDetails(sourceA);
+var docTypeB = new ClassifierDocumentTypeDetails(sourceB);
 var docTypes = new Dictionary<string, ClassifierDocumentTypeDetails>()
 {
     { "IRS-1040-A", docTypeA },
     { "IRS-1040-B", docTypeB }
 };
 
-var content = new BuildDocumentClassifierContent(classifierId, docTypes);
+var options = new BuildClassifierOptions(classifierId, docTypes);
 
-Operation<DocumentClassifierDetails> operation = await client.BuildClassifierAsync(WaitUntil.Completed, content);
+Operation<DocumentClassifierDetails> operation = await client.BuildClassifierAsync(WaitUntil.Completed, options);
 DocumentClassifierDetails classifier = operation.Value;
 
 Console.WriteLine($"Classifier ID: {classifier.ClassifierId}");
 Console.WriteLine($"Created on: {classifier.CreatedOn}");
 
 Console.WriteLine("Document types the classifier can recognize:");
-foreach (KeyValuePair<string, ClassifierDocumentTypeDetails> docType in classifier.DocTypes)
+foreach (KeyValuePair<string, ClassifierDocumentTypeDetails> docType in classifier.DocumentTypes)
 {
     Console.WriteLine($"  {docType.Key}");
 }
@@ -515,19 +508,16 @@ Use document classifiers to accurately detect and identify documents you process
 string classifierId = "<classifierId>";
 Uri uriSource = new Uri("<uriSource>");
 
-var content = new ClassifyDocumentContent()
-{
-    UrlSource = uriSource
-};
+var options = new ClassifyDocumentOptions(classifierId, uriSource);
 
-Operation<AnalyzeResult> operation = await client.ClassifyDocumentAsync(WaitUntil.Completed, classifierId, content);
+Operation<AnalyzeResult> operation = await client.ClassifyDocumentAsync(WaitUntil.Completed, options);
 AnalyzeResult result = operation.Value;
 
 Console.WriteLine($"Input was classified by the classifier with ID '{result.ModelId}'.");
 
 foreach (AnalyzedDocument document in result.Documents)
 {
-    Console.WriteLine($"Found a document of type: {document.DocType}");
+    Console.WriteLine($"Found a document of type: {document.DocumentType}");
 }
 ```
 
@@ -542,14 +532,12 @@ When you interact with the Document Intelligence client library using the .NET S
 For example, if you submit a receipt image with an invalid `Uri`, a `400` error is returned, indicating "Bad Request".
 
 ```C# Snippet:DocumentIntelligenceBadRequest
-var content = new AnalyzeDocumentContent()
-{
-    UrlSource = new Uri("http://invalid.uri")
-};
+var uriSource = new Uri("http://invalid.uri");
+var options = new AnalyzeDocumentOptions("prebuilt-receipt", uriSource);
 
 try
 {
-    Operation<AnalyzeResult> operation = await client.AnalyzeDocumentAsync(WaitUntil.Completed, "prebuilt-receipt", content);
+    Operation<AnalyzeResult> operation = await client.AnalyzeDocumentAsync(WaitUntil.Completed, options);
 }
 catch (RequestFailedException e)
 {
@@ -620,48 +608,48 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fdocumentintelligence%2FAzure.AI.DocumentIntelligence%2FREADME.png)
 
 <!-- LINKS -->
-[docint_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/src
-[docint_docs]: /azure/cognitive-services/form-recognizer/
+[docint_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/src
+[docint_docs]: https://learn.microsoft.com/azure/cognitive-services/form-recognizer/
 [docint_refdocs]: https://aka.ms/azsdk/net/docs/ref/formrecognizer
 [docint_nuget_package]: https://www.nuget.org/packages/Azure.AI.FormRecognizer
-[docint_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/README.md
+[docint_samples]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/README.md
 [docint_rest_api]: https://aka.ms/azsdk/formrecognizer/restapi
 [docint_models]: https://aka.ms/azsdk/formrecognizer/models
 [docint_errors]: https://aka.ms/azsdk/formrecognizer/errors
 [docint_build_model]: https://aka.ms/azsdk/formrecognizer/buildmodel
-[cognitive_resource]: /azure/cognitive-services/cognitive-services-apis-create-account
+[cognitive_resource]: https://learn.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
 
 
-[doc_intelligence_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/src/DocumentIntelligenceClient.cs
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/identity/Azure.Identity
-[register_aad_app]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[aad_grant_access]: /azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
-[custom_subdomain]: /azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/identity/Azure.Identity/README.md
-[cognitive_resource_portal]: /azure/cognitive-services/cognitive-services-apis-create-account
-[cognitive_resource_cli]: /azure/cognitive-services/cognitive-services-apis-create-account-cli
-[regional_endpoints]: /azure/cognitive-services/cognitive-services-custom-subdomains#is-there-a-list-of-regional-endpoints
-[azure_cli_endpoint_lookup]: /cli/azure/cognitiveservices/account?view=azure-cli-latest#az-cognitiveservices-account-show
-[azure_portal_get_endpoint]: /azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows#get-the-keys-for-your-resource
+[doc_intelligence_client_class]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/src/DocumentIntelligenceClient.cs
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/identity/Azure.Identity
+[register_aad_app]: https://learn.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
+[aad_grant_access]: https://learn.microsoft.com/azure/cognitive-services/authentication#assign-a-role-to-a-service-principal
+[custom_subdomain]: https://learn.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/identity/Azure.Identity/README.md
+[cognitive_resource_portal]: https://learn.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account
+[cognitive_resource_cli]: https://learn.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account-cli
+[regional_endpoints]: https://learn.microsoft.com/azure/cognitive-services/cognitive-services-custom-subdomains#is-there-a-list-of-regional-endpoints
+[azure_cli_endpoint_lookup]: https://learn.microsoft.com/cli/azure/cognitiveservices/account?view=azure-cli-latest#az-cognitiveservices-account-show
+[azure_portal_get_endpoint]: https://learn.microsoft.com/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Cwindows#get-the-keys-for-your-resource
 
 
 [di_studio]: https://aka.ms/azsdk/formrecognizer/formrecognizerstudio
 
-[logging]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md
+[logging]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/core/Azure.Core/samples/Diagnostics.md
 
-[extract_layout]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ExtractLayout.md
-[analyze_prebuilt]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_AnalyzeWithPrebuiltModel.md
-[build_a_custom_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_BuildCustomModel.md
-[build_a_document_classifier]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_BuildDocumentClassifier.md
-[classify_document]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ClassifyDocument.md
-[manage_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ManageModels.md
-[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_CopyCustomModel.md
-[compose_model]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ModelCompose.md
-[get_and_list]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_GetAndListOperations.md
-[analyze_with_addons]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_AddOnCapabilities.md
-[extract_layout_markdown]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.DocumentIntelligence_1.0.0-beta.3/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ExtractLayoutAsMarkdown.md
+[extract_layout]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ExtractLayout.md
+[analyze_prebuilt]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_AnalyzeWithPrebuiltModel.md
+[build_a_custom_model]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_BuildCustomModel.md
+[build_a_document_classifier]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_BuildDocumentClassifier.md
+[classify_document]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ClassifyDocument.md
+[manage_models]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ManageModels.md
+[copy_custom_models]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_CopyCustomModel.md
+[compose_model]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ModelCompose.md
+[get_and_list]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_GetAndListOperations.md
+[analyze_with_addons]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_AddOnCapabilities.md
+[extract_layout_markdown]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples/Sample_ExtractLayoutAsMarkdown.md
 
-[azure_cli]: /cli/azure
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [nuget]: https://www.nuget.org/
 [azure_portal]: https://portal.azure.com
