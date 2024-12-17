@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Chat client library for .NET - version 1.4.0-alpha.20241217.1 
+# Azure Communication Chat client library for .NET - version 1.4.0-alpha.20241217.4 
 
 
 This package contains a C# SDK for Azure Communication Services for chat.
@@ -385,13 +385,13 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [coc_contact]: mailto:opencode@microsoft.com
 [nuget]: https://www.nuget.org/
 [netstandars2mappings]:https://github.com/dotnet/standard/blob/master/docs/versions.md
-[useraccesstokens]:https://learn.microsoft.com/azure/communication-services/quickstarts/access-tokens?pivots=programming-language-csharp
-[communication_resource_docs]: https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_portal]:  https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_power_shell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
-[communication_resource_create_net]: https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
-[nextsteps]:https://learn.microsoft.com/azure/communication-services/quickstarts/chat/get-started?pivots=programming-language-csharp
+[useraccesstokens]:/azure/communication-services/quickstarts/access-tokens?pivots=programming-language-csharp
+[communication_resource_docs]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_portal]:  /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_power_shell]: /powershell/module/az.communication/new-azcommunicationservice
+[communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
+[nextsteps]:/azure/communication-services/quickstarts/chat/get-started?pivots=programming-language-csharp
 [source]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/communication/Azure.Communication.Chat/src
-[product_docs]: https://learn.microsoft.com/azure/communication-services/overview
+[product_docs]: /azure/communication-services/overview
 [package]: https://www.nuget.org/packages/Azure.Communication.Chat
 

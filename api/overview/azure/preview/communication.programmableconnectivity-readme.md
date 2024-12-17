@@ -6,12 +6,12 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure ProgrammableConnectivity client library for .NET - version 1.0.0-alpha.20241217.1 
+# Azure ProgrammableConnectivity client library for .NET - version 1.0.0-alpha.20241217.4 
 
 
 This client library allows .NET applications to interact with Azure Programmable Connectivity Gateway, instead of using `curl` requests. For information on APC, see [docs](https://learn.microsoft.com/azure/programmable-connectivity/).
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.ProgrammableConnectivity/src) | Package (NuGet): `https://www.nuget.org/packages/Azure.Communication.ProgrammableConnectivity` | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](https://learn.microsoft.com/azure)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.ProgrammableConnectivity/src) | Package (NuGet): `https://www.nuget.org/packages/Azure.Communication.ProgrammableConnectivity` | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
 
 ## Getting started
 
