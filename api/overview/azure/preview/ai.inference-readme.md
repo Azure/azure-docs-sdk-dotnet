@@ -1,12 +1,12 @@
 ---
 title: Azure Inference client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Inference, ai
-ms.date: 10/24/2024
+ms.date: 12/17/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: ai
 ---
-# Azure Inference client library for .NET - version 1.0.0-beta.2 
+# Azure Inference client library for .NET - version 1.0.0-alpha.20241217.1 
 
 
 The client Library (in preview) does inference, including chat completions, for AI models deployed by [Azure AI Studio](https://ai.azure.com) and [Azure Machine Learning Studio](https://ml.azure.com/). It supports Serverless API endpoints and Managed Compute endpoints (formerly known as Managed Online Endpoints). The client library makes services calls using REST API version `2024-05-01-preview`, as documented in [Azure AI Model Inference API](https://learn.microsoft.com/azure/ai-studio/reference/reference-model-inference-api). For more information see [Overview: Deploy models, flows, and web apps with Azure AI Studio](https://learn.microsoft.com/azure/ai-studio/concepts/deployments-overview).
@@ -143,11 +143,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
@@ -191,8 +191,8 @@ System.Console.WriteLine(response.Value.Content);
 
 The following types or messages are supported: `SystemMessage`,`UserMessage`, `AssistantMessage`, `ToolMessage`. See also samples:
 
-* [Sample5_ChatCompletionsWithImages.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.2/sdk/ai/Azure.AI.Inference/samples/Sample5_ChatCompletionsWithImages.md) for usage of `UserMessage` that includes sending an image URL or image data from a local file.
-* [Sample7_ChatCompletionsWithTools.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.2/sdk/ai/Azure.AI.Inference/samples/Sample7_ChatCompletionsWithTools.md) for usage of `ToolMessage`.
+* [Sample5_ChatCompletionsWithImages.md](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/ai/Azure.AI.Inference/samples/Sample5_ChatCompletionsWithImages.md) for usage of `UserMessage` that includes sending an image URL or image data from a local file.
+* [Sample7_ChatCompletionsWithTools.md](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/ai/Azure.AI.Inference/samples/Sample7_ChatCompletionsWithTools.md) for usage of `ToolMessage`.
 
 Alternatively, you can read a `BinaryData` object based on a JSON string instead of using the strongly typed classes like `ChatRequestSystemMessage` and `ChatRequestUserMessage`:
 
@@ -361,7 +361,7 @@ To generate embeddings for additional phrases, simply call `client.embed` multip
 ### Observability with OpenTelemetry
 
 Azure AI Inference client library supports tracing and metrics with OpenTelemetry. Refer to
-[Azure SDK Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Inference_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md#distributed-tracing)
+[Azure SDK Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#distributed-tracing)
 documentation for general information on OpenTelemetry support in Azure client libraries.
 
 Distributed tracing and metrics with OpenTelemetry are supported in Azure AI Inference in experimental mode and could be enabled through either
@@ -468,7 +468,7 @@ see the Code of Conduct FAQ or contact opencode@microsoft.com with any
 additional questions or comments.
 
 <!-- LINKS -->
-[style-guide-msft]: /style-guide/capitalization
+[style-guide-msft]: https://learn.microsoft.com/style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/ai/Azure.AI.Inference/README.png)
