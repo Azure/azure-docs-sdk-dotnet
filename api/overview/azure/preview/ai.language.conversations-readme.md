@@ -1,12 +1,12 @@
 ---
 title: Azure Cognitive Language Services Conversations client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Language.Conversations, cognitivelanguage
-ms.date: 08/01/2024
+ms.date: 12/18/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: cognitivelanguage
 ---
-# Azure Cognitive Language Services Conversations client library for .NET - version 2.0.0-beta.1 
+# Azure Cognitive Language Services Conversations client library for .NET - version 2.0.0-alpha.20241218.1 
 
 
 The Azure.AI.Language.Conversations client library provides a suite of APIs for conversational language analysis capabilities like conversation language understanding and orchestration, conversational summarization and conversational personally identifiable information (PII) detection.
@@ -17,7 +17,7 @@ Conversation Language Understanding - aka CLU for short - is a cloud-based conve
 
 Conversation Summarization is one feature offered by Azure AI Language, which is a combination of generative Large Language models and task-optimized encoder models that offer summarization solutions with higher quality, cost efficiency, and lower latency.
 
-Conversation PII detection another feature offered by Azure AI Language, which is a collection of machine learning and AI algorithms to identify, categorize, and redact sensitive information in text. The Conversational PII model is a specialized model for handling speech transcriptions and the more informal, conversational tone of meeting and call transcripts. 
+Conversation PII detection another feature offered by Azure AI Language, which is a collection of machine learning and AI algorithms to identify, categorize, and redact sensitive information in text. The Conversational PII model is a specialized model for handling speech transcriptions and the more informal, conversational tone of meeting and call transcripts.
 
 [Source code][conversationanalysis_client_src] | [Package (NuGet)][conversationanalysis_nuget_package] | [API reference documentation][conversationanalysis_refdocs] | [Samples][conversationanalysis_samples] | [Product documentation][conversationanalysis_docs] | [Analysis REST API documentation][conversationanalysis_restdocs]
 
@@ -103,6 +103,35 @@ ConversationAnalysisClient client = new ConversationAnalysisClient(endpoint, cre
 
 Note that regional endpoints do not support AAD authentication. Instead, create a [custom domain][custom_domain] name for your resource to use AAD authentication.
 
+### Service API versions
+
+The client library targets the latest service API version by default. A client instance accepts an optional service API version parameter from its options to specify which API version service to communicate.
+
+|SDK version  |Supported API version of service
+|-------------|-----------------------------------------------------
+|2.0.0-beta.1 | 2022-05-01, 2023-04-01, 2024-05-01, 2024-05-15-preview (default)
+|1.1.0 | 2022-05-01, 2023-04-01 (default)
+|1.0.0 | 2022-05-01 (default)
+
+#### Select a service API version
+
+You have the flexibility to explicitly select a supported service API version when instantiating a client by configuring its associated options. This ensures that the client can communicate with services using the specified API version.
+
+For example,
+
+```C# Snippet:CreateConversationAnalysisClientForSpecificApiVersion
+Uri endpoint = new Uri("https://myaccount.cognitiveservices.azure.com");
+AzureKeyCredential credential = new AzureKeyCredential("{api-key}");
+ConversationsClientOptions options = new ConversationsClientOptions(ConversationsClientOptions.ServiceVersion.V2024_05_01);
+ConversationAnalysisClient client = new ConversationAnalysisClient(endpoint, credential, options);
+```
+
+When selecting an API version, it's important to verify that there are no breaking changes compared to the latest API version. If there are significant differences, API calls may fail due to incompatibility.
+
+Always ensure that the chosen API version is fully supported and operational for your specific use case and that it aligns with the service's versioning policy.
+
+If you do not select an api version we will default to the latest version available, which has the possibility of being a preview version.
+
 ## Key concepts
 
 ### ConversationAnalysisClient
@@ -116,11 +145,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 ### Additional concepts
 
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
@@ -566,31 +595,31 @@ When you submit a pull request, a CLA-bot will automatically determine whether y
 This project has adopted the [Microsoft Open Source Code of Conduct][code_of_conduct]. For more information see the [Code of Conduct FAQ][coc_faq] or contact [opencode@microsoft.com][coc_contact] with any additional questions or comments.
 
 <!-- LINKS -->
-[azure_cli]: /cli/azure/
-[azure_identity]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/identity/Azure.Identity/README.md
-[azure_identity_install]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/identity/Azure.Identity/README.md#install-the-package
+[azure_cli]: https://learn.microsoft.com/cli/azure/
+[azure_identity]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md
+[azure_identity_install]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md#install-the-package
 [azure_portal]: https://portal.azure.com/
 [azure_subscription]: https://azure.microsoft.com/free/dotnet/
 [cla]: https://cla.microsoft.com
 [coc_contact]: mailto:opencode@microsoft.com
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
-[cognitive_auth]: /azure/cognitive-services/authentication/
-[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_2.0.0-beta.1/CONTRIBUTING.md
-[core_logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md
-[custom_domain]: /azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
-[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/identity/Azure.Identity/README.md#defaultazurecredential
+[cognitive_auth]: https://learn.microsoft.com/azure/cognitive-services/authentication/
+[contributing]: https://github.com/Azure/azure-sdk-for-net/blob/main/CONTRIBUTING.md
+[core_logging]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md
+[custom_domain]: https://learn.microsoft.com/azure/cognitive-services/authentication#create-a-resource-with-a-custom-subdomain
+[DefaultAzureCredential]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md#defaultazurecredential
 [language_studio]: https://language.cognitive.azure.com/
 [nuget]: https://www.nuget.org/
 
-[conversationanalysis_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/cognitivelanguage/Azure.AI.Language.Conversations/src/ConversationAnalysisClient.cs
-[conversationanalysis_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/cognitivelanguage/Azure.AI.Language.Conversations/src/
-[conversationanalysis_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Language.Conversations_2.0.0-beta.1/sdk/cognitivelanguage/Azure.AI.Language.Conversations/samples/
+[conversationanalysis_client_class]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/cognitivelanguage/Azure.AI.Language.Conversations/src/ConversationAnalysisClient.cs
+[conversationanalysis_client_src]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/cognitivelanguage/Azure.AI.Language.Conversations/src/
+[conversationanalysis_samples]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/cognitivelanguage/Azure.AI.Language.Conversations/samples/
 [conversationanalysis_nuget_package]: https://www.nuget.org/packages/Azure.AI.Language.Conversations/
-[conversationanalysis_docs]: /azure/cognitive-services/language-service/conversational-language-understanding/overview
-[conversationanalysis_docs_demos]: /azure/cognitive-services/language-service/conversational-language-understanding/quickstart
-[conversationanalysis_docs_features]: /azure/cognitive-services/language-service/conversational-language-understanding/overview
-[conversationanalysis_refdocs]: /dotnet/api/azure.ai.language.conversations
+[conversationanalysis_docs]: https://learn.microsoft.com/azure/cognitive-services/language-service/conversational-language-understanding/overview
+[conversationanalysis_docs_demos]: https://learn.microsoft.com/azure/cognitive-services/language-service/conversational-language-understanding/quickstart
+[conversationanalysis_docs_features]: https://learn.microsoft.com/azure/cognitive-services/language-service/conversational-language-understanding/overview
+[conversationanalysis_refdocs]: https://learn.microsoft.com/dotnet/api/azure.ai.language.conversations
 [conversationanalysis_restdocs]: https://learn.microsoft.com/rest/api/language/
 [conversationalauthoring_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Language.Conversations_1.1.0/sdk/cognitivelanguage/Azure.AI.Language.Conversations#create-a-conversationauthoringclient
 
