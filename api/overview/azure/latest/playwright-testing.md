@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: playwrighttesting
 ---
-# Azure Playwright Testing SDK for .NET - preview
-## Packages - preview
+# Azure Playwright Testing SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](playwright-testing-index.md)]
