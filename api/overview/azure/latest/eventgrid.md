@@ -4,7 +4,7 @@ description: Reference for Azure Eventgrid SDK for .NET
 ms.date: 12/19/2024
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: eventgrid
+ms.service: azure-event-grid
 ---
 # Azure Event Grid libraries for .NET
 Build event-driven applications that listen and react to events from Azure services and custom sources using simple HTTP-based event handling with Azure Event Grid.
@@ -54,7 +54,7 @@ dotnet add package Microsoft.Azure.Management.EventGrid
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the management APIs](/dotnet/api/overview/azure/eventgrid/management)
+> [Explore the management APIs](/dotnet/api/overview/azure/provisioning.eventgrid-readme)
 
 ## Learn more
 
