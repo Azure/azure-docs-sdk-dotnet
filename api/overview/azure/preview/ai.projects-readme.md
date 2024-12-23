@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Projects, ai
-ms.date: 12/13/2024
+ms.date: 12/23/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: ai
 ---
-# Azure AI Projects client library for .NET - version 1.0.0-beta.2 
+# Azure AI Projects client library for .NET - version 1.0.0-alpha.20241223.1 
 
 Use the AI Projects client library to:
 
@@ -34,6 +34,8 @@ Use the AI Projects client library to:
       - [Create and execute run](#create-and-execute-run)
       - [Retrieve messages](#retrieve-messages)
     - [File search](#file-search)
+    - [Enterprise File Search](#create-agent-with-enterprise-file-search)
+    - [Code interpreter attachment](#create-message-with-code-interpreter-attachment)
     - [Function call](#function-call)
     - [Azure function call](#azure-function-call)
     - [Azure Function Call](#create-agent-with-azure-function-call)
@@ -218,6 +220,108 @@ Agent agent = agentResponse.Value;
 
 With a file ID association and a supported tool enabled, the agent will then be able to consume the associated
 data when running threads.
+
+#### Create Agent with Enterprise File Search
+
+We can upload file to Azure as it is shown in the example, or use the existing Azure blob storage. In the code below we demonstrate how this can be achieved. First we upload file to azure and create `VectorStoreDataSource`, which then is used to create vector store. This vector store is then given to the `FileSearchTool` constructor.
+
+```C# Snippet:CreateVectorStoreBlob
+var ds = new VectorStoreDataSource(
+    assetIdentifier: blobURI,
+    assetType: VectorStoreDataSourceAssetType.UriAsset
+);
+var vectorStoreTask = await client.CreateVectorStoreAsync(
+    name: "sample_vector_store",
+    storeConfiguration: new VectorStoreConfiguration(
+        dataSources: new List<VectorStoreDataSource> { ds }
+    )
+);
+var vectorStore = vectorStoreTask.Value;
+
+FileSearchToolResource fileSearchResource = new([vectorStore.Id], null);
+
+List<ToolDefinition> tools = [new FileSearchToolDefinition()];
+Response<Agent> agentResponse = await client.CreateAgentAsync(
+    model: modelName,
+    name: "my-assistant",
+    instructions: "You are helpful assistant.",
+    tools: tools,
+    toolResources: new ToolResources() { FileSearch = fileSearchResource }
+);
+```
+
+We also can attach files to the existing vector store. In the code snippet below, we first create an empty vector store and add file to it.
+
+```C# Snippet:BatchFileAttachment
+var ds = new VectorStoreDataSource(
+    assetIdentifier: blobURI,
+    assetType: VectorStoreDataSourceAssetType.UriAsset
+);
+var vectorStoreTask = await client.CreateVectorStoreAsync(
+    name: "sample_vector_store"
+);
+var vectorStore = vectorStoreTask.Value;
+
+var uploadTask = await client.CreateVectorStoreFileBatchAsync(
+    vectorStoreId: vectorStore.Id,
+    dataSources: new List<VectorStoreDataSource> { ds }
+);
+Console.WriteLine($"Created vector store file batch, vector store file batch ID: {uploadTask.Value.Id}");
+
+FileSearchToolResource fileSearchResource = new([vectorStore.Id], null);
+```
+
+#### Create Message with Code Interpreter Attachment
+
+To attach a file with the context to the message, use the `MessageAttachment` class. To be able to process the attached file contents we need to provide the `List` with the single element `CodeInterpreterToolDefinition` as a `tools` parameter to both `CreateAgent` method and `MessageAttachment` class constructor.
+
+Here is an example to pass `CodeInterpreterTool` as tool:
+
+```C# Snippet:CreateAgentWithInterpreterTool
+AgentsClient client = new AgentsClient(connectionString, new DefaultAzureCredential());
+
+List<ToolDefinition> tools = [ new CodeInterpreterToolDefinition() ];
+Response<Agent> agentResponse = await client.CreateAgentAsync(
+    model: modelName,
+    name: "my-assistant",
+    instructions: "You are helpful assistant.",
+    tools: tools
+);
+Agent agent = agentResponse.Value;
+
+var fileResponse = await client.UploadFileAsync(filePath, AgentFilePurpose.Agents);
+var fileId = fileResponse.Value.Id;
+
+var attachment = new MessageAttachment(
+    fileId: fileId,
+    tools: tools
+);
+
+Response<AgentThread> threadResponse = await client.CreateThreadAsync();
+AgentThread thread = threadResponse.Value;
+
+Response<ThreadMessage> messageResponse = await client.CreateMessageAsync(
+    threadId: thread.Id,
+    role: MessageRole.User,
+    content: "What does the attachment say?",
+    attachments: new List< MessageAttachment > { attachment}
+    );
+ThreadMessage message = messageResponse.Value;
+```
+
+Azure blob storage can be used as a message attachment. In this case, use `VectorStoreDataSource` as a data source:
+
+```C# Snippet:CreateMessageAttachmentWithBlobStore
+var ds = new VectorStoreDataSource(
+    assetIdentifier: blobURI,
+    assetType: VectorStoreDataSourceAssetType.UriAsset
+);
+
+var attachment = new MessageAttachment(
+    ds: ds,
+    tools: tools
+);
+```
 
 #### Function call
 
@@ -522,14 +626,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [RequestFailedException]: https://learn.microsoft.com/dotnet/api/azure.requestfailedexception?view=azure-dotnet
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.2/sdk/ai/Azure.AI.Projects/tests/Samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects/tests/Samples
 [api_ref_docs]: https://learn.microsoft.com/dotnet/api/azure.ai.projects?view=azure-dotnet-preview
 [nuget]: https://www.nuget.org/packages/Azure.AI.Projects
-[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.2/sdk/ai/Azure.AI.Projects
+[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects
 [product_doc]: https://learn.microsoft.com/azure/ai-studio/
 [azure_identity]: https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet
 [azure_identity_dac]: https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
-[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Projects_1.0.0-beta.2/CONTRIBUTING.md
+[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/main/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
