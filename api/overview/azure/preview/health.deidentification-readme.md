@@ -1,12 +1,12 @@
 ---
 title: Azure Health.Deidentification client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Health.Deidentification, healthdataaiservices
-ms.date: 07/29/2024
+ms.date: 12/25/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: healthdataaiservices
 ---
-# Azure Health.Deidentification client library for .NET - version 1.0.0-beta.1 
+# Azure Health.Deidentification client library for .NET - version 1.0.0-alpha.20241224.1 
 
 
 Azure.Health.Deidentification is a managed service that enables users to tag, redact, or surrogate health data.
@@ -14,9 +14,7 @@ Azure.Health.Deidentification is a managed service that enables users to tag, re
 
 <!-- TODO Add operation links once docs are generated -->
 
-[Source code][source_root] | [Package (NuGet)][package] | [API reference documentation][reference_docs] | [Product documentation][azconfig_docs] | [Samples][source_samples]
-
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Health.Deidentification_1.0.0-beta.1/sdk/healthdataaiservices/Azure.Health.Deidentification/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
+[Source code](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/healthdataaiservices/Azure.Health.Deidentification/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](https://learn.microsoft.com/azure) | [Samples](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/healthdataaiservices/Azure.Health.Deidentification/samples)
 
 ## Getting started
 
@@ -77,7 +75,7 @@ Limitations:
 
 **Redaction Formatting**
 
-[Redaction formatting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Health.Deidentification_1.0.0-beta.1/sdk/healthdataaiservices/Azure.Health.Deidentification/docs/HowTo-RedactionFormatting.md)
+[Redaction formatting guide](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/healthdataaiservices/Azure.Health.Deidentification/docs/HowTo-RedactionFormatting.md)
 
 ### Thread safety
 
@@ -85,18 +83,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Health.Deidentification_1.0.0-beta.1/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Health.Deidentification_1.0.0-beta.1/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Health.Deidentification_1.0.0-beta.1/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Health.Deidentification_1.0.0-beta.1/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Health.Deidentification_1.0.0-beta.1/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Health.Deidentification_1.0.0-beta.1/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Health.Deidentification_1.0.0-beta.1/sdk/healthdataaiservices/Azure.Health.Deidentification/samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/healthdataaiservices/Azure.Health.Deidentification/samples).
 
 ## Next steps
 
@@ -128,7 +126,7 @@ additional questions or comments.
 
 <!-- LINKS -->
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
-[style-guide-msft]: /style-guide/capitalization
+[style-guide-msft]: https://learn.microsoft.com/style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/healthdataaiservices/Azure.Health.Deidentification/README.png)
