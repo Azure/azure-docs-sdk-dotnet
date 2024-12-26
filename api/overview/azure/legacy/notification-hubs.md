@@ -1,7 +1,7 @@
 ---
 title: Azure Notification Hubs SDK for .NET
 description: Reference for Azure Notification Hubs SDK for .NET
-ms.date: 12/25/2024
+ms.date: 12/26/2024
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: notificationhubs
