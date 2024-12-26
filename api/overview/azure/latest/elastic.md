@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: elastic
 ---
-# Azure Elastic SDK for .NET - preview
-## Packages - preview
+# Azure Elastic SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](elastic-index.md)]
