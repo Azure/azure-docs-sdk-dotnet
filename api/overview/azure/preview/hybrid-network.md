@@ -1,7 +1,7 @@
 ---
 title: Azure Hybrid Network SDK for .NET
 description: Reference for Azure Hybrid Network SDK for .NET
-ms.date: 01/09/2025
+ms.date: 01/10/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hybridnetwork
