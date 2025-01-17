@@ -1,7 +1,7 @@
 ---
 title: Azure PostgreSQL SDK for .NET
 description: Reference for Azure PostgreSQL SDK for .NET
-ms.date: 01/16/2025
+ms.date: 01/17/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: postgresql
