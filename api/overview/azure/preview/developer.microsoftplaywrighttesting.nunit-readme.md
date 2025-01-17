@@ -1,16 +1,16 @@
 ---
 title: 
-keywords: Azure, dotnet, SDK, API, Azure.Developer.MicrosoftPlaywrightTesting.NUnit, playwrighttesting
-ms.date: 11/18/2024
+keywords: Azure, dotnet, SDK, API, Azure.Developer.MicrosoftPlaywrightTesting.NUnit, playwright-testing
+ms.date: 01/17/2025
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: playwrighttesting
+ms.service: playwright-testing
 ---
 # Microsoft Azure Playwright Testing NUnit client library for .NET
 
 Microsoft Playwright Testing is a fully managed service that uses the cloud to enable you to run Playwright tests with much higher parallelization across different operating system-browser combinations simultaneously. This means faster test runs with broader scenario coverage, which helps speed up delivery of features without sacrificing quality. The service also enables you to publish test results and related artifacts to the service and view them in the service portal enabling faster and easier troubleshooting. With Microsoft Playwright Testing service, you can release features faster and more confidently.
 
-Ready to get started? Jump into our [quickstart guide]<!--(https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.MicrosoftPlaywrightTesting.NUnit_1.0.0-beta.3/sdk/playwrighttesting/Azure.Developer.MicrosoftPlaywrightTesting.NUnit/README.md#getting-started)-->!
+Ready to get started? Jump into our [quickstart guide]<!--(https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.MicrosoftPlaywrightTesting.NUnit_1.0.0-beta.4/sdk/playwrighttesting/Azure.Developer.MicrosoftPlaywrightTesting.NUnit/README.md#getting-started)-->!
 
 ## Useful links
 - [Quickstart: Run end-to-end tests at scale](https://aka.ms/mpt/quickstart)
@@ -36,7 +36,7 @@ dotnet add package Azure.Developer.MicrosoftPlaywrightTesting.NUnit --prerelease
 
 ### Authenticate the client
 
-To learn more about options for Microsoft Entra Id authentication, refer to [Azure.Identity credentials](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.MicrosoftPlaywrightTesting.NUnit_1.0.0-beta.3/sdk/identity/Azure.Identity#credentials). You can also refer to [our samples]<!--(https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.MicrosoftPlaywrightTesting.NUnit_1.0.0-beta.3/sdk/playwrighttesting/Azure.Developer.MicrosoftPlaywrightTesting.NUnit/samples/Sample1_CustomisingServiceParameters.md)--> on how to configurate different Azure Identity credentials.
+To learn more about options for Microsoft Entra Id authentication, refer to [Azure.Identity credentials](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.MicrosoftPlaywrightTesting.NUnit_1.0.0-beta.4/sdk/identity/Azure.Identity#credentials). You can also refer to [our samples]<!--(https://github.com/Azure/azure-sdk-for-net/tree/Azure.Developer.MicrosoftPlaywrightTesting.NUnit_1.0.0-beta.4/sdk/playwrighttesting/Azure.Developer.MicrosoftPlaywrightTesting.NUnit/samples/Sample1_CustomisingServiceParameters.md)--> on how to configurate different Azure Identity credentials.
 
 #### Create a Workspace
 
