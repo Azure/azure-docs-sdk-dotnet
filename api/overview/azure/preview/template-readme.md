@@ -1,23 +1,23 @@
 ---
 title: Azure Template client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Template, template
-ms.date: 10/25/2024
+ms.date: 01/20/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: template
 ---
-# Azure Template client library for .NET - version 1.0.3-beta.4270287 
+# Azure Template client library for .NET - version 1.0.3-beta.4488203 
 
 
 Azure Template is a managed service that helps developers get secret simply and securely.
 
 Use the client library for to:
 
-* [Get secret](/azure)
+* [Get secret](https://learn.microsoft.com/azure)
 
 [Source code][source_root] | [Package (NuGet)][package] | [API reference documentation][reference_docs] | [Product documentation][azconfig_docs] | [Samples][source_samples]
 
-  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4270287/sdk/template/Azure.Template/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](/azure)
+  [Source code](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4488203/sdk/template/Azure.Template/src) | [Package (NuGet)](https://www.nuget.org/packages) | [API reference documentation](https://azure.github.io/azure-sdk-for-net) | [Product documentation](https://learn.microsoft.com/azure)
 
 ## Getting started
 
@@ -37,7 +37,7 @@ dotnet add package Azure.Template --prerelease
 
 Include a section after the install command that details any requirements that must be satisfied before a developer can [authenticate](#authenticate-the-client) and test all of the snippets in the [Examples](#examples) section. For example, for Cosmos DB:
 
-> You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and [Cosmos DB account](/azure/cosmos-db/account-overview) (SQL API). In order to take advantage of the C# 8.0 syntax, it is recommended that you compile using the [.NET Core SDK](https://dotnet.microsoft.com/download) 3.0 or higher with a [language version](/dotnet/csharp/language-reference/configure-language-version#override-a-default) of `latest`.  It is also possible to compile with the .NET Core SDK 2.1.x using a language version of `preview`.
+> You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and [Cosmos DB account](https://learn.microsoft.com/azure/cosmos-db/account-overview) (SQL API). In order to take advantage of the C# 8.0 syntax, it is recommended that you compile using the [.NET Core SDK](https://dotnet.microsoft.com/download) 3.0 or higher with a [language version](https://learn.microsoft.com/dotnet/csharp/language-reference/configure-language-version#override-a-default) of `latest`.  It is also possible to compile with the .NET Core SDK 2.1.x using a language version of `preview`.
 
 ### Authenticate the client
 
@@ -57,18 +57,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4270287/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4270287/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4270287/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4270287/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4270287/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4488203/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4488203/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4488203/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4488203/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Template_1.0.3-beta.4488203/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Template_1.0.3-beta.4270287/sdk/template/Azure.Template/samples).
+You can familiarize yourself with different APIs using [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Template_1.0.3-beta.4488203/sdk/template/Azure.Template/samples).
 
 ### Get secret
 
@@ -105,7 +105,7 @@ If the package or a related package supports it, include tips for logging or ena
 This is a template, but your SDK readme should include details on how to contribute code to the repo/package.
 
 <!-- LINKS -->
-[style-guide-msft]: /style-guide/capitalization
+[style-guide-msft]: https://learn.microsoft.com/style-guide/capitalization
 [style-guide-cloud]: https://aka.ms/azsdk/cloud-style-guide
 
 ![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/template/Azure.Template/README.png)
