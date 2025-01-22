@@ -1,17 +1,17 @@
 ---
 title: Azure AI Projects client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Projects, ai
-ms.date: 12/13/2024
+ms.date: 01/22/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: ai
 ---
-# Azure AI Projects client library for .NET - version 1.0.0-beta.2 
+# Azure AI Projects client library for .NET - version 1.0.0-beta.3 
 
 Use the AI Projects client library to:
 
 * **Develop Agents using the Azure AI Agent Service**, leveraging an extensive ecosystem of models, tools, and capabilities from OpenAI, Microsoft, and other LLM providers. The Azure AI Agent Service enables the building of Agents for a wide range of generative AI use cases. The package is currently in preview.
-* **Enumerate connections** in your Azure AI Studio project and get connection properties. For example, get the inference endpoint URL and credentials associated with your Azure OpenAI connection.
+* **Enumerate connections** in your Azure AI Foundry project and get connection properties. For example, get the inference endpoint URL and credentials associated with your Azure OpenAI connection.
 
 [Product documentation][product_doc]
 | [Samples][samples]
@@ -34,6 +34,8 @@ Use the AI Projects client library to:
       - [Create and execute run](#create-and-execute-run)
       - [Retrieve messages](#retrieve-messages)
     - [File search](#file-search)
+    - [Enterprise File Search](#create-agent-with-enterprise-file-search)
+    - [Code interpreter attachment](#create-message-with-code-interpreter-attachment)
     - [Function call](#function-call)
     - [Azure function call](#azure-function-call)
     - [Azure Function Call](#create-agent-with-azure-function-call)
@@ -219,6 +221,108 @@ Agent agent = agentResponse.Value;
 With a file ID association and a supported tool enabled, the agent will then be able to consume the associated
 data when running threads.
 
+#### Create Agent with Enterprise File Search
+
+We can upload file to Azure as it is shown in the example, or use the existing Azure blob storage. In the code below we demonstrate how this can be achieved. First we upload file to azure and create `VectorStoreDataSource`, which then is used to create vector store. This vector store is then given to the `FileSearchTool` constructor.
+
+```C# Snippet:CreateVectorStoreBlob
+var ds = new VectorStoreDataSource(
+    assetIdentifier: blobURI,
+    assetType: VectorStoreDataSourceAssetType.UriAsset
+);
+var vectorStoreTask = await client.CreateVectorStoreAsync(
+    name: "sample_vector_store",
+    storeConfiguration: new VectorStoreConfiguration(
+        dataSources: new List<VectorStoreDataSource> { ds }
+    )
+);
+var vectorStore = vectorStoreTask.Value;
+
+FileSearchToolResource fileSearchResource = new([vectorStore.Id], null);
+
+List<ToolDefinition> tools = [new FileSearchToolDefinition()];
+Response<Agent> agentResponse = await client.CreateAgentAsync(
+    model: modelName,
+    name: "my-assistant",
+    instructions: "You are helpful assistant.",
+    tools: tools,
+    toolResources: new ToolResources() { FileSearch = fileSearchResource }
+);
+```
+
+We also can attach files to the existing vector store. In the code snippet below, we first create an empty vector store and add file to it.
+
+```C# Snippet:BatchFileAttachment
+var ds = new VectorStoreDataSource(
+    assetIdentifier: blobURI,
+    assetType: VectorStoreDataSourceAssetType.UriAsset
+);
+var vectorStoreTask = await client.CreateVectorStoreAsync(
+    name: "sample_vector_store"
+);
+var vectorStore = vectorStoreTask.Value;
+
+var uploadTask = await client.CreateVectorStoreFileBatchAsync(
+    vectorStoreId: vectorStore.Id,
+    dataSources: new List<VectorStoreDataSource> { ds }
+);
+Console.WriteLine($"Created vector store file batch, vector store file batch ID: {uploadTask.Value.Id}");
+
+FileSearchToolResource fileSearchResource = new([vectorStore.Id], null);
+```
+
+#### Create Message with Code Interpreter Attachment
+
+To attach a file with the context to the message, use the `MessageAttachment` class. To be able to process the attached file contents we need to provide the `List` with the single element `CodeInterpreterToolDefinition` as a `tools` parameter to both `CreateAgent` method and `MessageAttachment` class constructor.
+
+Here is an example to pass `CodeInterpreterTool` as tool:
+
+```C# Snippet:CreateAgentWithInterpreterTool
+AgentsClient client = new AgentsClient(connectionString, new DefaultAzureCredential());
+
+List<ToolDefinition> tools = [ new CodeInterpreterToolDefinition() ];
+Response<Agent> agentResponse = await client.CreateAgentAsync(
+    model: modelName,
+    name: "my-assistant",
+    instructions: "You are helpful assistant.",
+    tools: tools
+);
+Agent agent = agentResponse.Value;
+
+var fileResponse = await client.UploadFileAsync(filePath, AgentFilePurpose.Agents);
+var fileId = fileResponse.Value.Id;
+
+var attachment = new MessageAttachment(
+    fileId: fileId,
+    tools: tools
+);
+
+Response<AgentThread> threadResponse = await client.CreateThreadAsync();
+AgentThread thread = threadResponse.Value;
+
+Response<ThreadMessage> messageResponse = await client.CreateMessageAsync(
+    threadId: thread.Id,
+    role: MessageRole.User,
+    content: "What does the attachment say?",
+    attachments: new List< MessageAttachment > { attachment}
+    );
+ThreadMessage message = messageResponse.Value;
+```
+
+Azure blob storage can be used as a message attachment. In this case, use `VectorStoreDataSource` as a data source:
+
+```C# Snippet:CreateMessageAttachmentWithBlobStore
+var ds = new VectorStoreDataSource(
+    assetIdentifier: blobURI,
+    assetType: VectorStoreDataSourceAssetType.UriAsset
+);
+
+var attachment = new MessageAttachment(
+    ds: ds,
+    tools: tools
+);
+```
+
 #### Function call
 
 Tools that reference caller-defined capabilities as functions can be provided to an agent to allow it to
@@ -296,7 +400,7 @@ With the functions defined in their appropriate tools, an agent can be now creat
 ```C# Snippet:FunctionsCreateAgentWithFunctionTools
 // note: parallel function calling is only supported with newer models like gpt-4-1106-preview
 Response<Agent> agentResponse = await client.CreateAgentAsync(
-    model: "gpt-4-1106-preview",
+    model: modelName,
     name: "SDK Test Agent - Functions",
         instructions: "You are a weather bot. Use the provided functions to help answer questions. "
             + "Customize your responses to the user's preferences as much as possible and use friendly "
@@ -363,6 +467,85 @@ do
 }
 while (runResponse.Value.Status == RunStatus.Queued
     || runResponse.Value.Status == RunStatus.InProgress);
+```
+
+Calling function with streaming requires small modification of the code above. Streaming updates contain one ToolOutput per update and now the GetResolvedToolOutput function will look like it is shown on the code snippet below:
+
+```C# Snippet:FunctionsWithStreamingUpdateHandling
+ToolOutput GetResolvedToolOutput(string functionName, string toolCallId, string functionArguments)
+{
+    if (functionName == getUserFavoriteCityTool.Name)
+    {
+        return new ToolOutput(toolCallId, GetUserFavoriteCity());
+    }
+    using JsonDocument argumentsJson = JsonDocument.Parse(functionArguments);
+    if (functionName == getCityNicknameTool.Name)
+    {
+        string locationArgument = argumentsJson.RootElement.GetProperty("location").GetString();
+        return new ToolOutput(toolCallId, GetCityNickname(locationArgument));
+    }
+    if (functionName == getCurrentWeatherAtLocationTool.Name)
+    {
+        string locationArgument = argumentsJson.RootElement.GetProperty("location").GetString();
+        if (argumentsJson.RootElement.TryGetProperty("unit", out JsonElement unitElement))
+        {
+            string unitArgument = unitElement.GetString();
+            return new ToolOutput(toolCallId, GetWeatherAtLocation(locationArgument, unitArgument));
+        }
+        return new ToolOutput(toolCallId, GetWeatherAtLocation(locationArgument));
+    }
+    return null;
+}
+```
+
+We parse streaming updates in two cycles. One iterates over the streaming run outputs and when we are getting update, requiring the action, we are starting the second cycle, which iterates over the outputs of the same run, after submission of the local functions calls results.
+
+```C# Snippet:FunctionsWithStreamingUpdateCycle
+List<ToolOutput> toolOutputs = new();
+ThreadRun streamRun = null;
+await foreach (StreamingUpdate streamingUpdate in client.CreateRunStreamingAsync(thread.Id, agent.Id))
+{
+    if (streamingUpdate.UpdateKind == StreamingUpdateReason.RunCreated)
+    {
+        Console.WriteLine("--- Run started! ---");
+    }
+    else if (streamingUpdate is RequiredActionUpdate submitToolOutputsUpdate)
+    {
+        streamRun = submitToolOutputsUpdate.Value;
+        RequiredActionUpdate newActionUpdate = submitToolOutputsUpdate;
+        while (streamRun.Status == RunStatus.RequiresAction) {
+            toolOutputs.Add(
+                GetResolvedToolOutput(
+                    newActionUpdate.FunctionName,
+                    newActionUpdate.ToolCallId,
+                    newActionUpdate.FunctionArguments
+            ));
+            await foreach (StreamingUpdate actionUpdate in client.SubmitToolOutputsToStreamAsync(streamRun, toolOutputs))
+            {
+                if (actionUpdate is MessageContentUpdate contentUpdate)
+                {
+                    Console.Write(contentUpdate.Text);
+                }
+                else if (actionUpdate is RequiredActionUpdate newAction)
+                {
+                    newActionUpdate = newAction;
+                }
+                else if (actionUpdate.UpdateKind == StreamingUpdateReason.RunCompleted)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("--- Run completed! ---");
+                }
+            }
+            streamRun = client.GetRun(thread.Id, streamRun.Id);
+            toolOutputs.Clear();
+        }
+        break;
+    }
+    else if (streamingUpdate is MessageContentUpdate contentUpdate)
+    {
+        Console.Write(contentUpdate.Text);
+    }
+}
 ```
 
 #### Azure function call
@@ -522,14 +705,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [RequestFailedException]: https://learn.microsoft.com/dotnet/api/azure.requestfailedexception?view=azure-dotnet
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.2/sdk/ai/Azure.AI.Projects/tests/Samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.3/sdk/ai/Azure.AI.Projects/tests/Samples
 [api_ref_docs]: https://learn.microsoft.com/dotnet/api/azure.ai.projects?view=azure-dotnet-preview
 [nuget]: https://www.nuget.org/packages/Azure.AI.Projects
-[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.2/sdk/ai/Azure.AI.Projects
+[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.3/sdk/ai/Azure.AI.Projects
 [product_doc]: https://learn.microsoft.com/azure/ai-studio/
 [azure_identity]: https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet
 [azure_identity_dac]: https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
-[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Projects_1.0.0-beta.2/CONTRIBUTING.md
+[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Projects_1.0.0-beta.3/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
