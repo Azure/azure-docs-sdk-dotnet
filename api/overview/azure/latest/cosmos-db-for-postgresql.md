@@ -1,7 +1,7 @@
 ---
 title: Azure Cosmos DB for PostgreSQL SDK for .NET
 description: Reference for Azure Cosmos DB for PostgreSQL SDK for .NET
-ms.date: 01/21/2025
+ms.date: 01/22/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: cosmosdbforpostgresql
