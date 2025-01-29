@@ -15,9 +15,7 @@ token from the STS that can be used to access Mixed Reality services.
 
 [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.Authentication_1.2.0/sdk/mixedreality/Azure.MixedReality.Authentication/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.MixedReality.Authentication)
 
-![Mixed Reality service authentication diagram](/azure/spatial-anchors/concepts/media/spatial-anchors-authentication-overview.png)
-
-- [Azure Mixed Reality Authentication client library for .NET](#azure-mixed-reality-authentication-client-library-for-net)
+- [Azure Mixed Reality Authentication client library for .NET - version 1.2.0](#azure-mixed-reality-authentication-client-library-for-net---version-120)
   - [Getting started](#getting-started)
     - [Install the package](#install-the-package)
     - [Prerequisites](#prerequisites)
@@ -76,8 +74,6 @@ Mixed Reality services support a few different forms of authentication:
   - Otherwise, we recommend that you obtain Azure AD tokens from a web service that supports your app. We recommend this
     method for production applications because it allows you to avoid embedding the credentials for access to a Mixed
     Reality service in your client application.
-
-See [here](/azure/spatial-anchors/concepts/authentication) for detailed instructions and information.
 
 #### Authentication examples
 
@@ -177,24 +173,6 @@ AccessToken token = await client.GetTokenAsync();
 ```
 
 See the authentication examples [above](#authenticate-the-client) for more complex authentication scenarios.
-
-#### Using the access token in a Mixed Reality client library
-
-Some Mixed Reality client libraries might accept an access token in place of a credential. For example:
-
-```csharp
-// GetMixedRealityAccessTokenFromWebService is a hypothetical method that retrieves
-// a Mixed Reality access token from a web service. The web service would use the
-// MixedRealityStsClient and credentials to obtain an access token to be returned
-// to the client.
-AccessToken accessToken = await GetMixedRealityAccessTokenFromWebService();
-
-SpatialAnchorsAccount account = new SpatialAnchorsAccount(accountId, accountDomain);
-SpatialAnchorsClient client = new SpatialAnchorsClient(account, accessToken);
-```
-
-Note: The `SpatialAnchorsClient` usage above is hypothetical and may not reflect the actual library. Consult the
-documentation for the client library you're using to determine if and how this might be supported.
 
 ## Troubleshooting
 
