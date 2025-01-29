@@ -81,8 +81,6 @@ Mixed Reality services support a few different forms of authentication:
     method for production applications because it allows you to avoid embedding the credentials for access to a Mixed
     Reality service in your client application.
 
-See [here](https://docs.microsoft.com/azure/spatial-anchors/concepts/authentication) for detailed instructions and information.
-
 #### Authentication examples
 
 Below are some examples of some common authentication scenarios, but more examples and information can be found at
@@ -179,24 +177,6 @@ AccessToken token = await client.GetTokenAsync(accountId);
 ```
 
 See the authentication examples [above](#authenticate-the-client) for more complex authentication scenarios.
-
-#### Using the access token in a Mixed Reality client library
-
-Some Mixed Reality client libraries might accept an access token in place of a credential. For example:
-
-```csharp
-// GetMixedRealityAccessTokenFromWebService is a hypothetical method that retrieves
-// a Mixed Reality access token from a web service. The web service would use the
-// MixedRealityStsClient and credentials to obtain an access token to be returned
-// to the client.
-AccessToken accessToken = await GetMixedRealityAccessTokenFromWebService();
-
-SpatialAnchorsAccount account = new SpatialAnchorsAccount(accountId, accountDomain);
-SpatialAnchorsClient client = new SpatialAnchorsClient(account, accessToken);
-```
-
-Note: The `SpatialAnchorsClient` usage above is hypothetical and may not reflect the actual library. Consult the
-documentation for the client library you're using to determine if and how this might be supported.
 
 ## Troubleshooting
 
