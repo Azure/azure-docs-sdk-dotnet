@@ -12,7 +12,6 @@ ms.service: mixedreality
 
 Microsoft provides a series of Azure services to empower Mixed Reality devices and applications. The following services are provided:
 
-* [Azure Spatial Anchors](https://azure.microsoft.com/services/spatial-anchors/)
 * [Azure Remote Rendering](https://azure.microsoft.com/services/remote-rendering/) (preview)
 
 ## Management library

@@ -9,13 +9,11 @@ ms.service: mixedreality
 # Azure Mixed Reality Authentication client library for .NET - version 1.0.0-beta.2 
 
 
-Mixed Reality services, like Azure Spatial Anchors, Azure Remote Rendering, and others, use the Mixed Reality security
+Mixed Reality services, like Azure Remote Rendering, use the Mixed Reality security
 token service (STS) for authentication. This package supports exchanging Mixed Reality account credentials for an access
 token from the STS that can be used to access Mixed Reality services.
 
 [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.Authentication_1.0.0-beta.2/sdk/mixedreality/Azure.MixedReality.Authentication) | NuGet
-
-![Mixed Reality service authentication diagram](https://docs.microsoft.com/azure/spatial-anchors/concepts/media/spatial-anchors-authentication-overview.png)
 
 - [Azure Mixed Reality Authentication client library for .NET](#azure-mixed-reality-authentication-client-library-for-net)
   - [Getting started](#getting-started)
@@ -66,7 +64,6 @@ Add a package reference:
 - You must have an [Azure subscription](https://azure.microsoft.com/free/).
 - You must have an account with an [Azure Mixed Reality service](https://azure.microsoft.com/topic/mixed-reality/):
   - [Azure Remote Rendering](https://docs.microsoft.com/azure/remote-rendering/)
-  - [Azure Spatial Anchors](https://docs.microsoft.com/azure/spatial-anchors/)
 - Familiarity with the authentication and credential concepts from [Azure.Identity](https://github.com/Azure/azure-sdk-for-net/blob/Azure.MixedReality.Authentication_1.0.0-beta.2/sdk/identity/Azure.Identity/README.md).
 
 ### Authenticate the client

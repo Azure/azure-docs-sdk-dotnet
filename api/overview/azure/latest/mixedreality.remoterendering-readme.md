@@ -63,8 +63,7 @@ There are several different forms of authentication:
     user-based Azure AD authentication in your app. You then grant access to your Azure Remote Rendering accounts by using
     your existing Azure AD security groups. You can also grant access directly to users in your organization.
   - Otherwise, we recommend that you obtain Azure AD tokens from a web service that supports your app. We recommend this
-    method for production applications because it allows you to avoid embedding the credentials for access to Azure Spatial
-    Anchors in your client application.
+    method for production applications because it allows you to avoid embedding the credentials for access your client application.
 
 See [here](https://docs.microsoft.com/azure/remote-rendering/how-tos/authentication) for detailed instructions and information.
 
