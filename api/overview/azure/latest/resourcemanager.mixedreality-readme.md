@@ -1,5 +1,5 @@
 ---
-title: 
+title: Microsoft Azure Mixed Reality management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.MixedReality, mixedreality
 ms.date: 11/30/2023
 ms.topic: reference
