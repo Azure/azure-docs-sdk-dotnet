@@ -15,7 +15,7 @@ token from the STS that can be used to access Mixed Reality services.
 
 [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.Authentication_1.2.0/sdk/mixedreality/Azure.MixedReality.Authentication/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.MixedReality.Authentication)
 
-- [Azure Mixed Reality Authentication client library for .NET](#azure-mixed-reality-authentication-client-library-for-net---version-120)
+- [Azure Mixed Reality Authentication client library for .NET](#azure-mixed-reality-authentication-client-library-for-net)
   - [Getting started](#getting-started)
     - [Install the package](#install-the-package)
     - [Prerequisites](#prerequisites)
