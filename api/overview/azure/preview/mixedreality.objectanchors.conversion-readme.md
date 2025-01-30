@@ -4,7 +4,6 @@ keywords: Azure, dotnet, SDK, API, Azure.MixedReality.ObjectAnchors.Conversion, 
 ms.date: 11/03/2022
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: objectanchors
 ---
 # Azure Object Anchors client library for .NET - version 0.3.0-beta.6 
 
