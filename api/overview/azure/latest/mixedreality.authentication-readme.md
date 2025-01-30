@@ -4,7 +4,6 @@ keywords: Azure, dotnet, SDK, API, Azure.MixedReality.Authentication, mixedreali
 ms.date: 09/09/2022
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: mixedreality
 ---
 # Azure Mixed Reality Authentication client library for .NET - version 1.2.0 
 
@@ -15,23 +14,21 @@ token from the STS that can be used to access Mixed Reality services.
 
 [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.Authentication_1.2.0/sdk/mixedreality/Azure.MixedReality.Authentication/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.MixedReality.Authentication)
 
-- [Azure Mixed Reality Authentication client library for .NET](#azure-mixed-reality-authentication-client-library-for-net)
-  - [Getting started](#getting-started)
-    - [Install the package](#install-the-package)
-    - [Prerequisites](#prerequisites)
-    - [Authenticate the client](#authenticate-the-client)
-      - [Authentication examples](#authentication-examples)
-        - [Authenticating with account key authentication](#authenticating-with-account-key-authentication)
-        - [Authenticating with an AAD client secret](#authenticating-with-an-aad-client-secret)
-        - [Authenticating a user using device code authentication](#authenticating-a-user-using-device-code-authentication)
-        - [Interactive authentication with DefaultAzureCredential](#interactive-authentication-with-defaultazurecredential)
+- [Getting started](#getting-started)
+  - [Install the package](#install-the-package)
+  - [Prerequisites](#prerequisites)
+  - [Authenticate the client](#authenticate-the-client)
+    - [Authentication examples](#authentication-examples)
+      - [Authenticating with account key authentication](#authenticating-with-account-key-authentication)
+      - [Authenticating with an AAD client secret](#authenticating-with-an-aad-client-secret)
+      - [Authenticating a user using device code authentication](#authenticating-a-user-using-device-code-authentication)
+      - [Interactive authentication with DefaultAzureCredential](#interactive-authentication-with-defaultazurecredential)
   - [Key concepts](#key-concepts)
     - [MixedRealityStsClient](#mixedrealitystsclient)
     - [Thread safety](#thread-safety)
     - [Additional concepts](#additional-concepts)
   - [Examples](#examples)
     - [Retrieve an access token](#retrieve-an-access-token)
-      - [Using the access token in a Mixed Reality client library](#using-the-access-token-in-a-mixed-reality-client-library)
   - [Troubleshooting](#troubleshooting)
   - [Next steps](#next-steps)
     - [Client libraries supporting authentication with Mixed Reality Authentication](#client-libraries-supporting-authentication-with-mixed-reality-authentication)
