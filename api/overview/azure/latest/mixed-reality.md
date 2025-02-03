@@ -4,7 +4,6 @@ description: Reference for Azure Mixed Reality SDK for .NET
 ms.date: 01/31/2025
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: mixedreality
 ---
 # Azure Mixed Reality Resource Management Libraries for .NET
 
@@ -12,7 +11,6 @@ ms.service: mixedreality
 
 Microsoft provides a series of Azure services to empower Mixed Reality devices and applications. The following services are provided:
 
-* [Azure Spatial Anchors](https://azure.microsoft.com/services/spatial-anchors/)
 * [Azure Remote Rendering](https://azure.microsoft.com/services/remote-rendering/) (preview)
 
 ## Management library

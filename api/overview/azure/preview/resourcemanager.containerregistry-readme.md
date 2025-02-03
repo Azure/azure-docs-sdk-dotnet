@@ -1,10 +1,9 @@
 ---
-title: 
+title: Microsoft Azure Container Registry management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.ContainerRegistry, containerregistry
 ms.date: 10/15/2024
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: containerregistry
 ---
 # Microsoft Azure Container Registry management client library for .NET
 
@@ -14,11 +13,11 @@ This library supports managing Microsoft Azure Container Registry resources.
 
 This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
 
-    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
-    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
-    - HTTP pipeline with custom policies.
-    - Better error-handling.
-    - Support uniform telemetry across all languages.
+- Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
+- Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
+- HTTP pipeline with custom policies.
+- Better error-handling.
+- Support uniform telemetry across all languages.
 
 ## Getting started 
 

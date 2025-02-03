@@ -1,24 +1,23 @@
 ---
-title: 
+title: Microsoft Azure Mixed Reality management client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.MixedReality, mixedreality
 ms.date: 05/31/2023
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: mixedreality
 ---
 # Microsoft Azure Mixed Reality management client library for .NET
 
-Microsoft Azure Mixed Reality cloud services like Azure Remote Rendering and Azure Spatial Anchors help developers build compelling immersive experiences on a variety of platforms. These services allow you to integrate spatial awareness into your projects when you're making applications for 3D training, predictive equipment maintenance, and design review, all in the context of your users’ environments.
+Microsoft Azure Mixed Reality cloud services like Azure Remote Rendering help developers build compelling immersive experiences on a variety of platforms. These services allow you to integrate spatial awareness into your projects when you're making applications for 3D training, predictive equipment maintenance, and design review, all in the context of your users’ environments.
 
 This library supports managing Microsoft Azure Mixed Reality resources.
 
 This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
 
-    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
-    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
-    - HTTP pipeline with custom policies.
-    - Better error-handling.
-    - Support uniform telemetry across all languages.
+- Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
+- Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
+- HTTP pipeline with custom policies.
+- Better error-handling.
+- Support uniform telemetry across all languages.
 
 ## Getting started 
 

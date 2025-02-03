@@ -4,7 +4,6 @@ keywords: Azure, dotnet, SDK, API, Azure.MixedReality.ObjectAnchors.Conversion, 
 ms.date: 11/03/2022
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: objectanchors
 ---
 # Azure Object Anchors client library for .NET - version 0.3.0-beta.6 
 
@@ -13,17 +12,16 @@ Azure Object Anchors enables an application to detect an object in the physical 
 
 [Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.MixedReality.ObjectAnchors.Conversion_0.3.0-beta.6/sdk/objectanchors/Azure.MixedReality.ObjectAnchors.Conversion/src) | [Package (NuGet)](https://www.nuget.org/packages/Azure.MixedReality.ObjectAnchors.Conversion/)
 
-- [Azure Object Anchors client library for .NET](#azure-object-anchors-client-library-for-net)
-  - [Getting started](#getting-started)
-    - [Install the package](#install-the-package)
-    - [Prerequisites](#prerequisites)
-    - [Authenticate the client](#authenticate-the-client)
-  - [Key concepts](#key-concepts)
-    - [ObjectAnchorsConversionClient](#objectanchorsconversionclient)
-  - [Examples](#examples)
-    - [Upload an asset for Object Anchors asset conversion](#upload-an-asset-for-object-anchors-asset-conversion)
-    - [Start 3D asset conversion](#start-3d-asset-conversion)
-    - [Poll an existing ObjectAnchors asset conversion until completion and download the result](#poll-an-existing-objectanchors-asset-conversion-until-completion-and-download-the-result)
+- [Getting started](#getting-started)
+  - [Install the package](#install-the-package)
+  - [Prerequisites](#prerequisites)
+  - [Authenticate the client](#authenticate-the-client)
+- [Key concepts](#key-concepts)
+  - [ObjectAnchorsConversionClient](#objectanchorsconversionclient)
+- [Examples](#examples)
+  - [Upload an asset for Object Anchors asset conversion](#upload-an-asset-for-object-anchors-asset-conversion)
+  - [Start 3D asset conversion](#start-3d-asset-conversion)
+  - [Poll an existing ObjectAnchors asset conversion until completion and download the result](#poll-an-existing-objectanchors-asset-conversion-until-completion-and-download-the-result)
   - [Troubleshooting](#troubleshooting)
   - [Next steps](#next-steps)
   - [Contributing](#contributing)
@@ -62,8 +60,6 @@ Mixed Reality services support a few different forms of authentication:
     existing Azure AD security groups. You can also grant access directly to users in your organization.
   - Otherwise, we recommend that you obtain Azure AD tokens from a web service that supports your app. We recommend this
     method for production applications because it allows you to avoid embedding the credentials for access to the Object Anchors asset conversion service in your client application.
-
-See [here](/azure/spatial-anchors/concepts/authentication) for detailed instructions and information.
 
 ## Key concepts
 
