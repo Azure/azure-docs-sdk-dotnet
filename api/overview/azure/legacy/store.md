@@ -1,7 +1,7 @@
 ---
 title: Azure Store SDK for .NET
 description: Reference for Azure Store SDK for .NET
-ms.date: 01/31/2025
+ms.date: 02/03/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: store
