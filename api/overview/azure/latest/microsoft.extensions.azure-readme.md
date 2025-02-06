@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.Extensions.Azure, extensions
-ms.date: 11/27/2024
+ms.date: 02/06/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: extensions
@@ -151,11 +151,11 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 
 <!-- LINKS -->
-[source_root]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Extensions.Azure_1.9.0/sdk/extensions/Microsoft.Extensions.Azure/src
+[source_root]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Extensions.Azure_1.10.0/sdk/extensions/Microsoft.Extensions.Azure/src
 [nuget]: https://www.nuget.org/
 [package]: https://www.nuget.org/packages/Microsoft.Extensions.Azure/
-[configuration]: /aspnet/core/fundamentals/configuration/?view=aspnetcore-3.0
-[dependency_injection]: /aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.0
+[configuration]: https://learn.microsoft.com/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.0
+[dependency_injection]: https://learn.microsoft.com/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.0
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 
