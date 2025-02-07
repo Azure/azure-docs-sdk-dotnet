@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.Extensions.AspNetCore.Configuration.Secrets, extensions
-ms.date: 08/15/2024
+ms.date: 02/07/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: extensions
@@ -36,7 +36,7 @@ az keyvault secret set --vault-name MyVault --name MySecret --value "hVFkk965BuU
 
 #### Azure role-based access control
 
-When using [azure role-based access control](/azure/key-vault/general/rbac-guide), the identity you are authenticating has to have the "Key Vault Reader" and "Key Vault Secrets User" roles.
+When using [azure role-based access control](https://learn.microsoft.com/azure/key-vault/general/rbac-guide), the identity you are authenticating has to have the "Key Vault Reader" and "Key Vault Secrets User" roles.
 The "Key Vault Reader" role allows the extension to list secrets while the "Key Vault Secrets User" allows retrieving their values.
 
 ```powershell
@@ -51,11 +51,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Extensions.AspNetCore.Configuration.Secrets_1.3.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Extensions.AspNetCore.Configuration.Secrets_1.3.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Extensions.AspNetCore.Configuration.Secrets_1.3.2/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Extensions.AspNetCore.Configuration.Secrets_1.3.2/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Extensions.AspNetCore.Configuration.Secrets_1.3.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Extensions.AspNetCore.Configuration.Secrets_1.4.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Extensions.AspNetCore.Configuration.Secrets_1.4.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Extensions.AspNetCore.Configuration.Secrets_1.4.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Extensions.AspNetCore.Configuration.Secrets_1.4.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Extensions.AspNetCore.Configuration.Secrets_1.4.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
@@ -90,24 +90,22 @@ For more information see the [Code of Conduct FAQ][coc_faq]
 or contact [opencode@microsoft.com][coc_contact] with any
 additional questions or comments.
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fextensions%2FAzure.Extensions.AspNetCore.Configuration.Secrets%2FREADME.png)
-
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.Configuration.Secrets_1.3.2/sdk/extensions/Azure.Extensions.AspNetCore.Configuration.Secrets/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.Configuration.Secrets_1.4.0/sdk/extensions/Azure.Extensions.AspNetCore.Configuration.Secrets/src
 [package]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets/
-[docs]: /dotnet/api/Azure.Extensions.AspNetCore.Configuration.Secrets
+[docs]: https://learn.microsoft.com/dotnet/api/Azure.Extensions.AspNetCore.Configuration.Secrets
 [nuget]: https://www.nuget.org/packages/Azure.Extensions.AspNetCore.Configuration.Secrets
-[keyvault_create_cli]: /azure/key-vault/quick-create-cli#create-a-key-vault
-[keyvault_create_portal]: /azure/key-vault/quick-create-portal#create-a-vault
-[keyvault_create_ps]: /azure/key-vault/quick-create-powershell#create-a-key-vault
-[azure_cli]: /cli/azure
+[keyvault_create_cli]: https://learn.microsoft.com/azure/key-vault/quick-create-cli#create-a-key-vault
+[keyvault_create_portal]: https://learn.microsoft.com/azure/key-vault/quick-create-portal#create-a-vault
+[keyvault_create_ps]: https://learn.microsoft.com/azure/key-vault/quick-create-powershell#create-a-key-vault
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.Configuration.Secrets_1.3.2/sdk/identity/Azure.Identity/README.md
-[aspnetcore_configuration_doc]: /aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1
-[error_codes]: /rest/api/storageservices/blob-service-error-codes
+[identity]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Extensions.AspNetCore.Configuration.Secrets_1.4.0/sdk/identity/Azure.Identity/README.md
+[aspnetcore_configuration_doc]: https://learn.microsoft.com/aspnet/core/fundamentals/configuration/?view=aspnetcore-3.1
+[error_codes]: https://learn.microsoft.com/rest/api/storageservices/blob-service-error-codes
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[keyvault_doc]: /azure/key-vault/general/overview
+[keyvault_doc]: https://learn.microsoft.com/azure/key-vault/general/overview
 
