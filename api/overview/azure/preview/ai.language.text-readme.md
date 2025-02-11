@@ -1,7 +1,7 @@
 ---
 title: Azure Cognitive Language Services Text client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Language.Text, cognitivelanguage
-ms.date: 01/08/2025
+ms.date: 02/11/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: cognitivelanguage
@@ -284,5 +284,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_portal]: https://portal.azure.com
 [logging]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Language.Text_1.0.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/cognitivelanguage/Azure.AI.Language.Text/README.png)
 
