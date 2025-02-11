@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.Workloads, workloads
-ms.date: 01/12/2024
+ms.date: 02/11/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: workloads
@@ -47,7 +47,7 @@ Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azu
 Documentation is available to help you learn how to use this package:
 
 - [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Workloads_1.2.0-beta.1/doc/dev/mgmt_quickstart.md).
-- [API References](/dotnet/api/?view=azure-dotnet).
+- [API References](https://learn.microsoft.com/dotnet/api/?view=azure-dotnet).
 - [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.Workloads_1.2.0-beta.1/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
