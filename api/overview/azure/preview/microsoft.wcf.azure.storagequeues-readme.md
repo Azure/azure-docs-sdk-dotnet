@@ -1,7 +1,7 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Microsoft.WCF.Azure.StorageQueues, extension-wcf
-ms.date: 07/18/2024
+ms.date: 02/11/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: extension-wcf
