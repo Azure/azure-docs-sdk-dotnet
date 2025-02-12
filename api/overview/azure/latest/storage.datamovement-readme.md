@@ -1,7 +1,7 @@
 ---
 title: Azure Storage Data Movement Common client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Storage.DataMovement, storage
-ms.date: 02/11/2025
+ms.date: 02/12/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storage
