@@ -1,9 +1,10 @@
 ---
-title: Microsoft Azure Container Registry management client library for .NET
+title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.ContainerRegistry, containerregistry
-ms.date: 10/15/2024
+ms.date: 02/11/2025
 ms.topic: reference
 ms.devlang: dotnet
+ms.service: containerregistry
 ---
 # Microsoft Azure Container Registry management client library for .NET
 
@@ -13,11 +14,11 @@ This library supports managing Microsoft Azure Container Registry resources.
 
 This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
 
-- Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
-- Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
-- HTTP pipeline with custom policies.
-- Better error-handling.
-- Support uniform telemetry across all languages.
+    - Support MSAL.NET, Azure.Identity is out of box for supporting MSAL.NET.
+    - Support [OpenTelemetry](https://opentelemetry.io/) for distributed tracing.
+    - HTTP pipeline with custom policies.
+    - Better error-handling.
+    - Support uniform telemetry across all languages.
 
 ## Getting started 
 
@@ -35,7 +36,7 @@ dotnet add package Azure.ResourceManager.ContainerRegistry
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ContainerRegistry_1.3.0-beta.1/doc/dev/mgmt_quickstart.md).
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ContainerRegistry_1.3.0-beta.2/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
@@ -45,9 +46,9 @@ Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azu
 
 Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ContainerRegistry_1.3.0-beta.1/doc/dev/mgmt_quickstart.md).
-- [API References](/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ContainerRegistry_1.3.0-beta.1/sdk/identity/Azure.Identity/README.md).
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ContainerRegistry_1.3.0-beta.2/doc/dev/mgmt_quickstart.md).
+- [API References](https://learn.microsoft.com/dotnet/api/?view=azure-dotnet).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ContainerRegistry_1.3.0-beta.2/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
@@ -84,6 +85,6 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ContainerRegistry_1.3.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.ContainerRegistry_1.3.0-beta.2/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
