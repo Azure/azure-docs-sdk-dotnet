@@ -108,7 +108,7 @@ Time:2023-05-19T17:10:34.2972651Z</Message><HeaderName>x-ms-version</HeaderName>
 
 If you've upgraded to the latest beta or generally available version of the SDK and you experience this error, it's recommended that you downgrade to the previous generally available version of the SDK to see if the issue resolves. If the issue persists, or if the recommendation is not feasible, [open a support ticket](https://ms.portal.azure.com/#create/Microsoft.Support) to explore further options.
 
-### Download calls might hang when using Azure.Storage.Blobs v12.20.0
+### Download calls might hang when using Azure.Storage.Blobs version 12.20.0
 
 #### Issue description
 
