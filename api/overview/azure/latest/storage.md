@@ -112,7 +112,7 @@ If you've upgraded to the latest beta or generally available version of the SDK 
 
 #### Issue description
 
-**Azure.Storage.Blobs** version 12.20.0 references an older version of **Azure.Core** with a known issue during authentication. This issue can cause download calls to hang indefinitely. For remediation guidance, see [Recommended steps](#recommended-steps).
+**Azure.Storage.Blobs** version 12.20.0 references an older version of **Azure.Core** with a known issue during authentication. This issue can cause download calls to hang indefinitely. For remediation guidance, see [Recommended steps](#recommended-steps-1).
 
 #### Issue details
 
