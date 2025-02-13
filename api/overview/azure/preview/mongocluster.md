@@ -1,7 +1,7 @@
 ---
 title: Azure Mongocluster SDK for .NET
 description: Reference for Azure Mongocluster SDK for .NET
-ms.date: 02/12/2025
+ms.date: 02/13/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: mongocluster
