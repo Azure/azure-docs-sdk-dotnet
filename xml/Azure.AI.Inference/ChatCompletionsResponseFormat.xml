@@ -34,7 +34,7 @@
             Note that to enable JSON mode, some AI models may also require you to instruct the model to produce JSON
             via a system or user message.
             Please note <see cref="T:Azure.AI.Inference.ChatCompletionsResponseFormat" /> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-            The available derived classes include <see cref="T:Azure.AI.Inference.ChatCompletionsResponseFormatJSON" /> and <see cref="T:Azure.AI.Inference.ChatCompletionsResponseFormatText" />.
+            The available derived classes include <see cref="T:Azure.AI.Inference.ChatCompletionsResponseFormatJsonObject" /> and <see cref="T:Azure.AI.Inference.ChatCompletionsResponseFormatText" />.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -52,6 +52,158 @@
       <Parameters />
       <Docs>
         <summary> Initializes a new instance of <see cref="T:Azure.AI.Inference.ChatCompletionsResponseFormat" />. </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateJsonFormat">
+      <MemberSignature Language="C#" Value="public static Azure.AI.Inference.ChatCompletionsResponseFormat CreateJsonFormat ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Azure.AI.Inference.ChatCompletionsResponseFormat CreateJsonFormat() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Inference.ChatCompletionsResponseFormat.CreateJsonFormat" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function CreateJsonFormat () As ChatCompletionsResponseFormat" />
+      <MemberSignature Language="F#" Value="static member CreateJsonFormat : unit -&gt; Azure.AI.Inference.ChatCompletionsResponseFormat" Usage="Azure.AI.Inference.ChatCompletionsResponseFormat.CreateJsonFormat " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Inference</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.AI.Inference.ChatCompletionsResponseFormat</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary> Creates a new <see cref="T:Azure.AI.Inference.ChatCompletionsResponseFormat" /> requesting valid JSON, a.k.a. JSON mode. </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateJsonFormat">
+      <MemberSignature Language="C#" Value="public static Azure.AI.Inference.ChatCompletionsResponseFormat CreateJsonFormat (string jsonSchemaFormatName, System.Collections.Generic.IDictionary&lt;string,BinaryData&gt; jsonSchema, string jsonSchemaFormatDescription = default, bool? jsonSchemaIsStrict = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Azure.AI.Inference.ChatCompletionsResponseFormat CreateJsonFormat(string jsonSchemaFormatName, class System.Collections.Generic.IDictionary`2&lt;string, class System.BinaryData&gt; jsonSchema, string jsonSchemaFormatDescription, valuetype System.Nullable`1&lt;bool&gt; jsonSchemaIsStrict) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Inference.ChatCompletionsResponseFormat.CreateJsonFormat(System.String,System.Collections.Generic.IDictionary{System.String,System.BinaryData},System.String,System.Nullable{System.Boolean})" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function CreateJsonFormat (jsonSchemaFormatName As String, jsonSchema As IDictionary(Of String, BinaryData), Optional jsonSchemaFormatDescription As String = Nothing, Optional jsonSchemaIsStrict As Nullable(Of Boolean) = Nothing) As ChatCompletionsResponseFormat" />
+      <MemberSignature Language="F#" Value="static member CreateJsonFormat : string * System.Collections.Generic.IDictionary&lt;string, BinaryData&gt; * string * Nullable&lt;bool&gt; -&gt; Azure.AI.Inference.ChatCompletionsResponseFormat" Usage="Azure.AI.Inference.ChatCompletionsResponseFormat.CreateJsonFormat (jsonSchemaFormatName, jsonSchema, jsonSchemaFormatDescription, jsonSchemaIsStrict)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Inference</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.AI.Inference.ChatCompletionsResponseFormat</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="jsonSchemaFormatName" Type="System.String" />
+        <Parameter Name="jsonSchema" Type="System.Collections.Generic.IDictionary&lt;System.String,System.BinaryData&gt;" />
+        <Parameter Name="jsonSchemaFormatDescription" Type="System.String" />
+        <Parameter Name="jsonSchemaIsStrict" Type="System.Nullable&lt;System.Boolean&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="jsonSchemaFormatName"> The name of the response format. </param>
+        <param name="jsonSchema">
+          <para>
+                    The schema of the response format, described as a JSON schema. Learn more in the
+                    <see href="https://platform.openai.com/docs/guides/structured-outputs">structured outputs guide</see>.
+                    and the
+                    <see href="https://json-schema.org/understanding-json-schema">JSON schema reference documentation</see>.
+                </para>
+          <para>
+                    You can easily create a JSON schema via the factory methods of the <see cref="T:System.BinaryData" /> class, such
+                    as <see cref="M:System.BinaryData.FromBytes(System.Byte[])" /> or <see cref="M:System.BinaryData.FromString(System.String)" />. For
+                    example, the following code defines a simple schema for step-by-step responses to math problems:
+                    <code>
+                        BinaryData jsonSchema = BinaryData.FromBytes("""
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "steps": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "explanation": {"type": "string"},
+                                                "output": {"type": "string"}
+                                            },
+                                            "required": ["explanation", "output"],
+                                            "additionalProperties": false
+                                        }
+                                    },
+                                    "final_answer": {"type": "string"}
+                                },
+                                "required": ["steps", "final_answer"],
+                                "additionalProperties": false
+                            }
+                            """U8.ToArray());
+                    </code></para>
+        </param>
+        <param name="jsonSchemaFormatDescription">
+                The description of what the response format is for, which is used by the model to determine how to respond
+                in the format.
+            </param>
+        <param name="jsonSchemaIsStrict">
+          <para>
+                    Whether to enable strict schema adherence when generating the response. If set to <c>true</c>, the
+                    model will follow the exact schema defined in <paramref name="jsonSchema" />.
+                </para>
+          <para>
+                    Only a subset of the JSON schema specification is supported when this is set to <c>true</c>. Learn more
+                    in the
+                    <see href="https://platform.openai.com/docs/guides/structured-outputs">structured outputs guide</see>.
+                </para>
+        </param>
+        <summary>
+                Creates a new <see cref="T:Azure.AI.Inference.ChatCompletionsResponseFormat" /> requesting adherence to the specified JSON schema,
+                a.k.a. structured outputs.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="jsonSchemaFormatName" /> or <paramref name="jsonSchema" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="jsonSchemaFormatName" /> is an empty string, and was expected to be non-empty. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateTextFormat">
+      <MemberSignature Language="C#" Value="public static Azure.AI.Inference.ChatCompletionsResponseFormat CreateTextFormat ();" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Azure.AI.Inference.ChatCompletionsResponseFormat CreateTextFormat() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Inference.ChatCompletionsResponseFormat.CreateTextFormat" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function CreateTextFormat () As ChatCompletionsResponseFormat" />
+      <MemberSignature Language="F#" Value="static member CreateTextFormat : unit -&gt; Azure.AI.Inference.ChatCompletionsResponseFormat" Usage="Azure.AI.Inference.ChatCompletionsResponseFormat.CreateTextFormat " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Inference</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.AI.Inference.ChatCompletionsResponseFormat</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary> Creates a new <see cref="T:Azure.AI.Inference.ChatCompletionsResponseFormat" /> requesting plain text. </summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="JsonModelWriteCore">
+      <MemberSignature Language="C#" Value="protected virtual void JsonModelWriteCore (System.Text.Json.Utf8JsonWriter writer, System.ClientModel.Primitives.ModelReaderWriterOptions options);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void JsonModelWriteCore(class System.Text.Json.Utf8JsonWriter writer, class System.ClientModel.Primitives.ModelReaderWriterOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.AI.Inference.ChatCompletionsResponseFormat.JsonModelWriteCore(System.Text.Json.Utf8JsonWriter,System.ClientModel.Primitives.ModelReaderWriterOptions)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub JsonModelWriteCore (writer As Utf8JsonWriter, options As ModelReaderWriterOptions)" />
+      <MemberSignature Language="F#" Value="abstract member JsonModelWriteCore : System.Text.Json.Utf8JsonWriter * System.ClientModel.Primitives.ModelReaderWriterOptions -&gt; unit&#xA;override this.JsonModelWriteCore : System.Text.Json.Utf8JsonWriter * System.ClientModel.Primitives.ModelReaderWriterOptions -&gt; unit" Usage="chatCompletionsResponseFormat.JsonModelWriteCore (writer, options)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.AI.Inference</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="writer" Type="System.Text.Json.Utf8JsonWriter" />
+        <Parameter Name="options" Type="System.ClientModel.Primitives.ModelReaderWriterOptions" />
+      </Parameters>
+      <Docs>
+        <param name="writer"> The JSON writer. </param>
+        <param name="options"> The client options for reading and writing models. </param>
+        <summary>To be added.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
