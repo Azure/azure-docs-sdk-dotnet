@@ -1,7 +1,7 @@
 ---
 title: Azure Batch AI SDK for .NET
 description: Reference for Azure Batch AI SDK for .NET
-ms.date: 02/17/2025
+ms.date: 02/18/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: batchai
