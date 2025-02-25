@@ -167,5 +167,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [ref_VisualStudioCredential]: /dotnet/api/azure.identity.visualstudiocredential?view=azure-dotnet
 [ref_VisualStudioCodeCredential]: /dotnet/api/azure.identity.visualstudiocodecredential?view=azure-dotnet
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fidentity%2FAzure.Identity%2FREADME.png)
+
 
