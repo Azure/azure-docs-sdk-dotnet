@@ -129,5 +129,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 - [Azure Event Hubs REST API Reference](https://docs.microsoft.com/rest/api/eventhub/)
 - [Azure Event Hubs SDK for .NET Documentation](https://docs.microsoft.com/dotnet/api/overview/azure/event-hubs?view=azure-dotnet)
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Feventhub%2FMicrosoft.Azure.EventHubs%2FREADME.png)
+
 
