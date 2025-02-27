@@ -1,7 +1,7 @@
 ---
 title: Azure Neonpostgres SDK for .NET
 description: Reference for Azure Neonpostgres SDK for .NET
-ms.date: 02/26/2025
+ms.date: 02/27/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: neonpostgres
