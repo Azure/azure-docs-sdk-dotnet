@@ -116,4 +116,4 @@ Working with the source code of this library. The following just builds on the e
 [CTS_configuration_doc]: https://github.com/microsoft/scitt-ccf-ledger/blob/main/docs/configuration.md
 [ccf]: https://github.com/Microsoft/CCF
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fconfidentialledger%2FAzure.Security.CodeTransparency%2FREADME.png)
+

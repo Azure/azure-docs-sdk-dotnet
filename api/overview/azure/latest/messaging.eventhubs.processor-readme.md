@@ -294,5 +294,5 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 Please see our [contributing guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Messaging.EventHubs.Processor_5.11.6/sdk/eventhub/Azure.Messaging.EventHubs/CONTRIBUTING.md) for more information.
   
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Feventhub%2FAzure.Messaging.EventHubs.Processor%2FREADME.png)
+
 

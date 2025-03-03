@@ -10,6 +10,7 @@
     <AssemblyVersion>3.38.1.0</AssemblyVersion>
     <AssemblyVersion>3.39.0.0</AssemblyVersion>
     <AssemblyVersion>3.45.0.0</AssemblyVersion>
+    <AssemblyVersion>3.47.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -30,7 +31,7 @@
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.45.0.0</AssemblyVersion>
+        <AssemblyVersion>3.47.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -47,7 +48,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.45.0.0</AssemblyVersion>
+        <AssemblyVersion>3.47.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Action&lt;Microsoft.Azure.Cosmos.Headers&gt;</ReturnType>
@@ -69,7 +70,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.45.0.0</AssemblyVersion>
+        <AssemblyVersion>3.47.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.CosmosThresholdOptions</ReturnType>
@@ -92,7 +93,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.45.0.0</AssemblyVersion>
+        <AssemblyVersion>3.47.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.List&lt;System.String&gt;</ReturnType>
@@ -116,7 +117,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.45.0.0</AssemblyVersion>
+        <AssemblyVersion>3.47.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
@@ -128,7 +129,10 @@
         <value>To be added.</value>
         <remarks>
             Most commonly used with the Delete* and Replace* methods of <see cref="T:Microsoft.Azure.Cosmos.Container" /> such as <see cref="M:Microsoft.Azure.Cosmos.Container.ReplaceItemAsync``1(``0,System.String,System.Nullable{Microsoft.Azure.Cosmos.PartitionKey},Microsoft.Azure.Cosmos.ItemRequestOptions,System.Threading.CancellationToken)" />.
-            </remarks>
+            <see cref="M:Microsoft.Azure.Cosmos.Container.CreateItemAsync``1(``0,System.Nullable{Microsoft.Azure.Cosmos.PartitionKey},Microsoft.Azure.Cosmos.ItemRequestOptions,System.Threading.CancellationToken)" /> will ignore <see cref="P:Microsoft.Azure.Cosmos.RequestOptions.IfMatchEtag" /> if specificed. 
+            <see cref="M:Microsoft.Azure.Cosmos.Container.UpsertItemAsync``1(``0,System.Nullable{Microsoft.Azure.Cosmos.PartitionKey},Microsoft.Azure.Cosmos.ItemRequestOptions,System.Threading.CancellationToken)" /> will ignore <see cref="P:Microsoft.Azure.Cosmos.RequestOptions.IfMatchEtag" /> when materialized as Create, otherwise for Replace Etag constraint will be applied.
+            
+            <seealso href="https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/database-transactions-optimistic-concurrency#implementing-optimistic-concurrency-control-using-etag-and-http-headers" /></remarks>
       </Docs>
     </Member>
     <Member MemberName="IfNoneMatchEtag">
@@ -140,19 +144,26 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.45.0.0</AssemblyVersion>
+        <AssemblyVersion>3.47.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
+            Most commonly used to detect changes to the resource
             Gets or sets the If-None-Match (ETag) associated with the request in the Azure Cosmos DB service.
             </summary>
         <value>To be added.</value>
         <remarks>
-            Most commonly used to detect changes to the resource
-            </remarks>
+            Most commonly used with reads such as <see cref="M:Microsoft.Azure.Cosmos.Container.ReadItemAsync``1(System.String,Microsoft.Azure.Cosmos.PartitionKey,Microsoft.Azure.Cosmos.ItemRequestOptions,System.Threading.CancellationToken)" />.
+            When Item Etag matches the specified <see cref="P:Microsoft.Azure.Cosmos.RequestOptions.IfNoneMatchEtag" /> then 304 status code will be returned, otherwise existing Item will be returned with 200.
+            <see cref="M:Microsoft.Azure.Cosmos.Container.UpsertItemAsync``1(``0,System.Nullable{Microsoft.Azure.Cosmos.PartitionKey},Microsoft.Azure.Cosmos.ItemRequestOptions,System.Threading.CancellationToken)" /> will ignore <see cref="P:Microsoft.Azure.Cosmos.RequestOptions.IfNoneMatchEtag" /> when materialized as Create, otherwise for Replace Etag constraint will be applied.
+            
+            To match any Etag use "*"
+            If specified for writes (ex: Create, Replace, Delete) will be ignored.
+            
+            <seealso href="https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/database-transactions-optimistic-concurrency#implementing-optimistic-concurrency-control-using-etag-and-http-headers" /></remarks>
       </Docs>
     </Member>
     <Member MemberName="PriorityLevel">
@@ -164,7 +175,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.45.0.0</AssemblyVersion>
+        <AssemblyVersion>3.47.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Nullable&lt;Microsoft.Azure.Cosmos.PriorityLevel&gt;</ReturnType>
@@ -196,7 +207,7 @@
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.45.0.0</AssemblyVersion>
+        <AssemblyVersion>3.47.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IReadOnlyDictionary&lt;System.String,System.Object&gt;</ReturnType>
@@ -219,7 +230,7 @@
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.Azure.Cosmos.Client</AssemblyName>
-        <AssemblyVersion>3.45.0.0</AssemblyVersion>
+        <AssemblyVersion>3.47.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Azure.Cosmos.RequestOptions</ReturnType>
