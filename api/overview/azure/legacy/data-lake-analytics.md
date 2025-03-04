@@ -1,7 +1,7 @@
 ---
 title: Azure Data Lake Analytics SDK for .NET
 description: Reference for Azure Data Lake Analytics SDK for .NET
-ms.date: 03/03/2025
+ms.date: 03/04/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: datalakeanalytics
