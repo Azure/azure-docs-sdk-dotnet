@@ -1,7 +1,7 @@
 ---
 title: Azure NetApp Files SDK for .NET
 description: Reference for Azure NetApp Files SDK for .NET
-ms.date: 03/10/2025
+ms.date: 03/11/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: netappfiles
