@@ -1,7 +1,7 @@
 ---
 title: Azure Hybrid Container Service SDK for .NET
 description: Reference for Azure Hybrid Container Service SDK for .NET
-ms.date: 03/10/2025
+ms.date: 03/11/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: hybridcontainerservice
