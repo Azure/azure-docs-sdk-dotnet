@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Projects, ai
-ms.date: 02/28/2025
+ms.date: 03/12/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: ai
 ---
-# Azure AI Projects client library for .NET - version 1.0.0-beta.4 
+# Azure AI Projects client library for .NET - version 1.0.0-alpha.20250312.1 
 
 Use the AI Projects client library to:
 
@@ -806,14 +806,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [RequestFailedException]: https://learn.microsoft.com/dotnet/api/azure.requestfailedexception?view=azure-dotnet
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.4/sdk/ai/Azure.AI.Projects/tests/Samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects/tests/Samples
 [api_ref_docs]: https://learn.microsoft.com/dotnet/api/azure.ai.projects?view=azure-dotnet-preview
 [nuget]: https://www.nuget.org/packages/Azure.AI.Projects
-[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.4/sdk/ai/Azure.AI.Projects
+[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects
 [product_doc]: https://learn.microsoft.com/azure/ai-studio/
 [azure_identity]: https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet
 [azure_identity_dac]: https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
-[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Projects_1.0.0-beta.4/CONTRIBUTING.md
+[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/main/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
