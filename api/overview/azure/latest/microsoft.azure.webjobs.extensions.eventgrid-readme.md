@@ -1,12 +1,12 @@
 ---
 title: Azure WebJobs EventGrid client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.EventGrid, eventgrid
-ms.date: 11/19/2024
+ms.date: 03/14/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: eventgrid
 ---
-# Azure WebJobs EventGrid client library for .NET - version 3.4.3 
+# Azure WebJobs EventGrid client library for .NET - version 3.4.4 
 
 
 This extension provides functionality for receiving Event Grid webhook calls in Azure Functions, allowing you to easily write functions that respond to any event published to Event Grid.
@@ -23,19 +23,19 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.EventGrid
 
 ### Prerequisites
 
-You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and an Azure resource group with a custom Event Grid topic or domain. Follow this [step-by-step tutorial](/azure/event-grid/custom-event-quickstart-portal) to register the Event Grid resource provider and create Event Grid topics using the [Azure portal](https://portal.azure.com/). There is a [similar tutorial](/azure/event-grid/custom-event-quickstart) using [Azure CLI](/cli/azure).
+You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and an Azure resource group with a custom Event Grid topic or domain. Follow this [step-by-step tutorial](https://learn.microsoft.com/azure/event-grid/custom-event-quickstart-portal) to register the Event Grid resource provider and create Event Grid topics using the [Azure portal](https://portal.azure.com/). There is a [similar tutorial](https://learn.microsoft.com/azure/event-grid/custom-event-quickstart) using [Azure CLI](https://learn.microsoft.com/cli/azure).
 
 ### Authenticate the Client
 
 In order for the extension publish events, you will need the `endpoint` of the Event Grid topic and a `credential`, which can be created using the topic's access key.
 
-You can find the endpoint for your Event Grid topic either in the [Azure Portal](https://portal.azure.com/) or by using the [Azure CLI](/cli/azure) snippet below.
+You can find the endpoint for your Event Grid topic either in the [Azure Portal](https://portal.azure.com/) or by using the [Azure CLI](https://learn.microsoft.com/cli/azure) snippet below.
 
 ```bash
 az eventgrid topic show --name <your-resource-name> --resource-group <your-resource-group-name> --query "endpoint"
 ```
 
-The access key can also be found through the [portal](/azure/event-grid/get-access-keys), or by using the Azure CLI snippet below:
+The access key can also be found through the [portal](https://learn.microsoft.com/azure/event-grid/get-access-keys), or by using the Azure CLI snippet below:
 ```bash
 az eventgrid topic key list --name <your-resource-name> --resource-group <your-resource-group-name> --query "key1"
 ```
@@ -44,11 +44,11 @@ az eventgrid topic key list --name <your-resource-name> --resource-group <your-r
 
 ### Using Event Grid output binding
 
-Please follow the [binding tutorial](/azure/azure-functions/functions-bindings-event-grid-trigger?tabs) to learn about using this extension for publishing EventGrid events.
+Please follow the [binding tutorial](https://learn.microsoft.com/azure/azure-functions/functions-bindings-event-grid-trigger?tabs) to learn about using this extension for publishing EventGrid events.
 
 ### Using Event Grid trigger
 
-Please follow the [tutorial](/azure/azure-functions/functions-bindings-event-grid-trigger?tabs=csharp) to learn about triggering an Azure Function when an event is published.
+Please follow the [tutorial](https://learn.microsoft.com/azure/azure-functions/functions-bindings-event-grid-trigger?tabs=csharp) to learn about triggering an Azure Function when an event is published.
 
 ## Examples
 
@@ -113,7 +113,7 @@ For local development, use the `local.settings.json` file to store the connectio
 }
 ```
 
-When deployed, use the [application settings](/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to store this information.
+When deployed, use the [application settings](https://learn.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to store this information.
 
 You can also output a string or JObject and the extension will attempt to parse into the correct strongly typed event.
 
@@ -185,11 +185,11 @@ public static class CloudEventBatchTriggerFunction
 
 ## Troubleshooting
 
-Please refer to [Monitor Azure Functions](/azure/azure-functions/functions-monitoring) for troubleshooting guidance.
+Please refer to [Monitor Azure Functions](https://learn.microsoft.com/azure/azure-functions/functions-monitoring) for troubleshooting guidance.
 
 ## Next steps
 
-Read the [introduction to Azure Function](/azure/azure-functions/functions-overview) or [creating an Azure Function guide](/azure/azure-functions/functions-create-first-azure-function).
+Read the [introduction to Azure Function](https://learn.microsoft.com/azure/azure-functions/functions-overview) or [creating an Azure Function guide](https://learn.microsoft.com/azure/azure-functions/functions-create-first-azure-function).
 
 ## Contributing
 
@@ -206,15 +206,13 @@ For more information see the [Code of Conduct FAQ][coc_faq]
 or contact [opencode@microsoft.com][coc_contact] with any
 additional questions or comments.
 
-
-
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.4.3/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventGrid/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.4.4/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventGrid/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid/
-[docs]: /dotnet/api/Microsoft.Azure.WebJobs.Extensions.EventGrid
+[docs]: https://learn.microsoft.com/dotnet/api/Microsoft.Azure.WebJobs.Extensions.EventGrid
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.4.3/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventGrid_3.4.4/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
