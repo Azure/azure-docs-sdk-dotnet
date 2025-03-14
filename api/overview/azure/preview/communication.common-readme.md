@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Common client library for .NET - version 1.4.0-alpha.20250314.1 
+# Azure Communication Common client library for .NET - version 1.4.0-alpha.20250314.2 
 
 
 This package contains common code for Azure Communication Service libraries.
@@ -47,6 +47,7 @@ Depending on your scenario, you may want to initialize the `CommunicationTokenCr
 
 - a static token (suitable for short-lived clients used to e.g. send one-off Chat messages) or
 - a callback function that ensures a continuous authentication state (ideal e.g. for long Calling sessions).
+- a token credential capable of obtaining an Entra user token. You can provide any implementation of [Azure.Core.TokenCredential](/dotnet/api/azure.core.tokencredential?view=azure-dotnet). It is suitable for scenarios where Entra user access tokens are needed to authenticate with Communication Services.
 
 The tokens supplied to the `CommunicationTokenCredential` either through the constructor or via the token refresher callback can be obtained using the Azure Communication Identity library.
 
@@ -108,6 +109,54 @@ using var tokenCredential = new CommunicationTokenCredential(
         AsyncTokenRefresher = cancellationToken => FetchTokenForUserFromMyServerAsync("bob@contoso.com", cancellationToken),
         InitialToken = initialToken
     });
+```
+
+### Create a credential with a token credential capable of obtaining an Entra user token
+
+For scenarios where an Entra user can be used with Communication Services, you need to initialize any implementation of [Azure.Core.TokenCredential](/dotnet/api/azure.core.tokencredential?view=azure-dotnet) and provide it to the ``EntraCommunicationTokenCredentialOptions``.
+Along with this, you must provide the URI of the Azure Communication Services resource and the scopes required for the Entra user token. These scopes determine the permissions granted to the token.
+If the scopes are not provided, by default, it sets the scopes to `https://communication.azure.com/clients/.default`.
+```C# 
+var options = new InteractiveBrowserCredentialOptions
+    {
+        TenantId = "<your-tenant-id>",
+        ClientId = "<your-client-id>",
+        RedirectUri = new Uri("<your-redirect-uri>")
+    };
+var entraTokenCredential = new InteractiveBrowserCredential(options);
+
+var entraTokenCredentialOptions = new EntraCommunicationTokenCredentialOptions(
+    resourceEndpoint: "https://<your-resource>.communication.azure.com",
+    entraTokenCredential: entraTokenCredential)
+    {
+      Scopes = new[] { "https://communication.azure.com/clients/VoIP" }
+    };
+
+var credential = new CommunicationTokenCredential(entraTokenCredentialOptions);
+
+```
+
+The same approach can be used for authorizing an Entra user with a Teams license to use Teams Phone Extensibility features through your Azure Communication Services resource.
+This requires providing the `https://auth.msft.communication.azure.com/TeamsExtension.ManageCalls` scope
+```C# 
+var options = new InteractiveBrowserCredentialOptions
+    {
+        TenantId = "<your-tenant-id>",
+        ClientId = "<your-client-id>",
+        RedirectUri = new Uri("<your-redirect-uri>")
+    };
+var entraTokenCredential = new InteractiveBrowserCredential(options);
+
+var entraTokenCredentialOptions = new EntraCommunicationTokenCredentialOptions(
+    resourceEndpoint: "https://<your-resource>.communication.azure.com",
+    entraTokenCredential: entraTokenCredential)
+    )
+    {
+      Scopes = new[] { "https://auth.msft.communication.azure.com/TeamsExtension.ManageCalls" }
+    };
+
+var credential = new CommunicationTokenCredential(entraTokenCredentialOptions);
+
 ```
 
 ## Troubleshooting
