@@ -4,7 +4,7 @@ description: Reference for Azure Storage SDK for .NET
 ms.date: 03/17/2025
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: storage
+ms.service: azure-storage
 ---
 # Azure Storage client libraries for .NET
 
@@ -107,3 +107,20 @@ Time:2023-05-19T17:10:34.2972651Z</Message><HeaderName>x-ms-version</HeaderName>
 ```
 
 If you've upgraded to the latest beta or generally available version of the SDK and you experience this error, it's recommended that you downgrade to the previous generally available version of the SDK to see if the issue resolves. If the issue persists, or if the recommendation is not feasible, [open a support ticket](https://ms.portal.azure.com/#create/Microsoft.Support) to explore further options.
+
+### Download calls might hang when using Azure.Storage.Blobs version 12.20.0
+
+#### Issue description
+
+**Azure.Storage.Blobs** version 12.20.0 references an older version of **Azure.Core** with a known issue during authentication. This issue can cause download calls to hang indefinitely. For remediation guidance, see [Recommended steps](#recommended-steps-1).
+
+#### Issue details
+
+| Client library | Versions impacted | Minimum safe version | Recommended action |
+|--|--|--|--|
+| Azure Storage Blob | 12.20.0 | 12.23.0 | [Update to latest version or minimum 12.23.0](https://www.nuget.org/packages/Azure.Storage.Blobs/) |
+
+#### Recommended steps
+
+- Upgrade client library version according to the table above.
+- Continue to keep your client library versions up to date to ensure that you have the latest bug fixes and performance improvements.
