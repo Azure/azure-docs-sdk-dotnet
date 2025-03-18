@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Projects, ai
-ms.date: 02/28/2025
+ms.date: 03/17/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: ai
 ---
-# Azure AI Projects client library for .NET - version 1.0.0-beta.4 
+# Azure AI Projects client library for .NET - version 1.0.0-beta.5 
 
 Use the AI Projects client library to:
 
@@ -36,6 +36,7 @@ Use the AI Projects client library to:
     - [File search](#file-search)
     - [Enterprise File Search](#create-agent-with-enterprise-file-search)
     - [Code interpreter attachment](#create-message-with-code-interpreter-attachment)
+    - [Azure AI Search](#create-agent-with-azure-ai-search)
     - [Function call](#function-call)
     - [Azure function call](#azure-function-call)
     - [Azure Function Call](#create-agent-with-azure-function-call)
@@ -96,7 +97,7 @@ AgentsClient client = new AgentsClient(connectionString, new DefaultAzureCredent
 With an authenticated client, an agent can be created:
 ```C# Snippet:OverviewCreateAgent
 Response<Agent> agentResponse = await client.CreateAgentAsync(
-    model: "gpt-4-1106-preview",
+    model: "gpt-4",
     name: "Math Tutor",
     instructions: "You are a personal math tutor. Write and run code to answer math questions.",
     tools: new List<ToolDefinition> { new CodeInterpreterToolDefinition() });
@@ -210,7 +211,7 @@ fileSearchToolResource.VectorStoreIds.Add(vectorStore.Id);
 
 // Create an agent with toolResources and process assistant run
 Response<Agent> agentResponse = await client.CreateAgentAsync(
-        model: "gpt-4-1106-preview",
+        model: "gpt-4",
         name: "SDK Test Agent - Retrieval",
         instructions: "You are a helpful agent that can help fetch data from files you know about.",
         tools: new List<ToolDefinition> { new FileSearchToolDefinition() },
@@ -321,6 +322,92 @@ var attachment = new MessageAttachment(
     ds: ds,
     tools: tools
 );
+```
+
+#### Create Agent with Azure AI Search
+
+Azure AI Search is an enterprise search system for high-performance applications.
+It integrates with Azure OpenAI Service and Azure Machine Learning, offering advanced
+search technologies like vector search and full-text search. Ideal for knowledge base
+insights, information discovery, and automation. Creating an Agent with Azure AI
+Search requires an existing Azure AI Search Index. For more information and setup
+guides, see [Azure AI Search Tool Guide](https://learn.microsoft.com/azure/ai-services/agents/how-to/tools/azure-ai-search).
+
+```C# Snippet:CreateAgentWithAzureAISearchTool
+ListConnectionsResponse connections = await projectClient.GetConnectionsClient().GetConnectionsAsync(ConnectionType.AzureAISearch).ConfigureAwait(false);
+
+if (connections?.Value == null || connections.Value.Count == 0)
+{
+    throw new InvalidOperationException("No connections found for the Azure AI Search.");
+}
+
+ConnectionResponse connection = connections.Value[0];
+
+ToolResources searchResource = new ToolResources
+{
+    AzureAISearch = new AzureAISearchResource
+    {
+        IndexList = { new IndexResource(connection.Id, "sample_index") }
+    }
+};
+
+AgentsClient agentClient = projectClient.GetAgentsClient();
+
+Response<Agent> agentResponse = await agentClient.CreateAgentAsync(
+   model: modelName,
+   name: "my-assistant",
+   instructions: "You are a helpful assistant.",
+   tools: new List<ToolDefinition> { new AzureAISearchToolDefinition() },
+   toolResources: searchResource);
+Agent agent = agentResponse.Value;
+```
+
+If the agent has found the relevant information in the index, the reference
+and annotation will be provided in the message response. In the example above, we replace
+the reference placeholder by the actual reference and url. Please note, that to
+get sensible result, the index needs to have fields "title" and "url".
+
+```C# Snippet:PopulateReferencesAgentWithAzureAISearchTool
+PageableList<ThreadMessage> messages = await agentClient.GetMessagesAsync(
+    threadId: thread.Id,
+    order: ListSortOrder.Ascending
+);
+
+// Note: messages iterate from newest to oldest, with the messages[0] being the most recent
+foreach (ThreadMessage threadMessage in messages)
+{
+    Console.Write($"{threadMessage.CreatedAt:yyyy-MM-dd HH:mm:ss} - {threadMessage.Role,10}: ");
+    foreach (MessageContent contentItem in threadMessage.ContentItems)
+    {
+        if (contentItem is MessageTextContent textItem)
+        {
+            // We need to annotate only Agent messages.
+            if (threadMessage.Role == MessageRole.Agent && textItem.Annotations.Count > 0)
+            {
+                string annotatedText = textItem.Text;
+                foreach (MessageTextAnnotation annotation in textItem.Annotations)
+                {
+                    if (annotation is MessageTextUrlCitationAnnotation urlAnnotation)
+                    {
+                        annotatedText = annotatedText.Replace(
+                            urlAnnotation.Text,
+                            $" [see {urlAnnotation.UrlCitation.Title}] ({urlAnnotation.UrlCitation.Url})");
+                    }
+                }
+                Console.Write(annotatedText);
+            }
+            else
+            {
+                Console.Write(textItem.Text);
+            }
+        }
+        else if (contentItem is MessageImageFileContent imageFileItem)
+        {
+            Console.Write($"<image from ID: {imageFileItem.FileId}");
+        }
+        Console.WriteLine();
+    }
+}
 ```
 
 #### Function call
@@ -806,14 +893,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [RequestFailedException]: https://learn.microsoft.com/dotnet/api/azure.requestfailedexception?view=azure-dotnet
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.4/sdk/ai/Azure.AI.Projects/tests/Samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.5/sdk/ai/Azure.AI.Projects/tests/Samples
 [api_ref_docs]: https://learn.microsoft.com/dotnet/api/azure.ai.projects?view=azure-dotnet-preview
 [nuget]: https://www.nuget.org/packages/Azure.AI.Projects
-[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.4/sdk/ai/Azure.AI.Projects
+[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.5/sdk/ai/Azure.AI.Projects
 [product_doc]: https://learn.microsoft.com/azure/ai-studio/
 [azure_identity]: https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet
 [azure_identity_dac]: https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
-[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Projects_1.0.0-beta.4/CONTRIBUTING.md
+[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Projects_1.0.0-beta.5/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
