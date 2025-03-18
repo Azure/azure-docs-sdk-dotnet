@@ -1,10 +1,10 @@
 ---
 title: Azure Storage SDK for .NET
 description: Reference for Azure Storage SDK for .NET
-ms.date: 03/17/2025
+ms.date: 03/18/2025
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: azure-storage
+ms.service: storage
 ---
 # Azure Storage client libraries for .NET
 
