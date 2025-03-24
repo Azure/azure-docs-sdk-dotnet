@@ -1,7 +1,7 @@
 ---
 title: Azure Resources SDK for .NET
 description: Reference for Azure Resources SDK for .NET
-ms.date: 03/21/2025
+ms.date: 03/24/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: resources
