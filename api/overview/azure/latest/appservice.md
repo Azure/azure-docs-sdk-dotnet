@@ -1,7 +1,7 @@
 ---
 title: Azure Appservice SDK for .NET
 description: Reference for Azure Appservice SDK for .NET
-ms.date: 03/21/2025
+ms.date: 03/24/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: appservice
