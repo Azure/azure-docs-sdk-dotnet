@@ -1,7 +1,7 @@
 ---
 title: Azure Iotoperations SDK for .NET
 description: Reference for Azure Iotoperations SDK for .NET
-ms.date: 03/24/2025
+ms.date: 03/25/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: iotoperations
