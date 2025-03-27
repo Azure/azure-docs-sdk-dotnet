@@ -1,7 +1,7 @@
 ---
 title: Azure Mobile Apps SDK for .NET
 description: Reference for Azure Mobile Apps SDK for .NET
-ms.date: 03/26/2025
+ms.date: 03/27/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: mobileapps
