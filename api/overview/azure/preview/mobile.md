@@ -23,7 +23,7 @@ dotnet add package Microsoft.Azure.Mobile.Server
 ```
 
 > [!div class="nextstepaction"]
-> [Explore the client APIs](/dotnet/api/overview/azure/mobileapps/client)
+> [Explore the client APIs](/dotnet/api/microsoft.azure.mobile.server)
 
 [PackageManager]: https://docs.microsoft.com/nuget/tools/package-manager-console
 [DotNetCLI]: https://docs.microsoft.com/dotnet/core/tools/dotnet-add-package
