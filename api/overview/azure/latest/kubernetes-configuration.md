@@ -1,7 +1,7 @@
 ---
 title: Azure Kubernetes Configuration SDK for .NET
 description: Reference for Azure Kubernetes Configuration SDK for .NET
-ms.date: 03/31/2025
+ms.date: 04/01/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: kubernetesconfiguration
