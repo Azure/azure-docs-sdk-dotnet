@@ -1,7 +1,7 @@
 ---
 title: Azure Dynatrace SDK for .NET
 description: Reference for Azure Dynatrace SDK for .NET
-ms.date: 04/02/2025
+ms.date: 04/03/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: dynatrace
