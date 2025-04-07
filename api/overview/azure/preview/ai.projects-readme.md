@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Projects, ai
-ms.date: 03/28/2025
+ms.date: 04/07/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: ai
 ---
-# Azure AI Projects client library for .NET - version 1.0.0-beta.6 
+# Azure AI Projects client library for .NET - version 1.0.0-alpha.20250407.1 
 
 Use the AI Projects client library to:
 
@@ -615,56 +615,43 @@ We parse streaming updates in two cycles. One iterates over the streaming run ou
 ```C# Snippet:FunctionsWithStreamingUpdateCycle
 List<ToolOutput> toolOutputs = [];
 ThreadRun streamRun = null;
-await foreach (StreamingUpdate streamingUpdate in client.CreateRunStreamingAsync(thread.Id, agent.Id))
+AsyncCollectionResult<StreamingUpdate> stream = client.CreateRunStreamingAsync(thread.Id, agent.Id);
+do
 {
-    if (streamingUpdate.UpdateKind == StreamingUpdateReason.RunCreated)
+    toolOutputs.Clear();
+    await foreach (StreamingUpdate streamingUpdate in stream)
     {
-        Console.WriteLine("--- Run started! ---");
-    }
-    else if (streamingUpdate is RequiredActionUpdate submitToolOutputsUpdate)
-    {
-        streamRun = submitToolOutputsUpdate.Value;
-        RequiredActionUpdate newActionUpdate = submitToolOutputsUpdate;
-        while (streamRun.Status == RunStatus.RequiresAction) {
+        if (streamingUpdate.UpdateKind == StreamingUpdateReason.RunCreated)
+        {
+            Console.WriteLine("--- Run started! ---");
+        }
+        else if (streamingUpdate is RequiredActionUpdate submitToolOutputsUpdate)
+        {
+            RequiredActionUpdate newActionUpdate = submitToolOutputsUpdate;
             toolOutputs.Add(
                 GetResolvedToolOutput(
                     newActionUpdate.FunctionName,
                     newActionUpdate.ToolCallId,
                     newActionUpdate.FunctionArguments
             ));
-            await foreach (StreamingUpdate actionUpdate in client.SubmitToolOutputsToStreamAsync(streamRun, toolOutputs))
-            {
-                if (actionUpdate is MessageContentUpdate contentUpdate)
-                {
-                    Console.Write(contentUpdate.Text);
-                }
-                else if (actionUpdate is RequiredActionUpdate newAction)
-                {
-                    newActionUpdate = newAction;
-                    toolOutputs.Add(
-                        GetResolvedToolOutput(
-                            newActionUpdate.FunctionName,
-                            newActionUpdate.ToolCallId,
-                            newActionUpdate.FunctionArguments
-                        )
-                    );
-                }
-                else if (actionUpdate.UpdateKind == StreamingUpdateReason.RunCompleted)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("--- Run completed! ---");
-                }
-            }
-            streamRun = client.GetRun(thread.Id, streamRun.Id);
-            toolOutputs.Clear();
+            streamRun = submitToolOutputsUpdate.Value;
         }
-        break;
+        else if (streamingUpdate is MessageContentUpdate contentUpdate)
+        {
+            Console.Write(contentUpdate.Text);
+        }
+        else if (streamingUpdate.UpdateKind == StreamingUpdateReason.RunCompleted)
+        {
+            Console.WriteLine();
+            Console.WriteLine("--- Run completed! ---");
+        }
     }
-    else if (streamingUpdate is MessageContentUpdate contentUpdate)
+    if (toolOutputs.Count > 0)
     {
-        Console.Write(contentUpdate.Text);
+        stream = client.SubmitToolOutputsToStreamAsync(streamRun, toolOutputs);
     }
 }
+while (toolOutputs.Count > 0);
 ```
 
 #### Azure function call
@@ -909,7 +896,7 @@ Any operation that fails will throw a [RequestFailedException][RequestFailedExce
 try
 {
     client.CreateMessage(
-    "1234",
+    "thread1234",
     MessageRole.User,
     "I need to solve the equation `3x + 11 = 14`. Can you help me?");
 }
@@ -938,14 +925,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [RequestFailedException]: https://learn.microsoft.com/dotnet/api/azure.requestfailedexception?view=azure-dotnet
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.6/sdk/ai/Azure.AI.Projects/tests/Samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects/tests/Samples
 [api_ref_docs]: https://learn.microsoft.com/dotnet/api/azure.ai.projects?view=azure-dotnet-preview
 [nuget]: https://www.nuget.org/packages/Azure.AI.Projects
-[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.6/sdk/ai/Azure.AI.Projects
+[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects
 [product_doc]: https://learn.microsoft.com/azure/ai-studio/
 [azure_identity]: https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet
 [azure_identity_dac]: https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
-[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Projects_1.0.0-beta.6/CONTRIBUTING.md
+[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/main/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
