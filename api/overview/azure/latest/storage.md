@@ -4,7 +4,7 @@ description: Reference for Azure Storage SDK for .NET
 ms.date: 04/04/2025
 ms.topic: reference
 ms.devlang: dotnet
-ms.service: storage
+ms.service: azure-storage
 ---
 # Azure Storage client libraries for .NET
 
@@ -89,7 +89,7 @@ This bug does *not* affect customers who use an authenticated symmetric key wrap
 - Update client library version according to the table above.
 - If you rotated an unauthenticated symmetric encryption key with `BlobClient.UpdateClientSideKeyEncryptionKey` and an affected version of **Azure.Storage.Blobs**, it might be possible to restore your data by encrypting the affected key twice.
 
-### InvalidHeaderValue error message when using beta version of SDK
+### InvalidHeaderValue error message when using beta or generally available version of SDK
 
 In rare scenarios, applications that have upgraded to the latest beta or generally available version of the SDK can receive an `InvalidHeaderValue` error message. This issue can occur when using any of the Storage libraries. The error message looks similar to the following sample:
 
