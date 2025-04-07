@@ -1,7 +1,7 @@
 ---
 title: Azure Stack HCI SDK for .NET
 description: Reference for Azure Stack HCI SDK for .NET
-ms.date: 04/04/2025
+ms.date: 04/07/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: stackhci
