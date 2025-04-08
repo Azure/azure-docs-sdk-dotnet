@@ -1,12 +1,12 @@
 ---
 title: Azure Identity client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Identity, entra-id
-ms.date: 03/11/2025
+ms.date: 04/08/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: entra-id
 ---
-# Azure Identity client library for .NET - version 1.14.0-beta.2 
+# Azure Identity client library for .NET - version 1.14.0-beta.3 
 
 
 The Azure Identity library provides [Microsoft Entra ID](https://learn.microsoft.com/entra/fundamentals/whatis) ([formerly Azure Active Directory](https://learn.microsoft.com/entra/fundamentals/new-name)) token authentication support across the Azure SDK. It provides a set of [`TokenCredential`](https://learn.microsoft.com/dotnet/api/azure.core.tokencredential?view=azure-dotnet) implementations that can be used to construct Azure SDK clients that support Microsoft Entra token authentication.
@@ -198,9 +198,9 @@ Not all credentials require this configuration. Credentials that authenticate th
 
 |Credential | Usage | Reference|
 |-|-|-|
-|[`AuthorizationCodeCredential`][ref_AuthorizationCodeCredential]|Authenticates a user with a previously obtained authorization code. | [OAuth2 authentication code](https://learn.microsoft.com/entra/identity-platform/v2-oauth2-auth-code-flow)|
+|[`AuthorizationCodeCredential`][ref_AuthorizationCodeCredential]|Authenticates a user with a previously obtained authorization code. | [OAuth2 authorization code](https://learn.microsoft.com/entra/identity-platform/v2-oauth2-auth-code-flow)|
 |[`DeviceCodeCredential`][ref_DeviceCodeCredential]|Interactively authenticates a user on devices with limited UI. | [Device code authentication](https://learn.microsoft.com/entra/identity-platform/v2-oauth2-device-code)|
-|[`InteractiveBrowserCredential`][ref_InteractiveBrowserCredential]|Interactively authenticates a user with the default system browser. | [OAuth2 authentication code](https://learn.microsoft.com/entra/identity-platform/v2-oauth2-auth-code-flow)|
+|[`InteractiveBrowserCredential`][ref_InteractiveBrowserCredential]|Interactively authenticates a user with the default system browser. | [Interactive browser authentication](https://aka.ms/azsdk/net/identity/interactivebrowsercredential/usage)|
 |[`OnBehalfOfCredential`][ref_OnBehalfOfCredential]|Propagates the delegated user identity and permissions through the request chain. | [On-behalf-of authentication](https://learn.microsoft.com/entra/identity-platform/v2-oauth2-on-behalf-of-flow)|
 
 ### Authenticate via development tools
@@ -250,7 +250,7 @@ Not all credentials require this configuration. Credentials that authenticate th
 
 ## Continuous Access Evaluation
 
-As of version 1.10.0, accessing resources protected by [Continuous Access Evaluation (CAE)][cae] is possible on a per-request basis. This behavior can be enabled by setting the `IsCaeEnabled` property of `TokenRequestContext` via its constructor. CAE isn't supported for developer and managed identity credentials.
+As of version 1.10.0, accessing resources protected by [Continuous Access Evaluation (CAE)][cae] is possible on a per-request basis. This behavior can be enabled by setting the `IsCaeEnabled` property of `TokenRequestContext` via its constructor. CAE isn't supported for developer credentials.
 
 ## Token caching
 
@@ -260,7 +260,7 @@ As of version 1.10.0, accessing resources protected by [Continuous Access Evalua
 * Improve resilience and performance.
 * Reduce the number of requests made to Microsoft Entra ID to obtain access tokens.
 
-The Azure Identity library offers both in-memory and persistent disk caching. For more information, see the [token caching documentation](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.2/sdk/identity/Azure.Identity/samples/TokenCache.md).
+The Azure Identity library offers both in-memory and persistent disk caching. For more information, see the [token caching documentation](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.3/sdk/identity/Azure.Identity/samples/TokenCache.md).
 
 ## Brokered authentication
 
@@ -268,7 +268,7 @@ An authentication broker is an app that runs on a user's machine and manages the
 
 ## Troubleshooting
 
-See the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.2/sdk/identity/Azure.Identity/TROUBLESHOOTING.md).
+See the [troubleshooting guide](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.3/sdk/identity/Azure.Identity/TROUBLESHOOTING.md).
 
 ### Error handling
 
@@ -295,7 +295,7 @@ For more information on handling errors from failed requests to Microsoft Entra 
 
 ### Logging
 
-See [Enable and configure logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.2/sdk/identity/Azure.Identity/TROUBLESHOOTING.md#enable-and-configure-logging).
+See [Enable and configure logging](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.3/sdk/identity/Azure.Identity/TROUBLESHOOTING.md#enable-and-configure-logging).
 
 ### Thread safety
 
@@ -303,10 +303,10 @@ We guarantee that all credential instance methods are thread-safe and independen
 
 ### Additional concepts
 
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.2/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.2/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.2/sdk/core/Azure.Core/samples/Diagnostics.md) |
-[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.2/sdk/core/Azure.Core/README.md#mocking) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.3/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.3/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.3/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Mocking](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Identity_1.14.0-beta.3/sdk/core/Azure.Core/README.md#mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 
 ## Next steps
@@ -334,14 +334,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [azure_developer_cli]:https://aka.ms/azure-dev
 [azure_powerShell]: https://learn.microsoft.com/powershell/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.14.0-beta.2/sdk/identity/Azure.Identity/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.14.0-beta.3/sdk/identity/Azure.Identity/src
 [package]: https://www.nuget.org/packages/Azure.Identity
 [entraid_doc]: https://learn.microsoft.com/entra/identity/
 [entraid_err_doc]: https://learn.microsoft.com/entra/identity-platform/reference-error-codes
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
-[blobs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.14.0-beta.2/sdk/storage/Azure.Storage.Blobs
-[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.14.0-beta.2/sdk/core/Azure.Core
+[blobs_client_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.14.0-beta.3/sdk/storage/Azure.Storage.Blobs
+[azure_core_library]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Identity_1.14.0-beta.3/sdk/core/Azure.Core
 [identity_api_docs]: https://learn.microsoft.com/dotnet/api/azure.identity?view=azure-dotnet
 [vs_login_image]: https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/identity/Azure.Identity/images/VsLoginDialog.png
 [azure_cli_login_image]: https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/identity/Azure.Identity/images/AzureCliLogin.png
@@ -363,9 +363,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 [ref_InteractiveBrowserCredential]: https://learn.microsoft.com/dotnet/api/azure.identity.interactivebrowsercredential?view=azure-dotnet
 [ref_ManagedIdentityCredential]: https://learn.microsoft.com/dotnet/api/azure.identity.managedidentitycredential?view=azure-dotnet
 [ref_OnBehalfOfCredential]: https://learn.microsoft.com/dotnet/api/azure.identity.onbehalfofcredential?view=azure-dotnet
-[ref_UsernamePasswordCredential]: https://learn.microsoft.com/dotnet/api/azure.identity.usernamepasswordcredential?view=azure-dotnet
 [ref_VisualStudioCredential]: https://learn.microsoft.com/dotnet/api/azure.identity.visualstudiocredential?view=azure-dotnet
-[ref_VisualStudioCodeCredential]: https://learn.microsoft.com/dotnet/api/azure.identity.visualstudiocodecredential?view=azure-dotnet
 [ref_WorkloadIdentityCredential]: https://learn.microsoft.com/dotnet/api/azure.identity.workloadidentitycredential?view=azure-dotnet
 [cae]: https://learn.microsoft.com/entra/identity/conditional-access/concept-continuous-access-evaluation
 [sami_doc]: https://learn.microsoft.com/dotnet/azure/sdk/authentication/system-assigned-managed-identity
