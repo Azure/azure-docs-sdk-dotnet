@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Projects, ai
-ms.date: 03/28/2025
+ms.date: 04/21/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: ai
 ---
-# Azure AI Projects client library for .NET - version 1.0.0-beta.6 
+# Azure AI Projects client library for .NET - version 1.0.0-beta.7 
 
 Use the AI Projects client library to:
 
@@ -365,14 +365,16 @@ if (connections?.Value == null || connections.Value.Count == 0)
 
 ConnectionResponse connection = connections.Value[0];
 
-AISearchIndexResource indexList = new(connection.Id, "sample_index");
-indexList.QueryType = AzureAISearchQueryType.VectorSemanticHybrid;
-ToolResources searchResource = new ToolResources
+AzureAISearchResource searchResource = new(
+    connection.Id,
+    "sample_index",
+    5,
+    "category eq 'sleeping bag'",
+    AzureAISearchQueryType.Simple
+);
+ToolResources toolResource = new()
 {
-    AzureAISearch = new AzureAISearchResource
-    {
-        IndexList = { indexList }
-    }
+    AzureAISearch = searchResource
 };
 
 AgentsClient agentClient = projectClient.GetAgentsClient();
@@ -382,7 +384,7 @@ Agent agent = await agentClient.CreateAgentAsync(
    name: "my-assistant",
    instructions: "You are a helpful assistant.",
    tools: [ new AzureAISearchToolDefinition() ],
-   toolResources: searchResource);
+   toolResources: toolResource);
 ```
 
 If the agent has found the relevant information in the index, the reference
@@ -610,61 +612,48 @@ ToolOutput GetResolvedToolOutput(string functionName, string toolCallId, string 
 }
 ```
 
-We parse streaming updates in two cycles. One iterates over the streaming run outputs and when we are getting update, requiring the action, we are starting the second cycle, which iterates over the outputs of the same run, after submission of the local functions calls results.
+We create a stream and wait for the stream update of the `RequiredActionUpdate` type. This update will mark the point, when we need to submit tool outputs to the stream. We will submit outputs in the inner cycle. Please note that `RequiredActionUpdate` keeps only one required action, while our run may require multiple function calls, this case is handled in the inner cycle, so that we can add tool output to the existing array of outputs. After all required actions were submitted we clean up the array of required actions.
 
 ```C# Snippet:FunctionsWithStreamingUpdateCycle
 List<ToolOutput> toolOutputs = [];
 ThreadRun streamRun = null;
-await foreach (StreamingUpdate streamingUpdate in client.CreateRunStreamingAsync(thread.Id, agent.Id))
+AsyncCollectionResult<StreamingUpdate> stream = client.CreateRunStreamingAsync(thread.Id, agent.Id);
+do
 {
-    if (streamingUpdate.UpdateKind == StreamingUpdateReason.RunCreated)
+    toolOutputs.Clear();
+    await foreach (StreamingUpdate streamingUpdate in stream)
     {
-        Console.WriteLine("--- Run started! ---");
-    }
-    else if (streamingUpdate is RequiredActionUpdate submitToolOutputsUpdate)
-    {
-        streamRun = submitToolOutputsUpdate.Value;
-        RequiredActionUpdate newActionUpdate = submitToolOutputsUpdate;
-        while (streamRun.Status == RunStatus.RequiresAction) {
+        if (streamingUpdate.UpdateKind == StreamingUpdateReason.RunCreated)
+        {
+            Console.WriteLine("--- Run started! ---");
+        }
+        else if (streamingUpdate is RequiredActionUpdate submitToolOutputsUpdate)
+        {
+            RequiredActionUpdate newActionUpdate = submitToolOutputsUpdate;
             toolOutputs.Add(
                 GetResolvedToolOutput(
                     newActionUpdate.FunctionName,
                     newActionUpdate.ToolCallId,
                     newActionUpdate.FunctionArguments
             ));
-            await foreach (StreamingUpdate actionUpdate in client.SubmitToolOutputsToStreamAsync(streamRun, toolOutputs))
-            {
-                if (actionUpdate is MessageContentUpdate contentUpdate)
-                {
-                    Console.Write(contentUpdate.Text);
-                }
-                else if (actionUpdate is RequiredActionUpdate newAction)
-                {
-                    newActionUpdate = newAction;
-                    toolOutputs.Add(
-                        GetResolvedToolOutput(
-                            newActionUpdate.FunctionName,
-                            newActionUpdate.ToolCallId,
-                            newActionUpdate.FunctionArguments
-                        )
-                    );
-                }
-                else if (actionUpdate.UpdateKind == StreamingUpdateReason.RunCompleted)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("--- Run completed! ---");
-                }
-            }
-            streamRun = client.GetRun(thread.Id, streamRun.Id);
-            toolOutputs.Clear();
+            streamRun = submitToolOutputsUpdate.Value;
         }
-        break;
+        else if (streamingUpdate is MessageContentUpdate contentUpdate)
+        {
+            Console.Write(contentUpdate.Text);
+        }
+        else if (streamingUpdate.UpdateKind == StreamingUpdateReason.RunCompleted)
+        {
+            Console.WriteLine();
+            Console.WriteLine("--- Run completed! ---");
+        }
     }
-    else if (streamingUpdate is MessageContentUpdate contentUpdate)
+    if (toolOutputs.Count > 0)
     {
-        Console.Write(contentUpdate.Text);
+        stream = client.SubmitToolOutputsToStreamAsync(streamRun, toolOutputs);
     }
 }
+while (toolOutputs.Count > 0);
 ```
 
 #### Azure function call
@@ -866,7 +855,8 @@ OpenApiToolDefinition openapiTool = new(
     name: "get_weather",
     description: "Retrieve weather information for a location",
     spec: BinaryData.FromBytes(File.ReadAllBytes(file_path)),
-    auth: oaiAuth
+    auth: oaiAuth,
+    defaultParams: ["format"]
 );
 
 Agent agent = await client.CreateAgentAsync(
@@ -909,7 +899,7 @@ Any operation that fails will throw a [RequestFailedException][RequestFailedExce
 try
 {
     client.CreateMessage(
-    "1234",
+    "thread1234",
     MessageRole.User,
     "I need to solve the equation `3x + 11 = 14`. Can you help me?");
 }
@@ -938,14 +928,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [RequestFailedException]: https://learn.microsoft.com/dotnet/api/azure.requestfailedexception?view=azure-dotnet
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.6/sdk/ai/Azure.AI.Projects/tests/Samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.7/sdk/ai/Azure.AI.Projects/tests/Samples
 [api_ref_docs]: https://learn.microsoft.com/dotnet/api/azure.ai.projects?view=azure-dotnet-preview
 [nuget]: https://www.nuget.org/packages/Azure.AI.Projects
-[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.6/sdk/ai/Azure.AI.Projects
+[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.7/sdk/ai/Azure.AI.Projects
 [product_doc]: https://learn.microsoft.com/azure/ai-studio/
 [azure_identity]: https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet
 [azure_identity_dac]: https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
-[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Projects_1.0.0-beta.6/CONTRIBUTING.md
+[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Projects_1.0.0-beta.7/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
