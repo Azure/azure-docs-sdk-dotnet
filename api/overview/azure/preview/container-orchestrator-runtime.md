@@ -1,7 +1,7 @@
 ---
 title: Azure Container Orchestrator Runtime SDK for .NET
 description: Reference for Azure Container Orchestrator Runtime SDK for .NET
-ms.date: 04/18/2025
+ms.date: 04/21/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: containerorchestratorruntime
