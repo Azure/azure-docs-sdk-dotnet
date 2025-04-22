@@ -1,7 +1,7 @@
 ---
 title: Azure DevTest Labs SDK for .NET
 description: Reference for Azure DevTest Labs SDK for .NET
-ms.date: 04/21/2025
+ms.date: 04/22/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: devtest-lab
