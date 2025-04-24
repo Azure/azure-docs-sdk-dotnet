@@ -1,7 +1,7 @@
 ---
 title: Azure Orbital SDK for .NET
 description: Reference for Azure Orbital SDK for .NET
-ms.date: 04/23/2025
+ms.date: 04/24/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: orbital
