@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: entra-id
 ---
-# Azure Identity Brokered Authentication client library for .NET - version 1.3.0-alpha.20250428.1 
+# Azure Identity Brokered Authentication client library for .NET - version 1.3.0-alpha.20250428.3 
 
 
 The library extends the `Azure.Identity` library to provide authentication broker support. It includes the necessary dependencies and provides the `InteractiveBrowserCredentialBrokerOptions` class. This options class can be used to create an `InteractiveBrowserCredential` capable of using the system authentication broker in lieu of an embedded web view or the system browser.
