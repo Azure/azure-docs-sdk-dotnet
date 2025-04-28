@@ -1,7 +1,7 @@
 ---
 title: Azure Qumulo SDK for .NET
 description: Reference for Azure Qumulo SDK for .NET
-ms.date: 04/25/2025
+ms.date: 04/28/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: qumulo

@@ -1,7 +1,7 @@
 ---
 title: Azure Marketplace Ordering SDK for .NET
 description: Reference for Azure Marketplace Ordering SDK for .NET
-ms.date: 04/25/2025
+ms.date: 04/28/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: marketplaceordering
