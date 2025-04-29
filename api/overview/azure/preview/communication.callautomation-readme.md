@@ -6,7 +6,7 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication CallAutomation client library for .NET - version 1.4.0-alpha.20250428.3 
+# Azure Communication CallAutomation client library for .NET - version 1.4.0-alpha.20250429.1 
 
 
 This package contains a C# SDK for Azure Communication Call Automation.
