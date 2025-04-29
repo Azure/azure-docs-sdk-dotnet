@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Rooms client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.Rooms, communication
-ms.date: 09/12/2024
+ms.date: 03/18/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Rooms client library for .NET - version 1.1.1 
+# Azure Communication Rooms client library for .NET - version 1.2.0 
 
 
 This package contains a C# SDK for the Rooms Service of Azure Communication Services.
@@ -70,15 +70,19 @@ This parameter contains `ValidFrom`, `ValidUntil`, `PstnDialOutEnabled` and `Par
 // Create communication users using the CommunicationIdentityClient
 Response<CommunicationUserIdentifier> communicationUser1 = await communicationIdentityClient.CreateUserAsync();
 Response<CommunicationUserIdentifier> communicationUser2 = await communicationIdentityClient.CreateUserAsync();
+Response<CommunicationUserIdentifier> communicationUser3 = await communicationIdentityClient.CreateUserAsync();
 
 DateTimeOffset validFrom = DateTimeOffset.UtcNow;
 DateTimeOffset validUntil = validFrom.AddDays(1);
 RoomParticipant participant1 = new RoomParticipant(communicationUser1.Value); // If role is not provided, then it is set as Attendee by default
 RoomParticipant participant2 = new RoomParticipant(communicationUser2.Value) { Role = ParticipantRole.Presenter};
+// Starting in 1.2.0 release, A new role Collaborator is added
+RoomParticipant participant3 = new RoomParticipant(communicationUser3.Value) { Role = ParticipantRole.Collaborator };
 List<RoomParticipant> invitedParticipants = new List<RoomParticipant>
 {
     participant1,
-    participant2
+    participant2,
+    participant3
 };
 
 Response<CommunicationRoom> createRoomResponse = await roomsClient.CreateRoomAsync(validFrom, validUntil, invitedParticipants);
@@ -238,15 +242,15 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
-[communication_resource_docs]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_portal]:  /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_power_shell]: /powershell/module/az.communication/new-azcommunicationservice
-[communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
+[communication_resource_docs]: https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_portal]:  https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_power_shell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
+[communication_resource_create_net]: https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
 [nextsteps]: https://learn.microsoft.com/azure/communication-services/quickstarts/rooms/get-started-rooms?tabs=windows&pivots=programming-language-csharp
 [nuget]: https://www.nuget.org/
-[product_docs]: /azure/communication-services/overview
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Rooms_1.1.1/sdk/communication/Azure.Communication.Rooms/src
-[source_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Rooms_1.1.1/sdk/communication/Azure.Communication.Rooms/tests/Samples
+[product_docs]: https://learn.microsoft.com/azure/communication-services/overview
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Rooms_1.2.0/sdk/communication/Azure.Communication.Rooms/src
+[source_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.Rooms_1.2.0/sdk/communication/Azure.Communication.Rooms/tests/Samples
 
 <!-- TODO -->
 Update the sample code links once the sdk is published

@@ -1,12 +1,12 @@
 ---
 title: Azure WebJobs Event Hubs client library for .NET
 keywords: Azure, dotnet, SDK, API, Microsoft.Azure.WebJobs.Extensions.EventHubs, eventhub
-ms.date: 08/02/2024
+ms.date: 04/09/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: eventhub
 ---
-# Azure WebJobs Event Hubs client library for .NET - version 6.3.5 
+# Azure WebJobs Event Hubs client library for .NET - version 6.5.1 
 
 
 This extension provides functionality for accessing Azure Event Hubs from an Azure Function.
@@ -25,15 +25,15 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.EventHubs
 
 - **Azure Subscription:**  To use Azure services, including Azure Event Hubs, you'll need a subscription.  If you do not have an existing Azure account, you may sign up for a [free trial](https://azure.microsoft.com/free/dotnet/) or use your [Visual Studio Subscription](https://visualstudio.microsoft.com/subscriptions/) benefits when you [create an account](https://azure.microsoft.com/account).
 
-- **Event Hubs namespace with an Event Hub:** To interact with Azure Event Hubs, you'll also need to have a namespace and Event Hub available.  If you are not familiar with creating Azure resources, you may wish to follow the step-by-step guide for [creating an Event Hub using the Azure portal](/azure/event-hubs/event-hubs-create).  There, you can also find detailed instructions for using the Azure CLI, Azure PowerShell, or Azure Resource Manager (ARM) templates to create an Event Hub.
+- **Event Hubs namespace with an Event Hub:** To interact with Azure Event Hubs, you'll also need to have a namespace and Event Hub available.  If you are not familiar with creating Azure resources, you may wish to follow the step-by-step guide for [creating an Event Hub using the Azure portal](https://learn.microsoft.com/azure/event-hubs/event-hubs-create).  There, you can also find detailed instructions for using the Azure CLI, Azure PowerShell, or Azure Resource Manager (ARM) templates to create an Event Hub.
 
-- **Azure Storage account with blob storage:** To persist checkpoints as blobs in Azure Storage, you'll need to have an Azure Storage account with blobs available.  If you are not familiar with Azure Storage accounts, you may wish to follow the step-by-step guide for [creating a storage account using the Azure portal](/azure/storage/common/storage-quickstart-create-account?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&tabs=azure-portal).  There, you can also find detailed instructions for using the Azure CLI, Azure PowerShell, or Azure Resource Manager (ARM) templates to create storage accounts.
+- **Azure Storage account with blob storage:** To persist checkpoints as blobs in Azure Storage, you'll need to have an Azure Storage account with blobs available.  If you are not familiar with Azure Storage accounts, you may wish to follow the step-by-step guide for [creating a storage account using the Azure portal](https://learn.microsoft.com/azure/storage/common/storage-quickstart-create-account?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&tabs=azure-portal).  There, you can also find detailed instructions for using the Azure CLI, Azure PowerShell, or Azure Resource Manager (ARM) templates to create storage accounts.
 
 [![Deploy button](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-sdk-for-net%2Fmaster%2Fsdk%2Feventhub%2FAzure.Messaging.EventHubs.Processor%2Fassets%2Fsamples-azure-deploy.json)
 
 ### Authenticate the Client
 
-For the Event Hubs client library to interact with an Event Hub, it will need to understand how to connect and authorize with it.  The easiest means for doing so is to use a connection string, which is created automatically when creating an Event Hubs namespace.  If you aren't familiar with using connection strings with Event Hubs, you may wish to follow the step-by-step guide to [get an Event Hubs connection string](/azure/event-hubs/event-hubs-get-connection-string).
+For the Event Hubs client library to interact with an Event Hub, it will need to understand how to connect and authorize with it.  The easiest means for doing so is to use a connection string, which is created automatically when creating an Event Hubs namespace.  If you aren't familiar with using connection strings with Event Hubs, you may wish to follow the step-by-step guide to [get an Event Hubs connection string](https://learn.microsoft.com/azure/event-hubs/event-hubs-get-connection-string).
 
 The `Connection` property of `EventHubAttribute` and `EventHubTriggerAttribute` is used to specify the configuration property that stores the connection string.
 
@@ -50,11 +50,11 @@ For the local development use the `local.settings.json` file to store the connec
 }
 ```
 
-When deployed use the [application settings](/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to set the connection string.
+When deployed use the [application settings](https://learn.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings) to set the connection string.
 
 #### Identity-based authentication
 
-If your environment has [managed identity](/azure/app-service/overview-managed-identity?tabs=dotnet) enabled you can use it to authenticate the Event Hubs extension.  Before doing so, you will need to ensure that permissions have been configured as described in the [Azure Functions developer guide]( /azure/azure-functions/functions-reference#grant-permission-to-the-identity).
+If your environment has [managed identity](https://learn.microsoft.com/azure/app-service/overview-managed-identity?tabs=dotnet) enabled you can use it to authenticate the Event Hubs extension.  Before doing so, you will need to ensure that permissions have been configured as described in the [Azure Functions developer guide]( https://learn.microsoft.com/azure/azure-functions/functions-reference#grant-permission-to-the-identity).
 
 To use identity-based authentication provide the `<connection_name>__fullyQualifiedNamespace` configuration setting.
 
@@ -67,7 +67,7 @@ To use identity-based authentication provide the `<connection_name>__fullyQualif
 }
 ```
 
-Or in the case of deployed app set the same setting in [application settings](/azure/azure-functions/functions-how-to-use-azure-function-app-settings):
+Or in the case of deployed app set the same setting in [application settings](https://learn.microsoft.com/azure/azure-functions/functions-how-to-use-azure-function-app-settings):
 
 ```
 <connection_name>__fullyQualifiedNamespace={event_hubs_namespace}.servicebus.windows.net
@@ -81,13 +81,13 @@ More details about configuring an identity-based connection can be found [here](
 
 The Event Hub Trigger allows a function to be executed when a message is sent to an Event Hub.
 
-Please follow the [Azure Event Hubs trigger tutorial](/azure/azure-functions/functions-bindings-event-hubs-trigger?tabs=csharp) to learn more about Event Hub triggers.
+Please follow the [Azure Event Hubs trigger tutorial](https://learn.microsoft.com/azure/azure-functions/functions-bindings-event-hubs-trigger?tabs=csharp) to learn more about Event Hub triggers.
 
 ### Event Hub Output Binding
 
 The Event Hub Output Binding allows a function to send Event Hub events.
 
-Please follow the [Azure Event Hubs output binding](/azure/azure-functions/functions-bindings-event-hubs-output?tabs=csharp) to learn more about Event Hub bindings.
+Please follow the [Azure Event Hubs output binding](https://learn.microsoft.com/azure/azure-functions/functions-bindings-event-hubs-output?tabs=csharp) to learn more about Event Hub bindings.
 
 ### Supported types
 
@@ -206,11 +206,11 @@ public static void Run(
 
 ## Troubleshooting
 
-Please refer to [Monitor Azure Functions](/azure/azure-functions/functions-monitoring) for troubleshooting guidance.
+Please refer to [Monitor Azure Functions](https://learn.microsoft.com/azure/azure-functions/functions-monitoring) for troubleshooting guidance.
 
 ## Next steps
 
-Read the [introduction to Azure Functions](/azure/azure-functions/functions-overview) or [creating an Azure Function guide](/azure/azure-functions/functions-create-first-azure-function).
+Read the [introduction to Azure Functions](https://learn.microsoft.com/azure/azure-functions/functions-overview) or [creating an Azure Function guide](https://learn.microsoft.com/azure/azure-functions/functions-create-first-azure-function).
 
 ## Contributing
 
@@ -227,15 +227,13 @@ For more information see the [Code of Conduct FAQ][coc_faq]
 or contact [opencode@microsoft.com][coc_contact] with any
 additional questions or comments.
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fsearch%2FMicrosoft.Azure.WebJobs.Extensions.EventHubs%2FREADME.png)
-
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_6.3.5/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_6.5.1/sdk/search/Microsoft.Azure.WebJobs.Extensions.EventHubs/src
 [package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventHubs/
-[docs]: /dotnet/api/Microsoft.Azure.WebJobs.Extensions.EventHubs
+[docs]: https://learn.microsoft.com/dotnet/api/Microsoft.Azure.WebJobs.Extensions.EventHubs
 [nuget]: https://www.nuget.org/
 
-[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_6.3.5/CONTRIBUTING.md
+[contrib]: https://github.com/Azure/azure-sdk-for-net/tree/Microsoft.Azure.WebJobs.Extensions.EventHubs_6.5.1/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/

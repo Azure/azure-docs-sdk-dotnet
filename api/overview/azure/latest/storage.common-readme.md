@@ -1,12 +1,12 @@
 ---
 title: Azure Storage Common client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Storage.Common, storage
-ms.date: 11/12/2024
+ms.date: 03/11/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: storage
 ---
-# Azure Storage Common client library for .NET - version 12.22.0 
+# Azure Storage Common client library for .NET - version 12.23.0 
 
 
 > Server Version: 2021-02-12, 2020-12-06, 2020-10-02, 2020-08-04, 2020-06-12, 2020-04-08, 2020-02-10, 2019-12-12, 2019-07-07, and 2020-02-02
@@ -57,11 +57,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.22.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.22.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.22.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.22.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.22.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.23.0/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.23.0/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.23.0/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.23.0/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.23.0/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
@@ -74,6 +74,8 @@ Please see the examples for [Blobs][blobs_examples], [Queues][queues_examples], 
 
 All Azure Storage services will throw a [RequestFailedException][RequestFailedException]
 with helpful [`ErrorCode`s][error_codes].
+If multiple failures occur, an [AggregateException][AggregateException] will be thrown,
+containing each failure instance.
 
 ## Next steps
 
@@ -94,34 +96,33 @@ For more information see the [Code of Conduct FAQ][coc_faq]
 or contact [opencode@microsoft.com][coc_contact] with any
 additional questions or comments.
 
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net%2Fsdk%2Fstorage%2FAzure.Storage.Common%2FREADME.png)
-
 <!-- LINKS -->
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.22.0/sdk/storage/Azure.Storage.Common/src
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.23.0/sdk/storage/Azure.Storage.Common/src
 [package]: https://www.nuget.org/packages/Azure.Storage.Common/
-[docs]: /dotnet/api/azure.storage
-[rest_docs]: /rest/api/storageservices/
-[product_docs]: /azure/storage/
+[docs]: https://learn.microsoft.com/dotnet/api/azure.storage
+[rest_docs]: https://learn.microsoft.com/rest/api/storageservices/
+[product_docs]: https://learn.microsoft.com/azure/storage/
 [nuget]: https://www.nuget.org/
-[storage_account_docs]: /azure/storage/common/storage-account-overview
-[storage_account_create_ps]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-powershell
-[storage_account_create_cli]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-cli
-[storage_account_create_portal]: /azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
-[azure_cli]: /cli/azure
+[storage_account_docs]: https://learn.microsoft.com/azure/storage/common/storage-account-overview
+[storage_account_create_ps]: https://learn.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-powershell
+[storage_account_create_cli]: https://learn.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-cli
+[storage_account_create_portal]: https://learn.microsoft.com/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal
+[azure_cli]: https://learn.microsoft.com/cli/azure
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
-[auth_credentials]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.22.0/sdk/storage/Azure.Storage.Common/src/StorageSharedKeyCredential.cs
-[blobs_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.22.0/sdk/storage/Azure.Storage.Blobs/README.md#Examples
-[files_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.22.0/sdk/storage/Azure.Storage.Files.Shares/README.md#Examples
-[queues_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.22.0/sdk/storage/Azure.Storage.Queues/README.md#Examples
-[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.22.0/sdk/core/Azure.Core/src/RequestFailedException.cs
-[error_codes]: /rest/api/storageservices/common-rest-api-error-codes
-[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.22.0/sdk/storage/Azure.Storage.Common/samples/
-[blobs_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.22.0/sdk/storage/Azure.Storage.Blobs/README.md#next-steps
-[files_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.22.0/sdk/storage/Azure.Storage.Files.Shares/README.md#next-steps
-[queues_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.22.0/sdk/storage/Azure.Storage.Queues/README.md#next-steps
-[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.22.0/sdk/storage/CONTRIBUTING.md
+[auth_credentials]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.23.0/sdk/storage/Azure.Storage.Common/src/StorageSharedKeyCredential.cs
+[blobs_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.23.0/sdk/storage/Azure.Storage.Blobs/README.md#Examples
+[files_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.23.0/sdk/storage/Azure.Storage.Files.Shares/README.md#Examples
+[queues_examples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.23.0/sdk/storage/Azure.Storage.Queues/README.md#Examples
+[RequestFailedException]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.23.0/sdk/core/Azure.Core/src/RequestFailedException.cs
+[error_codes]: https://learn.microsoft.com/rest/api/storageservices/common-rest-api-error-codes
+[samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.23.0/sdk/storage/Azure.Storage.Common/samples/
+[blobs_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.23.0/sdk/storage/Azure.Storage.Blobs/README.md#next-steps
+[files_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.23.0/sdk/storage/Azure.Storage.Files.Shares/README.md#next-steps
+[queues_samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Storage.Common_12.23.0/sdk/storage/Azure.Storage.Queues/README.md#next-steps
+[storage_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Storage.Common_12.23.0/sdk/storage/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
+[AggregateException]: https://learn.microsoft.com/dotnet/api/system.aggregateexception?view=net-9.0
 

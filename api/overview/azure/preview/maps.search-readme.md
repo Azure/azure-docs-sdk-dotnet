@@ -1,17 +1,17 @@
 ---
 title: Azure Maps Search client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Maps.Search, maps
-ms.date: 09/30/2024
+ms.date: 04/16/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: maps
 ---
-# Azure Maps Search client library for .NET - version 2.0.0-beta.4 
+# Azure Maps Search client library for .NET - version 2.0.0-beta.5 
 
 
 Azure Maps Search is a library that can query for locations, points of interests or search within a geometric area.
 
-[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_2.0.0-beta.4/sdk/maps/Azure.Maps.Search/src) | [API reference documentation](/rest/api/maps/) | [REST API reference documentation](/rest/api/maps/search) | [Product documentation](/azure/azure-maps/)
+[Source code](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_2.0.0-beta.5/sdk/maps/Azure.Maps.Search/src) | [API reference documentation](https://learn.microsoft.com/rest/api/maps/) | [REST API reference documentation](https://learn.microsoft.com/rest/api/maps/search) | [Product documentation](https://learn.microsoft.com/azure/azure-maps/)
 
 ## Getting started
 
@@ -25,7 +25,7 @@ dotnet add package Azure.Maps.Search --prerelease
 
 ### Prerequisites
 
-> You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and [Azure Maps account](/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account).
+> You must have an [Azure subscription](https://azure.microsoft.com/free/dotnet/) and [Azure Maps account](https://learn.microsoft.com/azure/azure-maps/quick-demo-map-app#create-an-azure-maps-account).
 
 To create a new Azure Maps account, you can use the Azure Portal, Azure PowerShell, or the Azure CLI. Here's an example using the Azure CLI:
 
@@ -129,7 +129,7 @@ MapsSearchClient client = new MapsSearchClient(sasCredential);
 * Communicate with Azure Maps endpoint to request the geometry data such as a city or country outline for a set of entities
 * Communicate with Azure Maps endpoint to perform a free form search inside a single geometry or many of them
 
-Learn more by viewing our [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_2.0.0-beta.4/sdk/maps/Azure.Maps.Search/tests/Samples)
+Learn more by viewing our [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_2.0.0-beta.5/sdk/maps/Azure.Maps.Search/tests/Samples)
 
 ### Thread safety
 
@@ -137,18 +137,18 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.4/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.4/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.4/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.4/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.4/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.5/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
 
 ## Examples
 
-You can familiarize yourself with different APIs using our [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_2.0.0-beta.4/sdk/maps/Azure.Maps.Search/tests/Samples).
+You can familiarize yourself with different APIs using our [samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_2.0.0-beta.5/sdk/maps/Azure.Maps.Search/tests/Samples).
 
 ### Example Get Geocoding
 
@@ -259,17 +259,15 @@ For example, if you try to search with invalid coordinates, a error is returned,
 
 ## Next steps
 
-* [More samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_2.0.0-beta.4/sdk/maps/Azure.Maps.Search/samples)
+* [More samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.Maps.Search_2.0.0-beta.5/sdk/maps/Azure.Maps.Search/samples)
 
 ## Contributing
 
-See the [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.4/CONTRIBUTING.md) for details on building, testing, and contributing to this library.
+See the [CONTRIBUTING.md](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Maps.Search_2.0.0-beta.5/CONTRIBUTING.md) for details on building, testing, and contributing to this library.
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit <cla.microsoft.com>.
 
 When you submit a pull request, a CLA-bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact <opencode@microsoft.com> with any additional questions or comments.
-
-![Impressions](https://azure-sdk-impressions.azurewebsites.net/api/impressions/azure-sdk-for-net/sdk/maps/Azure.Maps.Search/README.png)
 

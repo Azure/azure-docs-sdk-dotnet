@@ -84,11 +84,15 @@
       </Docs>
     </Member>
     <Member MemberName="CancelJob">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response CancelJob (string name, Azure.RequestContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response CancelJob(string name, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response CancelJob (string jobName, Azure.RequestContext context);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response CancelJob(string jobName, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.CancelJob(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJob (name As String, context As RequestContext) As Response" />
-      <MemberSignature Language="F#" Value="abstract member CancelJob : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.CancelJob : string * Azure.RequestContext -&gt; Azure.Response" Usage="deidentificationClient.CancelJob (name, context)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJob (jobName As String, context As RequestContext) As Response" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member CancelJob : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.CancelJob : string * Azure.RequestContext -&gt; Azure.Response" Usage="deidentificationClient.CancelJob (jobName, context)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response CancelJob (string name, Azure.RequestContext context);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response CancelJob(string name, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJob (name As String, context As RequestContext) As Response" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member CancelJob : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.CancelJob : string * Azure.RequestContext -&gt; Azure.Response" Usage="deidentificationClient.CancelJob (name, context)" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Health.Deidentification</AssemblyName>
@@ -98,10 +102,12 @@
         <ReturnType>Azure.Response</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" />
       </Parameters>
       <Docs>
+        <param name="jobName"> The name of a job. </param>
         <param name="name"> The name of a job. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
@@ -114,18 +120,18 @@
         <returns> The response returned from the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is null. </exception>
+          <paramref name="jobName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call CancelJob and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 DeidentificationClient client = new DeidentificationClient(endpoint, credential);
 
-Response response = client.CancelJob("<name>", null);
+Response response = client.CancelJob("job_smith_documents_1", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -136,47 +142,19 @@ Console.WriteLine(result.GetProperty("targetLocation").GetProperty("prefix").ToS
 Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedAt").ToString());
 Console.WriteLine(result.GetProperty("createdAt").ToString());
-]]></code>
-This sample shows how to call CancelJob with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-DeidentificationClient client = new DeidentificationClient(endpoint, credential);
-
-Response response = client.CancelJob("<name>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("prefix").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("extensions")[0].ToString());
-Console.WriteLine(result.GetProperty("targetLocation").GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("targetLocation").GetProperty("prefix").ToString());
-Console.WriteLine(result.GetProperty("operation").ToString());
-Console.WriteLine(result.GetProperty("dataType").ToString());
-Console.WriteLine(result.GetProperty("redactionFormat").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-Console.WriteLine(result.GetProperty("lastUpdatedAt").ToString());
-Console.WriteLine(result.GetProperty("createdAt").ToString());
-Console.WriteLine(result.GetProperty("startedAt").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("successful").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("canceled").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").ToString());
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CancelJob">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt; CancelJob (string name, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt; CancelJob(string name, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt; CancelJob (string jobName, System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt; CancelJob(string jobName, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.CancelJob(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJob (name As String, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DeidentificationJob)" />
-      <MemberSignature Language="F#" Value="abstract member CancelJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&#xA;override this.CancelJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;" Usage="deidentificationClient.CancelJob (name, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJob (jobName As String, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DeidentificationJob)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member CancelJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&#xA;override this.CancelJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;" Usage="deidentificationClient.CancelJob (jobName, cancellationToken)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt; CancelJob (string name, System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt; CancelJob(string name, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJob (name As String, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DeidentificationJob)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member CancelJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&#xA;override this.CancelJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;" Usage="deidentificationClient.CancelJob (name, cancellationToken)" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Health.Deidentification</AssemblyName>
@@ -186,10 +164,12 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").To
         <ReturnType>Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" />
       </Parameters>
       <Docs>
+        <param name="jobName"> The name of a job. </param>
         <param name="name"> The name of a job. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Cancel a de-identification job. </summary>
@@ -202,34 +182,30 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").To
              If the job is already complete, this will have no effect.
              </remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is null. </exception>
+          <paramref name="jobName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
         <example>
 This sample shows how to call CancelJob.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 DeidentificationClient client = new DeidentificationClient(endpoint, credential);
 
-Response<DeidentificationJob> response = client.CancelJob("<name>");
-]]></code>
-This sample shows how to call CancelJob with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-DeidentificationClient client = new DeidentificationClient(endpoint, credential);
-
-Response<DeidentificationJob> response = client.CancelJob("<name>");
+Response<DeidentificationJob> response = client.CancelJob("job_smith_documents_1");
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CancelJobAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; CancelJobAsync (string name, Azure.RequestContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; CancelJobAsync(string name, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; CancelJobAsync (string jobName, Azure.RequestContext context);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; CancelJobAsync(string jobName, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.CancelJobAsync(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJobAsync (name As String, context As RequestContext) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member CancelJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.CancelJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="deidentificationClient.CancelJobAsync (name, context)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJobAsync (jobName As String, context As RequestContext) As Task(Of Response)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member CancelJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.CancelJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="deidentificationClient.CancelJobAsync (jobName, context)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; CancelJobAsync (string name, Azure.RequestContext context);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; CancelJobAsync(string name, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJobAsync (name As String, context As RequestContext) As Task(Of Response)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member CancelJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.CancelJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="deidentificationClient.CancelJobAsync (name, context)" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Health.Deidentification</AssemblyName>
@@ -239,10 +215,12 @@ Response<DeidentificationJob> response = client.CancelJob("<name>");
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" />
       </Parameters>
       <Docs>
+        <param name="jobName"> The name of a job. </param>
         <param name="name"> The name of a job. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
@@ -255,18 +233,18 @@ Response<DeidentificationJob> response = client.CancelJob("<name>");
         <returns> The response returned from the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is null. </exception>
+          <paramref name="jobName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call CancelJobAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 DeidentificationClient client = new DeidentificationClient(endpoint, credential);
 
-Response response = await client.CancelJobAsync("<name>", null);
+Response response = await client.CancelJobAsync("job_smith_documents_1", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -277,47 +255,19 @@ Console.WriteLine(result.GetProperty("targetLocation").GetProperty("prefix").ToS
 Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedAt").ToString());
 Console.WriteLine(result.GetProperty("createdAt").ToString());
-]]></code>
-This sample shows how to call CancelJobAsync with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-DeidentificationClient client = new DeidentificationClient(endpoint, credential);
-
-Response response = await client.CancelJobAsync("<name>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("prefix").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("extensions")[0].ToString());
-Console.WriteLine(result.GetProperty("targetLocation").GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("targetLocation").GetProperty("prefix").ToString());
-Console.WriteLine(result.GetProperty("operation").ToString());
-Console.WriteLine(result.GetProperty("dataType").ToString());
-Console.WriteLine(result.GetProperty("redactionFormat").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-Console.WriteLine(result.GetProperty("lastUpdatedAt").ToString());
-Console.WriteLine(result.GetProperty("createdAt").ToString());
-Console.WriteLine(result.GetProperty("startedAt").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("successful").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("canceled").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").ToString());
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="CancelJobAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt; CancelJobAsync (string name, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt;&gt; CancelJobAsync(string name, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt; CancelJobAsync (string jobName, System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt;&gt; CancelJobAsync(string jobName, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.CancelJobAsync(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJobAsync (name As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DeidentificationJob))" />
-      <MemberSignature Language="F#" Value="abstract member CancelJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;&#xA;override this.CancelJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;" Usage="deidentificationClient.CancelJobAsync (name, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJobAsync (jobName As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DeidentificationJob))" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member CancelJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;&#xA;override this.CancelJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;" Usage="deidentificationClient.CancelJobAsync (jobName, cancellationToken)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt; CancelJobAsync (string name, System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt;&gt; CancelJobAsync(string name, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function CancelJobAsync (name As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DeidentificationJob))" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member CancelJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;&#xA;override this.CancelJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;" Usage="deidentificationClient.CancelJobAsync (name, cancellationToken)" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Health.Deidentification</AssemblyName>
@@ -327,10 +277,12 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").To
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" />
       </Parameters>
       <Docs>
+        <param name="jobName"> The name of a job. </param>
         <param name="name"> The name of a job. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Cancel a de-identification job. </summary>
@@ -343,25 +295,17 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").To
              If the job is already complete, this will have no effect.
              </remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is null. </exception>
+          <paramref name="jobName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
         <example>
 This sample shows how to call CancelJobAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 DeidentificationClient client = new DeidentificationClient(endpoint, credential);
 
-Response<DeidentificationJob> response = await client.CancelJobAsync("<name>");
-]]></code>
-This sample shows how to call CancelJobAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-DeidentificationClient client = new DeidentificationClient(endpoint, credential);
-
-Response<DeidentificationJob> response = await client.CancelJobAsync("<name>");
+Response<DeidentificationJob> response = await client.CancelJobAsync("job_smith_documents_1");
 ]]></code></example>
       </Docs>
     </Member>
@@ -380,10 +324,10 @@ Response<DeidentificationJob> response = await client.CancelJobAsync("<name>");
         <ReturnType>Azure.Operation&lt;System.BinaryData&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="waitUntil" Type="Azure.WaitUntil" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="name" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="3" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
@@ -508,10 +452,10 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").To
         <ReturnType>Azure.Operation&lt;Azure.Health.Deidentification.DeidentificationJob&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="resource" Type="Azure.Health.Deidentification.DeidentificationJob" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="waitUntil" Type="Azure.WaitUntil" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="name" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="resource" Type="Azure.Health.Deidentification.DeidentificationJob" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
@@ -572,10 +516,10 @@ DeidentificationJob responseData = operation.Value;
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Operation&lt;System.BinaryData&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="waitUntil" Type="Azure.WaitUntil" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="name" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="3" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
@@ -700,10 +644,10 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").To
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Operation&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="waitUntil" Type="Azure.WaitUntil" />
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="resource" Type="Azure.Health.Deidentification.DeidentificationJob" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="waitUntil" Type="Azure.WaitUntil" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="name" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="resource" Type="Azure.Health.Deidentification.DeidentificationJob" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="waitUntil">
@@ -764,8 +708,8 @@ DeidentificationJob responseData = operation.Value;
         <ReturnType>Azure.Response</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="content"> The content to send as the body of the request. </param>
@@ -844,8 +788,8 @@ Console.WriteLine(result.GetProperty("taggerResult").GetProperty("etag").ToStrin
         <ReturnType>Azure.Response&lt;Azure.Health.Deidentification.DeidentificationResult&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="body" Type="Azure.Health.Deidentification.DeidentificationContent" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="body" Type="Azure.Health.Deidentification.DeidentificationContent" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="body"> Request body for de-identification operation. </param>
@@ -896,8 +840,8 @@ Response<DeidentificationResult> response = client.Deidentify(body);
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="content" Type="Azure.Core.RequestContent" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="content"> The content to send as the body of the request. </param>
@@ -976,8 +920,8 @@ Console.WriteLine(result.GetProperty("taggerResult").GetProperty("etag").ToStrin
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationResult&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="body" Type="Azure.Health.Deidentification.DeidentificationContent" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="body" Type="Azure.Health.Deidentification.DeidentificationContent" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="body"> Request body for de-identification operation. </param>
@@ -1013,12 +957,286 @@ Response<DeidentificationResult> response = await client.DeidentifyAsync(body);
 ]]></code></example>
       </Docs>
     </Member>
-    <Member MemberName="DeleteJob">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response DeleteJob (string name, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response DeleteJob(string name, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeleteJob(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteJob (name As String, Optional context As RequestContext = Nothing) As Response" />
-      <MemberSignature Language="F#" Value="abstract member DeleteJob : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.DeleteJob : string * Azure.RequestContext -&gt; Azure.Response" Usage="deidentificationClient.DeleteJob (name, context)" />
+    <Member MemberName="DeidentifyDocuments">
+      <MemberSignature Language="C#" Value="public virtual Azure.Operation&lt;BinaryData&gt; DeidentifyDocuments (Azure.WaitUntil waitUntil, string jobName, Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Operation`1&lt;class System.BinaryData&gt; DeidentifyDocuments(valuetype Azure.WaitUntil waitUntil, string jobName, class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyDocuments(Azure.WaitUntil,System.String,Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeidentifyDocuments (waitUntil As WaitUntil, jobName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Operation(Of BinaryData)" />
+      <MemberSignature Language="F#" Value="abstract member DeidentifyDocuments : Azure.WaitUntil * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Operation&lt;BinaryData&gt;&#xA;override this.DeidentifyDocuments : Azure.WaitUntil * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Operation&lt;BinaryData&gt;" Usage="deidentificationClient.DeidentifyDocuments (waitUntil, jobName, content, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Operation&lt;System.BinaryData&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="waitUntil" Type="Azure.WaitUntil" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="jobName" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" Index="2" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="3" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="waitUntil">
+          <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="jobName"> The name of a job. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] Create a de-identification job.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyDocuments(Azure.WaitUntil,System.String,Azure.Health.Deidentification.DeidentificationJob,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="jobName" /> or <paramref name="content" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+This sample shows how to call DeidentifyDocuments and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+DeidentificationClient client = new DeidentificationClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    operation = "Redact",
+    sourceLocation = new
+    {
+        location = "https://blobtest.blob.core.windows.net/container",
+        prefix = "documents/",
+    },
+    targetLocation = new
+    {
+        location = "https://blobtest.blob.core.windows.net/container",
+        prefix = "_output/",
+        overwrite = true,
+    },
+    customizations = new
+    {
+        redactionFormat = "[{type}]",
+    },
+});
+Operation<BinaryData> operation = client.DeidentifyDocuments(WaitUntil.Completed, "job_smith_documents_1", content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("location").ToString());
+Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("prefix").ToString());
+Console.WriteLine(result.GetProperty("targetLocation").GetProperty("location").ToString());
+Console.WriteLine(result.GetProperty("targetLocation").GetProperty("prefix").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("lastUpdatedAt").ToString());
+Console.WriteLine(result.GetProperty("createdAt").ToString());
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DeidentifyDocuments">
+      <MemberSignature Language="C#" Value="public virtual Azure.Operation&lt;Azure.Health.Deidentification.DeidentificationJob&gt; DeidentifyDocuments (Azure.WaitUntil waitUntil, string jobName, Azure.Health.Deidentification.DeidentificationJob resource, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Operation`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt; DeidentifyDocuments(valuetype Azure.WaitUntil waitUntil, string jobName, class Azure.Health.Deidentification.DeidentificationJob resource, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyDocuments(Azure.WaitUntil,System.String,Azure.Health.Deidentification.DeidentificationJob,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeidentifyDocuments (waitUntil As WaitUntil, jobName As String, resource As DeidentificationJob, Optional cancellationToken As CancellationToken = Nothing) As Operation(Of DeidentificationJob)" />
+      <MemberSignature Language="F#" Value="abstract member DeidentifyDocuments : Azure.WaitUntil * string * Azure.Health.Deidentification.DeidentificationJob * System.Threading.CancellationToken -&gt; Azure.Operation&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&#xA;override this.DeidentifyDocuments : Azure.WaitUntil * string * Azure.Health.Deidentification.DeidentificationJob * System.Threading.CancellationToken -&gt; Azure.Operation&lt;Azure.Health.Deidentification.DeidentificationJob&gt;" Usage="deidentificationClient.DeidentifyDocuments (waitUntil, jobName, resource, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Operation&lt;Azure.Health.Deidentification.DeidentificationJob&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="waitUntil" Type="Azure.WaitUntil" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="jobName" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="resource" Type="Azure.Health.Deidentification.DeidentificationJob" Index="2" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="waitUntil">
+          <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="jobName"> The name of a job. </param>
+        <param name="resource"> The resource instance. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> Create a de-identification job. </summary>
+        <returns>To be added.</returns>
+        <remarks> Long-running resource create or replace operation template. </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="jobName" /> or <paramref name="resource" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call DeidentifyDocuments.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+DeidentificationClient client = new DeidentificationClient(endpoint, credential);
+
+DeidentificationJob resource = new DeidentificationJob(new SourceStorageLocation(new Uri("https://blobtest.blob.core.windows.net/container"), "documents/"), new TargetStorageLocation(new Uri("https://blobtest.blob.core.windows.net/container"), "_output/")
+{
+    Overwrite = true,
+})
+{
+    OperationType = DeidentificationOperationType.Redact,
+    Customizations = new DeidentificationJobCustomizationOptions
+    {
+        RedactionFormat = "[{type}]",
+    },
+};
+Operation<DeidentificationJob> operation = client.DeidentifyDocuments(WaitUntil.Completed, "job_smith_documents_1", resource);
+DeidentificationJob responseData = operation.Value;
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DeidentifyDocumentsAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt; DeidentifyDocumentsAsync (Azure.WaitUntil waitUntil, string jobName, Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Operation`1&lt;class System.BinaryData&gt;&gt; DeidentifyDocumentsAsync(valuetype Azure.WaitUntil waitUntil, string jobName, class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyDocumentsAsync(Azure.WaitUntil,System.String,Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeidentifyDocumentsAsync (waitUntil As WaitUntil, jobName As String, content As RequestContent, Optional context As RequestContext = Nothing) As Task(Of Operation(Of BinaryData))" />
+      <MemberSignature Language="F#" Value="abstract member DeidentifyDocumentsAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt;&#xA;override this.DeidentifyDocumentsAsync : Azure.WaitUntil * string * Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&lt;BinaryData&gt;&gt;" Usage="deidentificationClient.DeidentifyDocumentsAsync (waitUntil, jobName, content, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Operation&lt;System.BinaryData&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="waitUntil" Type="Azure.WaitUntil" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="jobName" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" Index="2" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="3" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="waitUntil">
+          <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="jobName"> The name of a job. </param>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] Create a de-identification job.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyDocumentsAsync(Azure.WaitUntil,System.String,Azure.Health.Deidentification.DeidentificationJob,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The <see cref="T:Azure.Operation" /> representing an asynchronous operation on the service. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="jobName" /> or <paramref name="content" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+This sample shows how to call DeidentifyDocumentsAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+DeidentificationClient client = new DeidentificationClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    operation = "Redact",
+    sourceLocation = new
+    {
+        location = "https://blobtest.blob.core.windows.net/container",
+        prefix = "documents/",
+    },
+    targetLocation = new
+    {
+        location = "https://blobtest.blob.core.windows.net/container",
+        prefix = "_output/",
+        overwrite = true,
+    },
+    customizations = new
+    {
+        redactionFormat = "[{type}]",
+    },
+});
+Operation<BinaryData> operation = await client.DeidentifyDocumentsAsync(WaitUntil.Completed, "job_smith_documents_1", content);
+BinaryData responseData = operation.Value;
+
+JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("location").ToString());
+Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("prefix").ToString());
+Console.WriteLine(result.GetProperty("targetLocation").GetProperty("location").ToString());
+Console.WriteLine(result.GetProperty("targetLocation").GetProperty("prefix").ToString());
+Console.WriteLine(result.GetProperty("status").ToString());
+Console.WriteLine(result.GetProperty("lastUpdatedAt").ToString());
+Console.WriteLine(result.GetProperty("createdAt").ToString());
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DeidentifyDocumentsAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Operation&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt; DeidentifyDocumentsAsync (Azure.WaitUntil waitUntil, string jobName, Azure.Health.Deidentification.DeidentificationJob resource, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Operation`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt;&gt; DeidentifyDocumentsAsync(valuetype Azure.WaitUntil waitUntil, string jobName, class Azure.Health.Deidentification.DeidentificationJob resource, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyDocumentsAsync(Azure.WaitUntil,System.String,Azure.Health.Deidentification.DeidentificationJob,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeidentifyDocumentsAsync (waitUntil As WaitUntil, jobName As String, resource As DeidentificationJob, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Operation(Of DeidentificationJob))" />
+      <MemberSignature Language="F#" Value="abstract member DeidentifyDocumentsAsync : Azure.WaitUntil * string * Azure.Health.Deidentification.DeidentificationJob * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;&#xA;override this.DeidentifyDocumentsAsync : Azure.WaitUntil * string * Azure.Health.Deidentification.DeidentificationJob * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Operation&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;" Usage="deidentificationClient.DeidentifyDocumentsAsync (waitUntil, jobName, resource, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Operation&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="waitUntil" Type="Azure.WaitUntil" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="jobName" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="resource" Type="Azure.Health.Deidentification.DeidentificationJob" Index="2" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="waitUntil">
+          <see cref="F:Azure.WaitUntil.Completed" /> if the method should wait to return until the long-running operation has completed on the service; <see cref="F:Azure.WaitUntil.Started" /> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
+        <param name="jobName"> The name of a job. </param>
+        <param name="resource"> The resource instance. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> Create a de-identification job. </summary>
+        <returns>To be added.</returns>
+        <remarks> Long-running resource create or replace operation template. </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="jobName" /> or <paramref name="resource" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
+        <example>
+This sample shows how to call DeidentifyDocumentsAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+DeidentificationClient client = new DeidentificationClient(endpoint, credential);
+
+DeidentificationJob resource = new DeidentificationJob(new SourceStorageLocation(new Uri("https://blobtest.blob.core.windows.net/container"), "documents/"), new TargetStorageLocation(new Uri("https://blobtest.blob.core.windows.net/container"), "_output/")
+{
+    Overwrite = true,
+})
+{
+    OperationType = DeidentificationOperationType.Redact,
+    Customizations = new DeidentificationJobCustomizationOptions
+    {
+        RedactionFormat = "[{type}]",
+    },
+};
+Operation<DeidentificationJob> operation = await client.DeidentifyDocumentsAsync(WaitUntil.Completed, "job_smith_documents_1", resource);
+DeidentificationJob responseData = operation.Value;
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DeidentifyText">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response DeidentifyText (Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response DeidentifyText(class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyText(Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeidentifyText (content As RequestContent, Optional context As RequestContext = Nothing) As Response" />
+      <MemberSignature Language="F#" Value="abstract member DeidentifyText : Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Response&#xA;override this.DeidentifyText : Azure.Core.RequestContent * Azure.RequestContext -&gt; Azure.Response" Usage="deidentificationClient.DeidentifyText (content, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Health.Deidentification</AssemblyName>
@@ -1028,53 +1246,98 @@ Response<DeidentificationResult> response = await client.DeidentifyAsync(body);
         <ReturnType>Azure.Response</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" FrameworkAlternate="azure-dotnet" />
       </Parameters>
       <Docs>
-        <param name="name"> The name of a job. </param>
+        <param name="content"> The content to send as the body of the request. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
-            [Protocol Method] Delete a de-identification job.
+            [Protocol Method] De-identify text.
             <list type="bullet"><item><description>
             This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyText(Azure.Health.Deidentification.DeidentificationContent,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
             </description></item></list></summary>
         <returns> The response returned from the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is null. </exception>
-        <exception cref="T:System.ArgumentException">
-          <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="content" /> is null. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
-This sample shows how to call DeleteJob.
+This sample shows how to call DeidentifyText and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 DeidentificationClient client = new DeidentificationClient(endpoint, credential);
 
-Response response = client.DeleteJob("<name>");
+using RequestContent content = RequestContent.Create(new
+{
+    inputText = "Hello my name is John Smith.",
+    operation = "Redact",
+    customizations = new
+    {
+        redactionFormat = "[{type}]",
+    },
+});
+Response response = client.DeidentifyText(content);
 
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call DeleteJob with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-DeidentificationClient client = new DeidentificationClient(endpoint, credential);
-
-Response response = client.DeleteJob("<name>");
-
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code></example>
       </Docs>
     </Member>
-    <Member MemberName="DeleteJobAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; DeleteJobAsync (string name, Azure.RequestContext context = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; DeleteJobAsync(string name, class Azure.RequestContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeleteJobAsync(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteJobAsync (name As String, Optional context As RequestContext = Nothing) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member DeleteJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.DeleteJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="deidentificationClient.DeleteJobAsync (name, context)" />
+    <Member MemberName="DeidentifyText">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Health.Deidentification.DeidentificationResult&gt; DeidentifyText (Azure.Health.Deidentification.DeidentificationContent content, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationResult&gt; DeidentifyText(class Azure.Health.Deidentification.DeidentificationContent content, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyText(Azure.Health.Deidentification.DeidentificationContent,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeidentifyText (content As DeidentificationContent, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DeidentificationResult)" />
+      <MemberSignature Language="F#" Value="abstract member DeidentifyText : Azure.Health.Deidentification.DeidentificationContent * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationResult&gt;&#xA;override this.DeidentifyText : Azure.Health.Deidentification.DeidentificationContent * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationResult&gt;" Usage="deidentificationClient.DeidentifyText (content, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response&lt;Azure.Health.Deidentification.DeidentificationResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="Azure.Health.Deidentification.DeidentificationContent" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="content"> Request body for de-identification operation. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> De-identify text. </summary>
+        <returns>To be added.</returns>
+        <remarks> A remote procedure call (RPC) operation. </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
+        <example>
+This sample shows how to call DeidentifyText.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+DeidentificationClient client = new DeidentificationClient(endpoint, credential);
+
+DeidentificationContent content = new DeidentificationContent("Hello my name is John Smith.")
+{
+    OperationType = DeidentificationOperationType.Redact,
+    Customizations = new DeidentificationCustomizationOptions
+    {
+        RedactionFormat = "[{type}]",
+    },
+};
+Response<DeidentificationResult> response = client.DeidentifyText(content);
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DeidentifyTextAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; DeidentifyTextAsync (Azure.Core.RequestContent content, Azure.RequestContext context = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; DeidentifyTextAsync(class Azure.Core.RequestContent content, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyTextAsync(Azure.Core.RequestContent,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeidentifyTextAsync (content As RequestContent, Optional context As RequestContext = Nothing) As Task(Of Response)" />
+      <MemberSignature Language="F#" Value="abstract member DeidentifyTextAsync : Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.DeidentifyTextAsync : Azure.Core.RequestContent * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="deidentificationClient.DeidentifyTextAsync (content, context)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Health.Deidentification</AssemblyName>
@@ -1084,10 +1347,117 @@ Console.WriteLine(response.Status);
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="content" Type="Azure.Core.RequestContent" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" FrameworkAlternate="azure-dotnet" />
       </Parameters>
       <Docs>
+        <param name="content"> The content to send as the body of the request. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] De-identify text.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyTextAsync(Azure.Health.Deidentification.DeidentificationContent,System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+This sample shows how to call DeidentifyTextAsync and parse the result.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+DeidentificationClient client = new DeidentificationClient(endpoint, credential);
+
+using RequestContent content = RequestContent.Create(new
+{
+    inputText = "Hello my name is John Smith.",
+    operation = "Redact",
+    customizations = new
+    {
+        redactionFormat = "[{type}]",
+    },
+});
+Response response = await client.DeidentifyTextAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DeidentifyTextAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationResult&gt;&gt; DeidentifyTextAsync (Azure.Health.Deidentification.DeidentificationContent content, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationResult&gt;&gt; DeidentifyTextAsync(class Azure.Health.Deidentification.DeidentificationContent content, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeidentifyTextAsync(Azure.Health.Deidentification.DeidentificationContent,System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeidentifyTextAsync (content As DeidentificationContent, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DeidentificationResult))" />
+      <MemberSignature Language="F#" Value="abstract member DeidentifyTextAsync : Azure.Health.Deidentification.DeidentificationContent * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationResult&gt;&gt;&#xA;override this.DeidentifyTextAsync : Azure.Health.Deidentification.DeidentificationContent * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationResult&gt;&gt;" Usage="deidentificationClient.DeidentifyTextAsync (content, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationResult&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="content" Type="Azure.Health.Deidentification.DeidentificationContent" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="content"> Request body for de-identification operation. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> De-identify text. </summary>
+        <returns>To be added.</returns>
+        <remarks> A remote procedure call (RPC) operation. </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="content" /> is null. </exception>
+        <example>
+This sample shows how to call DeidentifyTextAsync.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+DeidentificationClient client = new DeidentificationClient(endpoint, credential);
+
+DeidentificationContent content = new DeidentificationContent("Hello my name is John Smith.")
+{
+    OperationType = DeidentificationOperationType.Redact,
+    Customizations = new DeidentificationCustomizationOptions
+    {
+        RedactionFormat = "[{type}]",
+    },
+};
+Response<DeidentificationResult> response = await client.DeidentifyTextAsync(content);
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteJob">
+      <MemberSignature Language="C#" Value="public virtual Azure.Response DeleteJob (string jobName, Azure.RequestContext context = default);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response DeleteJob(string jobName, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeleteJob(System.String,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteJob (jobName As String, Optional context As RequestContext = Nothing) As Response" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member DeleteJob : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.DeleteJob : string * Azure.RequestContext -&gt; Azure.Response" Usage="deidentificationClient.DeleteJob (jobName, context)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response DeleteJob (string name, Azure.RequestContext context = default);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response DeleteJob(string name, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteJob (name As String, Optional context As RequestContext = Nothing) As Response" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member DeleteJob : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.DeleteJob : string * Azure.RequestContext -&gt; Azure.Response" Usage="deidentificationClient.DeleteJob (name, context)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Response</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" />
+      </Parameters>
+      <Docs>
+        <param name="jobName"> The name of a job. </param>
         <param name="name"> The name of a job. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
@@ -1098,39 +1468,85 @@ Console.WriteLine(response.Status);
         <returns> The response returned from the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is null. </exception>
+          <paramref name="jobName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+        <example>
+This sample shows how to call DeleteJob.
+<code><![CDATA[
+Uri endpoint = new Uri("<endpoint>");
+TokenCredential credential = new DefaultAzureCredential();
+DeidentificationClient client = new DeidentificationClient(endpoint, credential);
+
+Response response = client.DeleteJob("job_smith_documents_1");
+
+Console.WriteLine(response.Status);
+]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="DeleteJobAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; DeleteJobAsync (string jobName, Azure.RequestContext context = default);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; DeleteJobAsync(string jobName, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.DeleteJobAsync(System.String,Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteJobAsync (jobName As String, Optional context As RequestContext = Nothing) As Task(Of Response)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member DeleteJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.DeleteJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="deidentificationClient.DeleteJobAsync (jobName, context)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; DeleteJobAsync (string name, Azure.RequestContext context = default);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; DeleteJobAsync(string name, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DeleteJobAsync (name As String, Optional context As RequestContext = Nothing) As Task(Of Response)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member DeleteJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.DeleteJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="deidentificationClient.DeleteJobAsync (name, context)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" />
+      </Parameters>
+      <Docs>
+        <param name="jobName"> The name of a job. </param>
+        <param name="name"> The name of a job. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] Delete a de-identification job.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item></list></summary>
+        <returns> The response returned from the service. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="jobName" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call DeleteJobAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 DeidentificationClient client = new DeidentificationClient(endpoint, credential);
 
-Response response = await client.DeleteJobAsync("<name>");
-
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call DeleteJobAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-DeidentificationClient client = new DeidentificationClient(endpoint, credential);
-
-Response response = await client.DeleteJobAsync("<name>");
+Response response = await client.DeleteJobAsync("job_smith_documents_1");
 
 Console.WriteLine(response.Status);
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetJob">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response GetJob (string name, Azure.RequestContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetJob(string name, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetJob (string jobName, Azure.RequestContext context);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetJob(string jobName, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJob(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJob (name As String, context As RequestContext) As Response" />
-      <MemberSignature Language="F#" Value="abstract member GetJob : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetJob : string * Azure.RequestContext -&gt; Azure.Response" Usage="deidentificationClient.GetJob (name, context)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJob (jobName As String, context As RequestContext) As Response" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member GetJob : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetJob : string * Azure.RequestContext -&gt; Azure.Response" Usage="deidentificationClient.GetJob (jobName, context)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response GetJob (string name, Azure.RequestContext context);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response GetJob(string name, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJob (name As String, context As RequestContext) As Response" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member GetJob : string * Azure.RequestContext -&gt; Azure.Response&#xA;override this.GetJob : string * Azure.RequestContext -&gt; Azure.Response" Usage="deidentificationClient.GetJob (name, context)" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Health.Deidentification</AssemblyName>
@@ -1140,10 +1556,12 @@ Console.WriteLine(response.Status);
         <ReturnType>Azure.Response</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" />
       </Parameters>
       <Docs>
+        <param name="jobName"> The name of a job. </param>
         <param name="name"> The name of a job. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
@@ -1156,18 +1574,18 @@ Console.WriteLine(response.Status);
         <returns> The response returned from the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is null. </exception>
+          <paramref name="jobName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call GetJob and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 DeidentificationClient client = new DeidentificationClient(endpoint, credential);
 
-Response response = client.GetJob("<name>", null);
+Response response = client.GetJob("job_smith_documents_1", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1178,47 +1596,19 @@ Console.WriteLine(result.GetProperty("targetLocation").GetProperty("prefix").ToS
 Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedAt").ToString());
 Console.WriteLine(result.GetProperty("createdAt").ToString());
-]]></code>
-This sample shows how to call GetJob with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-DeidentificationClient client = new DeidentificationClient(endpoint, credential);
-
-Response response = client.GetJob("<name>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("prefix").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("extensions")[0].ToString());
-Console.WriteLine(result.GetProperty("targetLocation").GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("targetLocation").GetProperty("prefix").ToString());
-Console.WriteLine(result.GetProperty("operation").ToString());
-Console.WriteLine(result.GetProperty("dataType").ToString());
-Console.WriteLine(result.GetProperty("redactionFormat").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-Console.WriteLine(result.GetProperty("lastUpdatedAt").ToString());
-Console.WriteLine(result.GetProperty("createdAt").ToString());
-Console.WriteLine(result.GetProperty("startedAt").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("successful").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("canceled").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").ToString());
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetJob">
-      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt; GetJob (string name, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt; GetJob(string name, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt; GetJob (string jobName, System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt; GetJob(string jobName, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJob(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJob (name As String, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DeidentificationJob)" />
-      <MemberSignature Language="F#" Value="abstract member GetJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&#xA;override this.GetJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;" Usage="deidentificationClient.GetJob (name, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJob (jobName As String, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DeidentificationJob)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member GetJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&#xA;override this.GetJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;" Usage="deidentificationClient.GetJob (jobName, cancellationToken)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public virtual Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt; GetJob (string name, System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt; GetJob(string name, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJob (name As String, Optional cancellationToken As CancellationToken = Nothing) As Response(Of DeidentificationJob)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member GetJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&#xA;override this.GetJob : string * System.Threading.CancellationToken -&gt; Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;" Usage="deidentificationClient.GetJob (name, cancellationToken)" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Health.Deidentification</AssemblyName>
@@ -1228,44 +1618,42 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").To
         <ReturnType>Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" />
       </Parameters>
       <Docs>
+        <param name="jobName"> The name of a job. </param>
         <param name="name"> The name of a job. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Get a de-identification job. </summary>
         <returns>To be added.</returns>
         <remarks> Resource read operation template. </remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is null. </exception>
+          <paramref name="jobName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
         <example>
 This sample shows how to call GetJob.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 DeidentificationClient client = new DeidentificationClient(endpoint, credential);
 
-Response<DeidentificationJob> response = client.GetJob("<name>");
-]]></code>
-This sample shows how to call GetJob with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-DeidentificationClient client = new DeidentificationClient(endpoint, credential);
-
-Response<DeidentificationJob> response = client.GetJob("<name>");
+Response<DeidentificationJob> response = client.GetJob("job_smith_documents_1");
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetJobAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetJobAsync (string name, Azure.RequestContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetJobAsync(string name, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetJobAsync (string jobName, Azure.RequestContext context);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetJobAsync(string jobName, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobAsync(System.String,Azure.RequestContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobAsync (name As String, context As RequestContext) As Task(Of Response)" />
-      <MemberSignature Language="F#" Value="abstract member GetJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="deidentificationClient.GetJobAsync (name, context)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobAsync (jobName As String, context As RequestContext) As Task(Of Response)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member GetJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="deidentificationClient.GetJobAsync (jobName, context)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&gt; GetJobAsync (string name, Azure.RequestContext context);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response&gt; GetJobAsync(string name, class Azure.RequestContext context) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobAsync (name As String, context As RequestContext) As Task(Of Response)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member GetJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;&#xA;override this.GetJobAsync : string * Azure.RequestContext -&gt; System.Threading.Tasks.Task&lt;Azure.Response&gt;" Usage="deidentificationClient.GetJobAsync (name, context)" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Health.Deidentification</AssemblyName>
@@ -1275,10 +1663,12 @@ Response<DeidentificationJob> response = client.GetJob("<name>");
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" />
       </Parameters>
       <Docs>
+        <param name="jobName"> The name of a job. </param>
         <param name="name"> The name of a job. </param>
         <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         <summary>
@@ -1291,18 +1681,18 @@ Response<DeidentificationJob> response = client.GetJob("<name>");
         <returns> The response returned from the service. </returns>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is null. </exception>
+          <paramref name="jobName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
         <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
         <example>
 This sample shows how to call GetJobAsync and parse the result.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 DeidentificationClient client = new DeidentificationClient(endpoint, credential);
 
-Response response = await client.GetJobAsync("<name>", null);
+Response response = await client.GetJobAsync("job_smith_documents_1", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1313,47 +1703,19 @@ Console.WriteLine(result.GetProperty("targetLocation").GetProperty("prefix").ToS
 Console.WriteLine(result.GetProperty("status").ToString());
 Console.WriteLine(result.GetProperty("lastUpdatedAt").ToString());
 Console.WriteLine(result.GetProperty("createdAt").ToString());
-]]></code>
-This sample shows how to call GetJobAsync with all parameters and parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-DeidentificationClient client = new DeidentificationClient(endpoint, credential);
-
-Response response = await client.GetJobAsync("<name>", null);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("prefix").ToString());
-Console.WriteLine(result.GetProperty("sourceLocation").GetProperty("extensions")[0].ToString());
-Console.WriteLine(result.GetProperty("targetLocation").GetProperty("location").ToString());
-Console.WriteLine(result.GetProperty("targetLocation").GetProperty("prefix").ToString());
-Console.WriteLine(result.GetProperty("operation").ToString());
-Console.WriteLine(result.GetProperty("dataType").ToString());
-Console.WriteLine(result.GetProperty("redactionFormat").ToString());
-Console.WriteLine(result.GetProperty("status").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
-Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
-Console.WriteLine(result.GetProperty("lastUpdatedAt").ToString());
-Console.WriteLine(result.GetProperty("createdAt").ToString());
-Console.WriteLine(result.GetProperty("startedAt").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("successful").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("failed").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("canceled").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("total").ToString());
-Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").ToString());
 ]]></code></example>
       </Docs>
     </Member>
     <Member MemberName="GetJobAsync">
-      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt; GetJobAsync (string name, System.Threading.CancellationToken cancellationToken = default);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt;&gt; GetJobAsync(string name, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt; GetJobAsync (string jobName, System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt;&gt; GetJobAsync(string jobName, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobAsync(System.String,System.Threading.CancellationToken)" />
-      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobAsync (name As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DeidentificationJob))" />
-      <MemberSignature Language="F#" Value="abstract member GetJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;&#xA;override this.GetJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;" Usage="deidentificationClient.GetJobAsync (name, cancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobAsync (jobName As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DeidentificationJob))" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member GetJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;&#xA;override this.GetJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;" Usage="deidentificationClient.GetJobAsync (jobName, cancellationToken)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt; GetJobAsync (string name, System.Threading.CancellationToken cancellationToken = default);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Azure.Response`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt;&gt; GetJobAsync(string name, valuetype System.Threading.CancellationToken cancellationToken) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobAsync (name As String, Optional cancellationToken As CancellationToken = Nothing) As Task(Of Response(Of DeidentificationJob))" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member GetJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;&#xA;override this.GetJobAsync : string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;" Usage="deidentificationClient.GetJobAsync (name, cancellationToken)" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Azure.Health.Deidentification</AssemblyName>
@@ -1363,36 +1725,101 @@ Console.WriteLine(result.GetProperty("summary").GetProperty("bytesProcessed").To
         <ReturnType>System.Threading.Tasks.Task&lt;Azure.Response&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" />
       </Parameters>
       <Docs>
+        <param name="jobName"> The name of a job. </param>
         <param name="name"> The name of a job. </param>
         <param name="cancellationToken"> The cancellation token to use. </param>
         <summary> Get a de-identification job. </summary>
         <returns>To be added.</returns>
         <remarks> Resource read operation template. </remarks>
         <exception cref="T:System.ArgumentNullException">
-          <paramref name="name" /> is null. </exception>
+          <paramref name="jobName" /> is null. </exception>
         <exception cref="T:System.ArgumentException">
-          <paramref name="name" /> is an empty string, and was expected to be non-empty. </exception>
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
         <example>
 This sample shows how to call GetJobAsync.
 <code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
+Uri endpoint = new Uri("<endpoint>");
 TokenCredential credential = new DefaultAzureCredential();
 DeidentificationClient client = new DeidentificationClient(endpoint, credential);
 
-Response<DeidentificationJob> response = await client.GetJobAsync("<name>");
-]]></code>
-This sample shows how to call GetJobAsync with all parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-TokenCredential credential = new DefaultAzureCredential();
-DeidentificationClient client = new DeidentificationClient(endpoint, credential);
-
-Response<DeidentificationJob> response = await client.GetJobAsync("<name>");
+Response<DeidentificationJob> response = await client.GetJobAsync("job_smith_documents_1");
 ]]></code></example>
+      </Docs>
+    </Member>
+    <Member MemberName="GetJobDocuments">
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetJobDocuments (string jobName, int? maxpagesize, Azure.RequestContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetJobDocuments(string jobName, valuetype System.Nullable`1&lt;int32&gt; maxpagesize, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobDocuments(System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobDocuments (jobName As String, maxpagesize As Nullable(Of Integer), context As RequestContext) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="F#" Value="abstract member GetJobDocuments : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetJobDocuments : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="deidentificationClient.GetJobDocuments (jobName, maxpagesize, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Pageable&lt;System.BinaryData&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="2" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="jobName"> The name of a job. </param>
+        <param name="maxpagesize"> The maximum number of result items per page. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] List processed documents within a job.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.Health.Deidentification.DeidentificationClient.GetJobDocuments(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="jobName" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetJobDocuments">
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;Azure.Health.Deidentification.DeidentificationDocumentDetails&gt; GetJobDocuments (string jobName, int? maxpagesize = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class Azure.Health.Deidentification.DeidentificationDocumentDetails&gt; GetJobDocuments(string jobName, valuetype System.Nullable`1&lt;int32&gt; maxpagesize, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobDocuments(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobDocuments (jobName As String, Optional maxpagesize As Nullable(Of Integer) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Pageable(Of DeidentificationDocumentDetails)" />
+      <MemberSignature Language="F#" Value="abstract member GetJobDocuments : string * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.Health.Deidentification.DeidentificationDocumentDetails&gt;&#xA;override this.GetJobDocuments : string * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.Health.Deidentification.DeidentificationDocumentDetails&gt;" Usage="deidentificationClient.GetJobDocuments (jobName, maxpagesize, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Pageable&lt;Azure.Health.Deidentification.DeidentificationDocumentDetails&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="2" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="jobName"> The name of a job. </param>
+        <param name="maxpagesize"> The maximum number of result items per page. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> List processed documents within a job. </summary>
+        <returns>To be added.</returns>
+        <remarks> The most basic operation. </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="jobName" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
       </Docs>
     </Member>
     <Member MemberName="GetJobDocuments">
@@ -1410,10 +1837,10 @@ Response<DeidentificationJob> response = await client.GetJobAsync("<name>");
         <ReturnType>Azure.Pageable&lt;System.BinaryData&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="continuationToken" Type="System.String" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="continuationToken" Type="System.String" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="3" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="name"> The name of a job. </param>
@@ -1488,10 +1915,10 @@ foreach (BinaryData item in client.GetJobDocuments("<name>", 1234, "<continuatio
         <ReturnType>Azure.Pageable&lt;Azure.Health.Deidentification.DocumentDetails&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="continuationToken" Type="System.String" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="continuationToken" Type="System.String" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="name"> The name of a job. </param>
@@ -1529,6 +1956,77 @@ foreach (DocumentDetails item in client.GetJobDocuments("<name>", maxpagesize: 1
       </Docs>
     </Member>
     <Member MemberName="GetJobDocumentsAsync">
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetJobDocumentsAsync (string jobName, int? maxpagesize, Azure.RequestContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetJobDocumentsAsync(string jobName, valuetype System.Nullable`1&lt;int32&gt; maxpagesize, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobDocumentsAsync(System.String,System.Nullable{System.Int32},Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobDocumentsAsync (jobName As String, maxpagesize As Nullable(Of Integer), context As RequestContext) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="F#" Value="abstract member GetJobDocumentsAsync : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetJobDocumentsAsync : string * Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="deidentificationClient.GetJobDocumentsAsync (jobName, maxpagesize, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.AsyncPageable&lt;System.BinaryData&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="2" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="jobName"> The name of a job. </param>
+        <param name="maxpagesize"> The maximum number of result items per page. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] List processed documents within a job.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.Health.Deidentification.DeidentificationClient.GetJobDocumentsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="jobName" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetJobDocumentsAsync">
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;Azure.Health.Deidentification.DeidentificationDocumentDetails&gt; GetJobDocumentsAsync (string jobName, int? maxpagesize = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class Azure.Health.Deidentification.DeidentificationDocumentDetails&gt; GetJobDocumentsAsync(string jobName, valuetype System.Nullable`1&lt;int32&gt; maxpagesize, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobDocumentsAsync(System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobDocumentsAsync (jobName As String, Optional maxpagesize As Nullable(Of Integer) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As AsyncPageable(Of DeidentificationDocumentDetails)" />
+      <MemberSignature Language="F#" Value="abstract member GetJobDocumentsAsync : string * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.Health.Deidentification.DeidentificationDocumentDetails&gt;&#xA;override this.GetJobDocumentsAsync : string * Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.Health.Deidentification.DeidentificationDocumentDetails&gt;" Usage="deidentificationClient.GetJobDocumentsAsync (jobName, maxpagesize, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.AsyncPageable&lt;Azure.Health.Deidentification.DeidentificationDocumentDetails&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="jobName" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="2" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="jobName"> The name of a job. </param>
+        <param name="maxpagesize"> The maximum number of result items per page. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> List processed documents within a job. </summary>
+        <returns>To be added.</returns>
+        <remarks> The most basic operation. </remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="jobName" /> is null. </exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="jobName" /> is an empty string, and was expected to be non-empty. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetJobDocumentsAsync">
       <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetJobDocumentsAsync (string name, int? maxpagesize, string continuationToken, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetJobDocumentsAsync(string name, valuetype System.Nullable`1&lt;int32&gt; maxpagesize, string continuationToken, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobDocumentsAsync(System.String,System.Nullable{System.Int32},System.String,Azure.RequestContext)" />
@@ -1543,10 +2041,10 @@ foreach (DocumentDetails item in client.GetJobDocuments("<name>", maxpagesize: 1
         <ReturnType>Azure.AsyncPageable&lt;System.BinaryData&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="continuationToken" Type="System.String" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="continuationToken" Type="System.String" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="3" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="name"> The name of a job. </param>
@@ -1621,10 +2119,10 @@ await foreach (BinaryData item in client.GetJobDocumentsAsync("<name>", 1234, "<
         <ReturnType>Azure.AsyncPageable&lt;Azure.Health.Deidentification.DocumentDetails&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="name" Type="System.String" />
-        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="continuationToken" Type="System.String" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="name" Type="System.String" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="continuationToken" Type="System.String" Index="2" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="3" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="name"> The name of a job. </param>
@@ -1662,6 +2160,65 @@ await foreach (DocumentDetails item in client.GetJobDocumentsAsync("<name>", max
       </Docs>
     </Member>
     <Member MemberName="GetJobs">
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetJobs (int? maxpagesize, Azure.RequestContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetJobs(valuetype System.Nullable`1&lt;int32&gt; maxpagesize, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobs(System.Nullable{System.Int32},Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobs (maxpagesize As Nullable(Of Integer), context As RequestContext) As Pageable(Of BinaryData)" />
+      <MemberSignature Language="F#" Value="abstract member GetJobs : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;&#xA;override this.GetJobs : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.Pageable&lt;BinaryData&gt;" Usage="deidentificationClient.GetJobs (maxpagesize, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Pageable&lt;System.BinaryData&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="maxpagesize"> The maximum number of result items per page. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] List de-identification jobs.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.Health.Deidentification.DeidentificationClient.GetJobs(System.Nullable{System.Int32},System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The <see cref="T:Azure.Pageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetJobs">
+      <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;Azure.Health.Deidentification.DeidentificationJob&gt; GetJobs (int? maxpagesize = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt; GetJobs(valuetype System.Nullable`1&lt;int32&gt; maxpagesize, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobs(System.Nullable{System.Int32},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobs (Optional maxpagesize As Nullable(Of Integer) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As Pageable(Of DeidentificationJob)" />
+      <MemberSignature Language="F#" Value="abstract member GetJobs : Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&#xA;override this.GetJobs : Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.Pageable&lt;Azure.Health.Deidentification.DeidentificationJob&gt;" Usage="deidentificationClient.GetJobs (maxpagesize, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.Pageable&lt;Azure.Health.Deidentification.DeidentificationJob&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="maxpagesize"> The maximum number of result items per page. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> List de-identification jobs. </summary>
+        <returns>To be added.</returns>
+        <remarks> Resource list operation template. </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetJobs">
       <MemberSignature Language="C#" Value="public virtual Azure.Pageable&lt;BinaryData&gt; GetJobs (int? maxpagesize, string continuationToken, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.Pageable`1&lt;class System.BinaryData&gt; GetJobs(valuetype System.Nullable`1&lt;int32&gt; maxpagesize, string continuationToken, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobs(System.Nullable{System.Int32},System.String,Azure.RequestContext)" />
@@ -1676,9 +2233,9 @@ await foreach (DocumentDetails item in client.GetJobDocumentsAsync("<name>", max
         <ReturnType>Azure.Pageable&lt;System.BinaryData&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="continuationToken" Type="System.String" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="continuationToken" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="2" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="maxpagesize"> The maximum number of result items per page. </param>
@@ -1764,9 +2321,9 @@ foreach (BinaryData item in client.GetJobs(1234, "<continuationToken>", null))
         <ReturnType>Azure.Pageable&lt;Azure.Health.Deidentification.DeidentificationJob&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="continuationToken" Type="System.String" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="continuationToken" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="2" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="maxpagesize"> The maximum number of result items per page. </param>
@@ -1799,6 +2356,65 @@ foreach (DeidentificationJob item in client.GetJobs(maxpagesize: 1234, continuat
       </Docs>
     </Member>
     <Member MemberName="GetJobsAsync">
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetJobsAsync (int? maxpagesize, Azure.RequestContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetJobsAsync(valuetype System.Nullable`1&lt;int32&gt; maxpagesize, class Azure.RequestContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobsAsync(System.Nullable{System.Int32},Azure.RequestContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobsAsync (maxpagesize As Nullable(Of Integer), context As RequestContext) As AsyncPageable(Of BinaryData)" />
+      <MemberSignature Language="F#" Value="abstract member GetJobsAsync : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;&#xA;override this.GetJobsAsync : Nullable&lt;int&gt; * Azure.RequestContext -&gt; Azure.AsyncPageable&lt;BinaryData&gt;" Usage="deidentificationClient.GetJobsAsync (maxpagesize, context)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.AsyncPageable&lt;System.BinaryData&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="1" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="maxpagesize"> The maximum number of result items per page. </param>
+        <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        <summary>
+            [Protocol Method] List de-identification jobs.
+            <list type="bullet"><item><description>
+            This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+            </description></item><item><description>
+            Please try the simpler <see cref="M:Azure.Health.Deidentification.DeidentificationClient.GetJobsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)" /> convenience overload with strongly typed models first.
+            </description></item></list></summary>
+        <returns> The <see cref="T:Azure.AsyncPageable`1" /> from the service containing a list of <see cref="T:System.BinaryData" /> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:Azure.RequestFailedException"> Service returned a non-success status code. </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetJobsAsync">
+      <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;Azure.Health.Deidentification.DeidentificationJob&gt; GetJobsAsync (int? maxpagesize = default, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class Azure.Health.Deidentification.DeidentificationJob&gt; GetJobsAsync(valuetype System.Nullable`1&lt;int32&gt; maxpagesize, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobsAsync(System.Nullable{System.Int32},System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetJobsAsync (Optional maxpagesize As Nullable(Of Integer) = Nothing, Optional cancellationToken As CancellationToken = Nothing) As AsyncPageable(Of DeidentificationJob)" />
+      <MemberSignature Language="F#" Value="abstract member GetJobsAsync : Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.Health.Deidentification.DeidentificationJob&gt;&#xA;override this.GetJobsAsync : Nullable&lt;int&gt; * System.Threading.CancellationToken -&gt; Azure.AsyncPageable&lt;Azure.Health.Deidentification.DeidentificationJob&gt;" Usage="deidentificationClient.GetJobsAsync (maxpagesize, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Azure.Health.Deidentification</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Azure.AsyncPageable&lt;Azure.Health.Deidentification.DeidentificationJob&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="1" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="maxpagesize"> The maximum number of result items per page. </param>
+        <param name="cancellationToken"> The cancellation token to use. </param>
+        <summary> List de-identification jobs. </summary>
+        <returns>To be added.</returns>
+        <remarks> Resource list operation template. </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetJobsAsync">
       <MemberSignature Language="C#" Value="public virtual Azure.AsyncPageable&lt;BinaryData&gt; GetJobsAsync (int? maxpagesize, string continuationToken, Azure.RequestContext context);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Azure.AsyncPageable`1&lt;class System.BinaryData&gt; GetJobsAsync(valuetype System.Nullable`1&lt;int32&gt; maxpagesize, string continuationToken, class Azure.RequestContext context) cil managed" />
       <MemberSignature Language="DocId" Value="M:Azure.Health.Deidentification.DeidentificationClient.GetJobsAsync(System.Nullable{System.Int32},System.String,Azure.RequestContext)" />
@@ -1813,9 +2429,9 @@ foreach (DeidentificationJob item in client.GetJobs(maxpagesize: 1234, continuat
         <ReturnType>Azure.AsyncPageable&lt;System.BinaryData&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="continuationToken" Type="System.String" />
-        <Parameter Name="context" Type="Azure.RequestContext" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="continuationToken" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="context" Type="Azure.RequestContext" Index="2" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="maxpagesize"> The maximum number of result items per page. </param>
@@ -1901,9 +2517,9 @@ await foreach (BinaryData item in client.GetJobsAsync(1234, "<continuationToken>
         <ReturnType>Azure.AsyncPageable&lt;Azure.Health.Deidentification.DeidentificationJob&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" />
-        <Parameter Name="continuationToken" Type="System.String" />
-        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+        <Parameter Name="maxpagesize" Type="System.Nullable&lt;System.Int32&gt;" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="continuationToken" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="2" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="maxpagesize"> The maximum number of result items per page. </param>
