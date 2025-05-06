@@ -14,9 +14,17 @@
   <Interfaces />
   <Docs>
     <summary>
-            Provides an interface to create objects without needing reflection.
-            </summary>
-    <remarks>To be added.</remarks>
+             Provides an interface to create objects without needing reflection.
+             </summary>
+    <remarks>
+             In most cases the implementation will be created automatically by the source generator.  In some advanced scenarios
+             the implementation may be created manually by the user see https://aka.ms/no-modelreaderwritertypebuilder-found for more details.
+            
+             This class has no state and therefore the same instance can be used in multiple calls to <see cref="T:System.ClientModel.Primitives.ModelReaderWriter" />.
+             <see cref="T:System.ClientModel.Primitives.ModelReaderWriterContext" /> will cache the <see cref="T:System.ClientModel.Primitives.ModelReaderWriterTypeBuilder" /> instances for each type.
+             The state for collection building is maintained internally by <see cref="T:System.ClientModel.Primitives.ModelReaderWriter" /> and is not needed to be maintained by the implementation.
+             The instance of the collection builder will be passed into each method that needs to modify that state such as <see cref="M:System.ClientModel.Primitives.ModelReaderWriterTypeBuilder.AddItem(System.Object,System.Object)" /> and <see cref="M:System.ClientModel.Primitives.ModelReaderWriterTypeBuilder.AddItemWithKey(System.Object,System.String,System.Object)" />.
+             </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -36,11 +44,15 @@
       </Docs>
     </Member>
     <Member MemberName="AddItem">
-      <MemberSignature Language="C#" Value="protected virtual void AddItem (object collection, object? item);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void AddItem(object collection, object item) cil managed" />
+      <MemberSignature Language="C#" Value="protected virtual void AddItem (object collectionBuilder, object? item);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void AddItem(object collectionBuilder, object item) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:System.ClientModel.Primitives.ModelReaderWriterTypeBuilder.AddItem(System.Object,System.Object)" />
-      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub AddItem (collection As Object, item As Object)" />
-      <MemberSignature Language="F#" Value="abstract member AddItem : obj * obj -&gt; unit&#xA;override this.AddItem : obj * obj -&gt; unit" Usage="modelReaderWriterTypeBuilder.AddItem (collection, item)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub AddItem (collectionBuilder As Object, item As Object)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member AddItem : obj * obj -&gt; unit&#xA;override this.AddItem : obj * obj -&gt; unit" Usage="modelReaderWriterTypeBuilder.AddItem (collectionBuilder, item)" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="protected virtual void AddItem (object collection, object? item);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void AddItem(object collection, object item) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub AddItem (collection As Object, item As Object)" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member AddItem : obj * obj -&gt; unit&#xA;override this.AddItem : obj * obj -&gt; unit" Usage="modelReaderWriterTypeBuilder.AddItem (collection, item)" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.ClientModel</AssemblyName>
@@ -50,16 +62,53 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="collection" Type="System.Object" />
-        <Parameter Name="item" Type="System.Object" />
+        <Parameter Name="collectionBuilder" Type="System.Object" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="collection" Type="System.Object" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="item" Type="System.Object" Index="1" />
       </Parameters>
       <Docs>
+        <param name="collectionBuilder">Represents the collection builder to which the item will be added.</param>
         <param name="collection">Represents the collection to which the item will be added.</param>
-        <param name="item">Represents the item that will be added to the collection.</param>
+        <param name="item">Represents the item that will be added to the collection builder.</param>
         <summary>
-            Adds an item to a specified collection.
+            Adds an item to the passed in collection builder.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The collection builder instance that is being passed in is the instance returned from <see cref="M:System.ClientModel.Primitives.ModelReaderWriterTypeBuilder.CreateInstance" />.
+            The state of the collection builder is maintained internally by <see cref="T:System.ClientModel.Primitives.ModelReaderWriter" /> and is not needed to be maintained by the implementation.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="AddItemWithKey">
+      <MemberSignature Language="C#" Value="protected virtual void AddItemWithKey (object collectionBuilder, string key, object? item);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void AddItemWithKey(object collectionBuilder, string key, object item) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.ClientModel.Primitives.ModelReaderWriterTypeBuilder.AddItemWithKey(System.Object,System.String,System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub AddItemWithKey (collectionBuilder As Object, key As String, item As Object)" />
+      <MemberSignature Language="F#" Value="abstract member AddItemWithKey : obj * string * obj -&gt; unit&#xA;override this.AddItemWithKey : obj * string * obj -&gt; unit" Usage="modelReaderWriterTypeBuilder.AddItemWithKey (collectionBuilder, key, item)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.ClientModel</AssemblyName>
+        <AssemblyVersion>1.4.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="collectionBuilder" Type="System.Object" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="key" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="item" Type="System.Object" Index="2" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="collectionBuilder">Represents the collection builder to which the item will be added.</param>
+        <param name="key">Represents the key under which the item will be added.</param>
+        <param name="item">Represents the item that will be added to the collection builder.</param>
+        <summary>
+            Adds an item to the passed in collection builder under the specified key.
+            </summary>
+        <remarks>
+            The collection builder instance that is being passed in is the instance returned from <see cref="M:System.ClientModel.Primitives.ModelReaderWriterTypeBuilder.CreateInstance" />.
+            The state of the collection builder is maintained internally by <see cref="T:System.ClientModel.Primitives.ModelReaderWriter" /> and is not needed to be maintained by the implementation.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="AddKeyValuePair">
@@ -77,9 +126,9 @@
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="collection" Type="System.Object" />
-        <Parameter Name="key" Type="System.String" />
-        <Parameter Name="item" Type="System.Object" />
+        <Parameter Name="collection" Type="System.Object" Index="0" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="key" Type="System.String" Index="1" FrameworkAlternate="azure-dotnet-preview" />
+        <Parameter Name="item" Type="System.Object" Index="2" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="collection">Represents the collection to which the item will be added.</param>
@@ -110,7 +159,40 @@
             Gets the type this builder creates.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For collections like an array which you cannot dynamically add to
+            this should be the type of collection that will be used to build the array such as <see cref="T:System.Collections.Generic.List`1" />.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConvertCollectionBuilder">
+      <MemberSignature Language="C#" Value="protected virtual object ConvertCollectionBuilder (object collectionBuilder);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance object ConvertCollectionBuilder(object collectionBuilder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.ClientModel.Primitives.ModelReaderWriterTypeBuilder.ConvertCollectionBuilder(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Function ConvertCollectionBuilder (collectionBuilder As Object) As Object" />
+      <MemberSignature Language="F#" Value="abstract member ConvertCollectionBuilder : obj -&gt; obj&#xA;override this.ConvertCollectionBuilder : obj -&gt; obj" Usage="modelReaderWriterTypeBuilder.ConvertCollectionBuilder collectionBuilder" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>System.ClientModel</AssemblyName>
+        <AssemblyVersion>1.4.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="collectionBuilder" Type="System.Object" Index="0" FrameworkAlternate="azure-dotnet" />
+      </Parameters>
+      <Docs>
+        <param name="collectionBuilder">The builder collection that is being transformed.</param>
+        <summary>
+            Converts the passed in builder collection into the requested collection type.
+            </summary>
+        <returns>The requested collection format.</returns>
+        <remarks>
+            In the case like an array which you cannot dynamically add to <see cref="M:System.ClientModel.Primitives.ModelReaderWriterTypeBuilder.CreateInstance" /> would have returned an instance of
+            <see cref="T:System.Collections.Generic.List`1" /> which matches the <see cref="P:System.ClientModel.Primitives.ModelReaderWriterTypeBuilder.BuilderType" />.  This method would then convert the <see cref="T:System.Collections.Generic.List`1" />
+            into an array by calling <see cref="M:System.Collections.Generic.List`1.ToArray" />.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateInstance">
@@ -137,11 +219,15 @@
       </Docs>
     </Member>
     <Member MemberName="GetItems">
-      <MemberSignature Language="C#" Value="protected virtual System.Collections.IEnumerable? GetItems (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Collections.IEnumerable GetItems(object obj) cil managed" />
+      <MemberSignature Language="C#" Value="protected virtual System.Collections.IEnumerable? GetItems (object collection);" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Collections.IEnumerable GetItems(object collection) cil managed" FrameworkAlternate="azure-dotnet" />
       <MemberSignature Language="DocId" Value="M:System.ClientModel.Primitives.ModelReaderWriterTypeBuilder.GetItems(System.Object)" />
-      <MemberSignature Language="VB.NET" Value="Protected Overridable Function GetItems (obj As Object) As IEnumerable" />
-      <MemberSignature Language="F#" Value="abstract member GetItems : obj -&gt; System.Collections.IEnumerable&#xA;override this.GetItems : obj -&gt; System.Collections.IEnumerable" Usage="modelReaderWriterTypeBuilder.GetItems obj" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Function GetItems (collection As Object) As IEnumerable" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="F#" Value="abstract member GetItems : obj -&gt; System.Collections.IEnumerable&#xA;override this.GetItems : obj -&gt; System.Collections.IEnumerable" Usage="modelReaderWriterTypeBuilder.GetItems collection" FrameworkAlternate="azure-dotnet" />
+      <MemberSignature Language="C#" Value="protected virtual System.Collections.IEnumerable? GetItems (object obj);" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Collections.IEnumerable GetItems(object obj) cil managed" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Function GetItems (obj As Object) As IEnumerable" FrameworkAlternate="azure-dotnet-preview" />
+      <MemberSignature Language="F#" Value="abstract member GetItems : obj -&gt; System.Collections.IEnumerable&#xA;override this.GetItems : obj -&gt; System.Collections.IEnumerable" Usage="modelReaderWriterTypeBuilder.GetItems obj" FrameworkAlternate="azure-dotnet-preview" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>System.ClientModel</AssemblyName>
@@ -151,15 +237,20 @@
         <ReturnType>System.Collections.IEnumerable</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="obj" Type="System.Object" />
+        <Parameter Name="collection" Type="System.Object" Index="0" FrameworkAlternate="azure-dotnet" />
+        <Parameter Name="obj" Type="System.Object" Index="0" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
+        <param name="collection">To be added.</param>
         <param name="obj">To be added.</param>
         <summary>
-            Gets an <see cref="T:System.Collections.IEnumerable" /> representation of the object.
+            Gets an <see cref="T:System.Collections.IEnumerable" /> representation of the passed in collection.
             </summary>
         <returns>An <see cref="T:System.Collections.IEnumerable" /> representation if its a collection otherwise null.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            This is only needed when the collection passed into <see cref="M:System.ClientModel.Primitives.ModelReaderWriter.Write(System.Object,System.ClientModel.Primitives.ModelReaderWriterOptions,System.ClientModel.Primitives.ModelReaderWriterContext)" />
+            does not implement <see cref="T:System.Collections.IEnumerable" />. In this case you must implement this method to return an <see cref="T:System.Collections.IEnumerable" />.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ItemType">
@@ -199,7 +290,7 @@
         <ReturnType>System.Object</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="builder" Type="System.Object" />
+        <Parameter Name="builder" Type="System.Object" Index="0" FrameworkAlternate="azure-dotnet-preview" />
       </Parameters>
       <Docs>
         <param name="builder">The builder collection that is being transformed.</param>
