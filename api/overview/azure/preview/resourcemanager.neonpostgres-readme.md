@@ -1,18 +1,14 @@
 ---
 title: 
 keywords: Azure, dotnet, SDK, API, Azure.ResourceManager.NeonPostgres, neonpostgres
-ms.date: 11/18/2024
+ms.date: 05/09/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: neonpostgres
 ---
-# Microsoft Azure NeonPostgres management client library for .NET
+# Microsoft Azure liftrneon management client library for .NET
 
-Neon is a modern Postgres database service that takes the world’s most-loved database and delivers it as a serverless platform designed to optimize both performance and cost. It eliminates the need for manual server resizing by offering compute and storage autoscaling, including scale-to-zero for inactive databases to save costs. Additionally, Neon supports database branching, enabling iterative CI/CD workflows and instant point-in-time recovery.
-
-Efficient autoscaling for Postgres. Neon’s autoscaling adjusts resources dynamically based on actual usage, boosting performance during traffic spikes.
-Faster developer workflows. Via database branching, developers can instantly create database copies for testing, feature development, and schema migrations.
-Perfect for AI apps and agents. With pgvector for vector embeddings, serverless speed for agentic infrastructure, and optimal price performance due to scale-to-zero.
+**[Describe the service briefly first.]**
 
 This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
 
@@ -22,11 +18,11 @@ This library follows the [new Azure SDK guidelines](https://azure.github.io/azur
     - Better error-handling.
     - Support uniform telemetry across all languages.
 
-## Getting started
+## Getting started 
 
 ### Install the package
 
-Install the Microsoft Azure NeonPostgres management library for .NET with [NuGet](https://www.nuget.org/):
+Install the Microsoft Azure liftrneon management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
 dotnet add package Azure.ResourceManager.NeonPostgres --prerelease
@@ -38,7 +34,7 @@ dotnet add package Azure.ResourceManager.NeonPostgres --prerelease
 
 ### Authenticate the Client
 
-To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.NeonPostgres_1.0.0-beta.1/doc/dev/mgmt_quickstart.md).
+To create an authenticated client and start interacting with Microsoft Azure resources, see the [quickstart guide here](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.NeonPostgres_1.0.0-beta.2/doc/dev/mgmt_quickstart.md).
 
 ## Key concepts
 
@@ -48,9 +44,9 @@ Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azu
 
 Documentation is available to help you learn how to use this package:
 
-- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.NeonPostgres_1.0.0-beta.1/doc/dev/mgmt_quickstart.md).
+- [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.NeonPostgres_1.0.0-beta.2/doc/dev/mgmt_quickstart.md).
 - [API References](/dotnet/api/?view=azure-dotnet).
-- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.NeonPostgres_1.0.0-beta.1/sdk/identity/Azure.Identity/README.md).
+- [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.NeonPostgres_1.0.0-beta.2/sdk/identity/Azure.Identity/README.md).
 
 ## Examples
 
@@ -87,7 +83,6 @@ more information, see the [Code of Conduct FAQ][coc_faq] or contact
 <opencode@microsoft.com> with any other questions or comments.
 
 <!-- LINKS -->
-[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.NeonPostgres_1.0.0-beta.1/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
+[cg]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.ResourceManager.NeonPostgres_1.0.0-beta.2/sdk/resourcemanager/Azure.ResourceManager/docs/CONTRIBUTING.md
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
-
