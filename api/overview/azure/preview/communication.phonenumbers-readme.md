@@ -1,12 +1,12 @@
 ---
 title: Azure Communication Phone Numbers client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.Communication.PhoneNumbers, communication
-ms.date: 03/15/2024
+ms.date: 05/09/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: communication
 ---
-# Azure Communication Phone Numbers client library for .NET - version 1.3.0-beta.5 
+# Azure Communication Phone Numbers client library for .NET - version 1.4.0-alpha.20250509.1 
 
 
 Azure Communication Phone Numbers is managing phone numbers for Azure Communication Services.
@@ -104,11 +104,11 @@ We guarantee that all client instance methods are thread-safe and independent of
 
 ### Additional concepts
 <!-- CLIENT COMMON BAR -->
-[Client options](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.3.0-beta.5/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
-[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.3.0-beta.5/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
-[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.3.0-beta.5/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
-[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.3.0-beta.5/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
-[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.3.0-beta.5/sdk/core/Azure.Core/samples/Diagnostics.md) |
+[Client options](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#configuring-service-clients-using-clientoptions) |
+[Accessing the response](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#accessing-http-response-details-using-responset) |
+[Long-running operations](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#consuming-long-running-operations-using-operationt) |
+[Handling failures](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/README.md#reporting-errors-requestfailedexception) |
+[Diagnostics](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md) |
 [Mocking](https://learn.microsoft.com/dotnet/azure/sdk/unit-testing-mocking) |
 [Client lifetime](https://devblogs.microsoft.com/azure-sdk/lifetime-management-and-thread-safety-guarantees-of-azure-sdk-net-clients/)
 <!-- CLIENT COMMON BAR -->
@@ -243,20 +243,20 @@ This project has adopted the [Microsoft Open Source Code of Conduct][coc]. For m
 
 [azure_sub]: https://azure.microsoft.com/free/dotnet/
 [azure_portal]: https://portal.azure.com
-[azure_identity]: /dotnet/api/azure.identity?view=azure-dotnet
-[source]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.Communication.PhoneNumbers_1.3.0-beta.5/sdk/communication/Azure.Communication.PhoneNumbers/src
-[source_samples]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.Communication.PhoneNumbers_1.3.0-beta.5/sdk/communication/Azure.Communication.PhoneNumbers/samples
+[azure_identity]: https://learn.microsoft.com/dotnet/api/azure.identity?view=azure-dotnet
+[source]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/communication/Azure.Communication.PhoneNumbers/src
+[source_samples]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/communication/Azure.Communication.PhoneNumbers/samples
 [cla]: https://cla.microsoft.com
 [coc]: https://opensource.microsoft.com/codeofconduct/
 [coc_faq]: https://opensource.microsoft.com/codeofconduct/faq/
 [coc_contact]: mailto:opencode@microsoft.com
 <!--[package]: https://www.nuget.org/packages/Azure.Communication.PhoneNumbers-->
-[phone_numbers]: /azure/communication-services/quickstarts/telephony/get-phone-number?pivots=platform-azp
-[product_docs]: /azure/communication-services/overview
+[phone_numbers]: https://learn.microsoft.com/azure/communication-services/quickstarts/telephony/get-phone-number?pivots=platform-azp
+[product_docs]: https://learn.microsoft.com/azure/communication-services/overview
 [nuget]: https://www.nuget.org/
-[communication_resource_docs]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_portal]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
-[communication_resource_create_power_shell]: /powershell/module/az.communication/new-azcommunicationservice
-[communication_resource_create_net]: /azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
-[direct_routing]: /azure/communication-services/concepts/telephony/direct-routing-provisioning
+[communication_resource_docs]: https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_portal]: https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-azp
+[communication_resource_create_power_shell]: https://learn.microsoft.com/powershell/module/az.communication/new-azcommunicationservice
+[communication_resource_create_net]: https://learn.microsoft.com/azure/communication-services/quickstarts/create-communication-resource?tabs=windows&pivots=platform-net
+[direct_routing]: https://learn.microsoft.com/azure/communication-services/concepts/telephony/direct-routing-provisioning
 
