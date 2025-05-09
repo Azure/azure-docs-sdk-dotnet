@@ -24,8 +24,8 @@ Official documentation on how to use the Azure App Configuration provider is ava
 
 ## Examples
 
-* [.NET Core Console App](./examples/ConsoleApplication)
-* [ASP.NET Core Web App](./examples/ConfigStoreDemo)
+* [.NET Core Console App](https://github.com/Azure/AppConfiguration-DotnetProvider/tree/main/examples/ConsoleApplication)
+* [ASP.NET Core Web App](https://github.com/Azure/AppConfiguration-DotnetProvider/tree/main/examples/ConfigStoreDemo)
 
 <!-- LINKS -->
 [package]: https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureAppConfiguration
