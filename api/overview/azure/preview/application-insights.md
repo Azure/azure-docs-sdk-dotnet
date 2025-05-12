@@ -1,7 +1,7 @@
 ---
 title: Azure Application Insights SDK for .NET
 description: Reference for Azure Application Insights SDK for .NET
-ms.date: 05/09/2025
+ms.date: 05/12/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: azure-monitor
