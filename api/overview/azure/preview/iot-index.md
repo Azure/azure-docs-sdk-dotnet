@@ -1,5 +1,7 @@
 | Reference | Package | Source |
 |---|---|---|
+|[Digital Twins](digitaltwins.core-readme.md)|[Azure.DigitalTwins.Core](https://www.nuget.org/packages/Azure.DigitalTwins.Core)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/digitaltwins/Azure.DigitalTwins.Core)|
+|[Device Update](iot.deviceupdate-readme.md)|[Azure.IoT.DeviceUpdate](https://www.nuget.org/packages/Azure.IoT.DeviceUpdate)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/deviceupdate/Azure.IoT.DeviceUpdate)|
 |[Models Repository](iot.modelsrepository-readme.md)|[Azure.IoT.ModelsRepository](https://www.nuget.org/packages/Azure.IoT.ModelsRepository)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/modelsrepository/Azure.IoT.ModelsRepository)|
 |Microsoft.Azure.Devices|[Microsoft.Azure.Devices](https://www.nuget.org/packages/Microsoft.Azure.Devices)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
 |IoT Plug and Play - Devices Client|[Microsoft.Azure.Devices.Client](https://www.nuget.org/packages/Microsoft.Azure.Devices.Client)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
@@ -12,4 +14,5 @@
 |[Resource Management - IoT Central](resourcemanager.iotcentral-readme.md)|[Azure.ResourceManager.IotCentral](https://www.nuget.org/packages/Azure.ResourceManager.IotCentral)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/iotcentral/Azure.ResourceManager.IotCentral)|
 |[Resource Management - IoT Firmware Defense](resourcemanager.iotfirmwaredefense-readme.md)|[Azure.ResourceManager.IotFirmwareDefense](https://www.nuget.org/packages/Azure.ResourceManager.IotFirmwareDefense)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/iot/Azure.ResourceManager.IotFirmwareDefense)|
 |[Resource Management - IoT Hub](resourcemanager.iothub-readme.md)|[Azure.ResourceManager.IotHub](https://www.nuget.org/packages/Azure.ResourceManager.IotHub)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/iothub/Azure.ResourceManager.IotHub)|
+|[Resource Management - IoT Operations](resourcemanager.iotoperations-readme.md)|[Azure.ResourceManager.IotOperations](https://www.nuget.org/packages/Azure.ResourceManager.IotOperations)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/iotoperations/Azure.ResourceManager.IotOperations)|
 |Resource Management - Device Update|[Microsoft.Azure.Management.DeviceUpdate](https://www.nuget.org/packages/Microsoft.Azure.Management.DeviceUpdate)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/)|
