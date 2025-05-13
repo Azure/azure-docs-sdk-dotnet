@@ -1,12 +1,12 @@
 ---
 title: Azure AI Persistent Agents client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Agents.Persistent, ai
-ms.date: 05/08/2025
+ms.date: 05/13/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: ai
 ---
-# Azure AI Persistent Agents client library for .NET - version 1.0.0-beta.1 
+# Azure AI Persistent Agents client library for .NET - version 1.0.0-alpha.20250513.1 
 
 
 Use the AI Agents client library to:
@@ -113,7 +113,7 @@ PersistentAgentThread thread = await client.Threads.CreateThreadAsync();
 
 With a thread created, messages can be created on it:
 ```C# Snippet:AgentsOverviewCreateMessage
-ThreadMessage message = await client.Messages.CreateMessageAsync(
+PersistentThreadMessage message = await client.Messages.CreateMessageAsync(
     thread.Id,
     MessageRole.User,
     "I need to solve the equation `3x + 11 = 14`. Can you help me?");
@@ -149,11 +149,11 @@ Assert.AreEqual(
 Assuming the run successfully completed, listing messages from the thread that was run will now reflect new information
 added by the agent:
 ```C# Snippet:AgentsOverviewListUpdatedMessages
-AsyncPageable<ThreadMessage> messages
+AsyncPageable<PersistentThreadMessage> messages
     = client.Messages.GetMessagesAsync(
         threadId: thread.Id, order: ListSortOrder.Ascending);
 
-await foreach (ThreadMessage threadMessage in messages)
+await foreach (PersistentThreadMessage threadMessage in messages)
 {
     Console.Write($"{threadMessage.CreatedAt:yyyy-MM-dd HH:mm:ss} - {threadMessage.Role,10}: ");
     foreach (MessageContent contentItem in threadMessage.ContentItems)
@@ -199,7 +199,7 @@ Once uploaded, the file ID can then be provided to create a vector store for it
 ```C# Snippet:AgentsCreateVectorStore
 // Create a vector store with the file and wait for it to be processed.
 // If you do not specify a vector store, create_message will create a vector store with a default expiration policy of seven days after they were last active
-VectorStore vectorStore = await client.VectorStores.CreateVectorStoreAsync(
+PersistentAgentsVectorStore vectorStore = await client.VectorStores.CreateVectorStoreAsync(
     fileIds:  new List<string> { uploadedAgentFile.Id },
     name: "my_vector_store");
 ```
@@ -230,7 +230,7 @@ var ds = new VectorStoreDataSource(
     assetIdentifier: blobURI,
     assetType: VectorStoreDataSourceAssetType.UriAsset
 );
-VectorStore vectorStore = await client.VectorStores.CreateVectorStoreAsync(
+PersistentAgentsVectorStore vectorStore = await client.VectorStores.CreateVectorStoreAsync(
     name: "sample_vector_store",
     storeConfiguration: new VectorStoreConfiguration(
         dataSources: [ ds ]
@@ -256,7 +256,7 @@ var ds = new VectorStoreDataSource(
     assetIdentifier: blobURI,
     assetType: VectorStoreDataSourceAssetType.UriAsset
 );
-VectorStore vectorStore = await client.VectorStores.CreateVectorStoreAsync(
+PersistentAgentsVectorStore vectorStore = await client.VectorStores.CreateVectorStoreAsync(
     name: "sample_vector_store"
 );
 
@@ -299,7 +299,7 @@ var attachment = new MessageAttachment(
 
 PersistentAgentThread thread = await client.Threads.CreateThreadAsync();
 
-ThreadMessage message = await client.Messages.CreateMessageAsync(
+PersistentThreadMessage message = await client.Messages.CreateMessageAsync(
     threadId: thread.Id,
     role: MessageRole.User,
     content: "Can you give me the documented codes for 'banana' and 'orange'?",
@@ -378,12 +378,12 @@ the reference placeholder by the actual reference and url. Please note, that to
 get sensible result, the index needs to have fields "title" and "url".
 
 ```C# Snippet:AgentsPopulateReferencesAgentWithAzureAISearchTool
-AsyncPageable<ThreadMessage> messages = client.Messages.GetMessagesAsync(
+AsyncPageable<PersistentThreadMessage> messages = client.Messages.GetMessagesAsync(
     threadId: thread.Id,
     order: ListSortOrder.Ascending
 );
 
-await foreach (ThreadMessage threadMessage in messages)
+await foreach (PersistentThreadMessage threadMessage in messages)
 {
     Console.Write($"{threadMessage.CreatedAt:yyyy-MM-dd HH:mm:ss} - {threadMessage.Role,10}: ");
     foreach (MessageContent contentItem in threadMessage.ContentItems)
@@ -396,11 +396,11 @@ await foreach (ThreadMessage threadMessage in messages)
                 string annotatedText = textItem.Text;
                 foreach (MessageTextAnnotation annotation in textItem.Annotations)
                 {
-                    if (annotation is MessageTextUrlCitationAnnotation urlAnnotation)
+                    if (annotation is MessageTextUriCitationAnnotation uriAnnotation)
                     {
                         annotatedText = annotatedText.Replace(
-                            urlAnnotation.Text,
-                            $" [see {urlAnnotation.UrlCitation.Title}] ({urlAnnotation.UrlCitation.Url})");
+                            uriAnnotation.Text,
+                            $" [see {uriAnnotation.UriCitation.Title}] ({uriAnnotation.UriCitation.Uri})");
                     }
                 }
                 Console.Write(annotatedText);
@@ -710,7 +710,7 @@ After we have created a message with request to ask "What would foo say?", we ne
 ```C# Snippet:AgentsAzureFunctionsHandlePollingWithRequiredAction
 PersistentAgentThread thread = await client.Threads.CreateThreadAsync();
 
-ThreadMessage message = await client.Messages.CreateMessageAsync(
+PersistentThreadMessage message = await client.Messages.CreateMessageAsync(
     thread.Id,
     MessageRole.User,
     "What is the most prevalent element in the universe? What would foo say?");
@@ -858,7 +858,7 @@ PersistentAgent agent = await client.Administration.CreateAgentAsync(
 In this example we are using the `weather_openapi.json` file and agent will request the [wttr.in](https://wttr.in) website for the weather in a location from the prompt.
 ```C# Snippet:AgentsOpenAPIHandlePollingWithRequiredAction
 PersistentAgentThread thread = await client.Threads.CreateThreadAsync();
-ThreadMessage message = await client.Messages.CreateMessageAsync(
+PersistentThreadMessage message = await client.Messages.CreateMessageAsync(
     thread.Id,
     MessageRole.User,
     "What's the weather in Seattle?");
@@ -902,7 +902,7 @@ To further diagnose and troubleshoot issues, you can enable logging following th
 
 ## Next steps
 
-Beyond the introductory scenarios discussed, the AI Agents client library offers support for additional scenarios to help take advantage of the full feature set of the AI services.  In order to help explore some of these scenarios, the AI Agents client library offers a set of samples to serve as an illustration for common scenarios.  Please see the [Samples](https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Agents.Persistent_1.0.0-beta.1/sdk/ai/Azure.AI.Agents.Persistent/samples) for details.
+Beyond the introductory scenarios discussed, the AI Agents client library offers support for additional scenarios to help take advantage of the full feature set of the AI services.  In order to help explore some of these scenarios, the AI Agents client library offers a set of samples to serve as an illustration for common scenarios.  Please see the [Samples](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Agents.Persistent/samples) for details.
 
 ## Contributing
 
@@ -916,14 +916,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [RequestFailedException]: https://learn.microsoft.com/dotnet/api/azure.requestfailedexception?view=azure-dotnet
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Agents.Persistent_1.0.0-beta.1/sdk/ai/Azure.AI.Agents.Persistent/tests/Samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Agents.Persistent/tests/Samples
 [api_ref_docs]: https://learn.microsoft.com/dotnet/api/azure.ai.projects?view=azure-dotnet-preview
 [nuget]: https://www.nuget.org/packages/Azure.AI.Projects
-[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Agents.Persistent_1.0.0-beta.1/sdk/ai/Azure.AI.Agents.Persistent
+[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Agents.Persistent
 [product_doc]: https://learn.microsoft.com/azure/ai-studio/
 [azure_identity]: https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet
 [azure_identity_dac]: https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
-[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Agents.Persistent_1.0.0-beta.1/CONTRIBUTING.md
+[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/main/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
