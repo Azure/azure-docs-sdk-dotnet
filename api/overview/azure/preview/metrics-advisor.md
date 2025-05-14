@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: metricsadvisor
 ---
-# Azure Metrics Advisor SDK for .NET - latest
-## Packages - latest
+# Azure Metrics Advisor SDK for .NET - preview
+## Packages - preview
 [!INCLUDE [packages](metrics-advisor-index.md)]
