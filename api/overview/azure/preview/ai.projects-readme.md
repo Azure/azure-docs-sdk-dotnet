@@ -1,12 +1,12 @@
 ---
 title: Azure AI Projects client library for .NET
 keywords: Azure, dotnet, SDK, API, Azure.AI.Projects, ai
-ms.date: 04/23/2025
+ms.date: 05/15/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: ai
 ---
-# Azure AI Projects client library for .NET - version 1.0.0-beta.8 
+# Azure AI Projects client library for .NET - version 1.0.0-alpha.20250515.1 
 
 Use the AI Projects client library to:
 
@@ -38,7 +38,8 @@ Use the AI Projects client library to:
     - [Code interpreter attachment](#create-message-with-code-interpreter-attachment)
     - [Create Agent with Bing Grounding](#create-agent-with-bing-grounding)
     - [Azure AI Search](#create-agent-with-azure-ai-search)
-    - [Function call](#function-call)
+    - [Function call Executed Manually](#function-call-executed-manually)
+    - [Function call Executed Automatically](#function-call-executed-automatically)
     - [Azure function Call](#azure-function-call)
     - [OpenAPI](#create-agent-with-openapi)
 - [Troubleshooting](#troubleshooting)
@@ -434,7 +435,7 @@ foreach (ThreadMessage threadMessage in messages)
 }
 ```
 
-#### Function call
+#### Function call executed manually
 
 Tools that reference caller-defined capabilities as functions can be provided to an agent to allow it to
 dynamically resolve and disambiguate during a run.
@@ -655,6 +656,63 @@ do
 }
 while (toolOutputs.Count > 0);
 ```
+
+#### Function call executed automatically
+
+In addition to the manual function calls, SDK supports automatic function calling.  After creating functions and`FunctionToolDefinition` according to the last section, here is the steps:
+
+When you create an agent, you can specify the function call by tools argument similar to the example of manual function calls:
+```C# Snippet:StreamingWithAutoFunctionCall_CreateAgent
+Agent agent = client.CreateAgent(
+    model: modelDeploymentName,
+    name: "SDK Test Agent - Functions",
+        instructions: "You are a weather bot. Use the provided functions to help answer questions. "
+            + "Customize your responses to the user's preferences as much as possible and use friendly "
+            + "nicknames for cities whenever possible.",
+    tools: [getCityNicknameTool, getCurrentWeatherAtLocationTool, getUserFavoriteCityTool]
+);
+```
+
+We create a thread and message similar to the example of manual function tool calls:
+```C# Snippet:StreamingWithAutoFunctionCall_CreateThreadMessage
+AgentThread thread = client.CreateThread();
+
+ThreadMessage message = client.CreateMessage(
+    thread.Id,
+    MessageRole.User,
+    "What's the weather like in my favorite city?");
+```
+
+Setup `AutoFunctionCallOptions`:
+```C# Snippet:StreamingWithAutoFunctionCall_EnableAutoFunctionCalls
+List<ToolOutput> toolOutputs = new();
+Dictionary<string, Delegate> toolDelegates = new();
+toolDelegates.Add(nameof(GetWeatherAtLocation), GetWeatherAtLocation);
+toolDelegates.Add(nameof(GetCityNickname), GetCityNickname);
+toolDelegates.Add(nameof(GetUserFavoriteCity), GetUserFavoriteCity);
+AutoFunctionCallOptions autoFunctionCallOptions = new(toolDelegates, 10);
+```
+
+With autoFunctionCallOptions as parameter for `CreateRunStreamingAsync`, the agent will then call the function automatically when it is needed:
+```C# Snippet:StreamingWithAutoFunctionCallAsync
+await foreach (StreamingUpdate streamingUpdate in client.CreateRunStreamingAsync(thread.Id, agent.Id, autoFunctionCallOptions: autoFunctionCallOptions))
+{
+    if (streamingUpdate.UpdateKind == StreamingUpdateReason.RunCreated)
+    {
+        Console.WriteLine("--- Run started! ---");
+    }
+    else if (streamingUpdate is MessageContentUpdate contentUpdate)
+    {
+        Console.Write(contentUpdate.Text);
+    }
+    else if (streamingUpdate.UpdateKind == StreamingUpdateReason.RunCompleted)
+    {
+        Console.WriteLine();
+        Console.WriteLine("--- Run completed! ---");
+    }
+}
+```
+To allow the agent cast the parameters to the function call, you must use the supported argument types.  They are `string`, `int`, `ushort`, `float`, `uint`, `decimal`, `double`, `long`, and `bool`.   Other tpes such as array, dictionary, or classes are not supported.   
 
 #### Azure function call
 
@@ -928,14 +986,14 @@ This project has adopted the [Microsoft Open Source Code of Conduct][code_of_con
 
 <!-- LINKS -->
 [RequestFailedException]: https://learn.microsoft.com/dotnet/api/azure.requestfailedexception?view=azure-dotnet
-[samples]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.8/sdk/ai/Azure.AI.Projects/tests/Samples
+[samples]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects/tests/Samples
 [api_ref_docs]: https://learn.microsoft.com/dotnet/api/azure.ai.projects?view=azure-dotnet-preview
 [nuget]: https://www.nuget.org/packages/Azure.AI.Projects
-[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/Azure.AI.Projects_1.0.0-beta.8/sdk/ai/Azure.AI.Projects
+[source_code]: https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects
 [product_doc]: https://learn.microsoft.com/azure/ai-studio/
 [azure_identity]: https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?view=azure-dotnet
 [azure_identity_dac]: https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential?view=azure-dotnet
-[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.Projects_1.0.0-beta.8/CONTRIBUTING.md
+[aiprojects_contrib]: https://github.com/Azure/azure-sdk-for-net/blob/main/CONTRIBUTING.md
 [cla]: https://cla.microsoft.com
 [code_of_conduct]: https://opensource.microsoft.com/codeofconduct/
 [code_of_conduct_faq]: https://opensource.microsoft.com/codeofconduct/faq/
