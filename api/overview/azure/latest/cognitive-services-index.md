@@ -1,5 +1,6 @@
 | Reference | Package | Source |
 |---|---|---|
+|[AI Agents Persistent](ai.agents.persistent-readme.md)|[Azure.AI.Agents.Persistent](https://www.nuget.org/packages/Azure.AI.Agents.Persistent)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/ai/Azure.AI.Agents.Persistent)|
 |[Content Safety](ai.contentsafety-readme.md)|[Azure.AI.ContentSafety](https://www.nuget.org/packages/Azure.AI.ContentSafety)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/contentsafety/Azure.AI.ContentSafety)|
 |[Document Intelligence](ai.documentintelligence-readme.md)|[Azure.AI.DocumentIntelligence](https://www.nuget.org/packages/Azure.AI.DocumentIntelligence)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence)|
 |[Form Recognizer](ai.formrecognizer-readme.md)|[Azure.AI.FormRecognizer](https://www.nuget.org/packages/Azure.AI.FormRecognizer)|[GitHub](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/formrecognizer/Azure.AI.FormRecognizer)|
