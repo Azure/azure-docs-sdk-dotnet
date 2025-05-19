@@ -1,7 +1,7 @@
 ---
 title: Azure Purview SDK for .NET
 description: Reference for Azure Purview SDK for .NET
-ms.date: 05/16/2025
+ms.date: 05/19/2025
 ms.topic: reference
 ms.devlang: dotnet
 ms.service: purview
