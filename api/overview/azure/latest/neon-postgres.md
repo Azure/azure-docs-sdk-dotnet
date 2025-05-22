@@ -6,6 +6,6 @@ ms.topic: reference
 ms.devlang: dotnet
 ms.service: neonpostgres
 ---
-# Azure Neon Postgres SDK for .NET - preview
-## Packages - preview
+# Azure Neon Postgres SDK for .NET - latest
+## Packages - latest
 [!INCLUDE [packages](neon-postgres-index.md)]
